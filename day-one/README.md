@@ -16,6 +16,16 @@ be a journey.
 
 Let's get started.
 
+--------------------------------
 
 note: this is round 2. I installed too much before. no inertia or breeze this
 time. just a vanilla laravel install.
+
+--------------------------------
+
+End time: 10:30pm
+
+Had several bumps but got it done. it's rough. I need to get better at tailwind. I 
+also need to become more familiar with controllers as well. I had to lean heavily 
+on cursor to build out the contact page. I didn't even style it either. Hit a wall 
+and calling it before styling the contact page. 

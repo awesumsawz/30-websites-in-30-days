@@ -18,7 +18,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className="dark">
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning>
         <div className="min-h-screen flex flex-col bg-background text-foreground">
           <header className="bg-card shadow-md">
             <nav className="container mx-auto px-4 py-4">

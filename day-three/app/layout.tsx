@@ -2,6 +2,7 @@ import "./globals.css"
 import { Inter } from "next/font/google"
 import Link from "next/link"
 import type { ReactNode } from "react"
+import { Footer } from "@/components/Footer"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -46,11 +47,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </nav>
           </header>
           <main className="flex-grow container mx-auto px-4 py-8">{children}</main>
-          <footer className="bg-card py-4">
-            <div className="container mx-auto px-4 text-center text-sm text-foreground">
-              © {new Date().getFullYear()} ADA Compliant Dracula-Themed Jira Clone
-            </div>
-          </footer>
+          <Footer />
         </div>
       </body>
     </html>

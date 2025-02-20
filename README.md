@@ -23,6 +23,8 @@ keep going after that.
     b. Log any technology choices made at the start of the day
     c. Log experiences and challenges throughout the day
 7. The project must be pushed to github every day
+8. While AI can be used, it is prohibited from being the primary focus of the
+    project. The goal is to build websites with my brain, not a machine's.
 
 ## Log Start - Newest to Oldest
 
@@ -46,6 +48,10 @@ Let's do this.
 
 Start time: 4pm
 --------------------------------
+Using V0 for the first time to build my UI. I'd like to focus on getting into
+the typescript of the project rather than focusing on just getting the page
+built. 
+
 
 
 ### Day Two - 02-20-2025

@@ -26,6 +26,28 @@ keep going after that.
 
 ## Log Start - Newest to Oldest
 
+
+### Day Three - 02-21-2025
+
+Today I'm going to focus back on nextjs. 
+
+I'd like to build a self-hosted ticket
+system like jira but for small projects. I don't work with a team but I really
+like using ticketing systems to track progress. I'm going to try to build a 
+simple version of that today. 
+
+Css with tailwind today.
+
+Typescript for the js.
+
+pnpm (based on a theo video from yesterday) for the package manager.
+
+Let's do this.
+
+Start time: 4pm
+--------------------------------
+
+
 ### Day Two - 02-20-2025
 
 Today it's time for nextjs again. I've built a project with it once before but

@@ -6,3 +6,5 @@ day-one/package-lock.json
 day-two/bun.lock
 
 day-three/package-lock.json
+
+.DS_Store

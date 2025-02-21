@@ -51,8 +51,28 @@ Start time: 4pm
 Using V0 for the first time to build my UI. I'd like to focus on getting into
 the typescript of the project rather than focusing on just getting the page
 built. 
+break time: 5:00pm -- dinner
+resume: 8pm
+--------------------------------
+End time: 9:30pm
 
+Getting stuff going today was rough. Integrating with v0 proved more confusing
+than I'd anticipated. I hope to bring down the time to start variable as time
+continues. I really enjoyed using v0 though! I really liked just moving past the
+design phase and jumping into code that I was able to interact with right away.
+I'm still figuring out typescript. It feels a lot like js with extra hurdles
+right now. I hope to start to see the appeal as time goes on but for now it 
+seems like more of a hassle than a help.
 
+I also really liked the project idea for today. I feel like having a ticketing
+system for personal and solo projects would be really helpful. It'd also be nice
+to be able to put something open source out into the world to have real world
+impacts.
+
+We'll see what tomorrow brings but I think I'd like to return to this concept
+again tomorrow with a fresh start. I want to get more into the thought side of
+the project sooner than later. I like flexing my brain muscles every now and 
+then just to prove that I can!
 
 ### Day Two - 02-20-2025
 

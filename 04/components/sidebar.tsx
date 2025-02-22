@@ -40,8 +40,16 @@ export function Sidebar() {
   return (
     <>
       <Button
-        variant="ghost"
-        className="fixed top-4 left-4 z-50 md:hidden text-primary hover:text-primary-foreground hover:bg-primary/20"
+        variant="outline"
+        size="icon"
+        className={`
+          fixed top-4 right-4 z-50 md:hidden
+          bg-primary text-primary-foreground
+          hover:bg-primary/90 hover:text-primary-foreground
+          focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background
+          transition-all duration-200 ease-in-out
+          ${isMobileMenuOpen ? "rotate-90" : "rotate-0"}
+        `}
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
       >
         {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -67,7 +75,7 @@ export function Sidebar() {
                   }`}
                 >
                   <item.icon className="mr-3 h-5 w-5" />
-                  <span className={`${isDesktopMenuOpen ? "md:inline" : "md:hidden"}`}>{item.name}</span>
+                  <span>{item.name}</span>
                 </Link>
               </li>
             ))}

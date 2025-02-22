@@ -1,3 +1,4 @@
+import { AddTicketModal } from "@/components/add-ticket-modal"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 const columns = [
@@ -27,7 +28,10 @@ const columns = [
 export default function Kanban() {
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-primary">Kanban Board</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold text-primary">Kanban Board</h1>
+        <AddTicketModal />
+      </div>
       <div className="grid gap-6 md:grid-cols-3">
         {columns.map((column) => (
           <Card key={column.title} className="bg-card border-primary/20">

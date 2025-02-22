@@ -29,8 +29,12 @@ keep going after that.
     again. This puts emphasis on the building process, learning, and a touch of
     dopemining
 
-## Log Start - Newest to Oldest
+--------------------------------
 
+## Log
+Sorted newest to oldest
+
+--------------------------------
 
 ### Day Four - 02-22-2025
 
@@ -38,10 +42,19 @@ Today I'm back with NextJS. I liked working on the project from yesterday, so
 I'm continuing on with that. I'll emphasize the build process today and try to
 get further into typescript to build out dynamic components.
 
-start time: 4:00pm
+start: 4:00pm
+break: 5pm
+resume: 8:30pm
+end: 10pm
+
+Relied pretty heavily on ai today to get things rolling. Thought was that I'd
+prefer to have something written for me to reference tomorrow. So I built the 
+UI using v0. Then I had cursor build out the prisma factory and incorportate it
+into the backlog page. No super proud or happy with how things turned out but I
+think I'm starting to understand and feel a bit more comfortable with how NextJS
+is structured. 
 
 --------------------------------
-
 
 ### Day Three - 02-21-2025
 
@@ -60,15 +73,15 @@ pnpm (based on a theo video from yesterday) for the package manager.
 
 Let's do this.
 
-Start time: 4pm
---------------------------------
+Start: 4pm
+
 Using V0 for the first time to build my UI. I'd like to focus on getting into
 the typescript of the project rather than focusing on just getting the page
 built. 
-break time: 5:00pm -- dinner
+
+break: 5:00pm -- dinner
 resume: 8pm
---------------------------------
-End time: 9:30pm
+End: 9:30pm
 
 Getting stuff going today was rough. Integrating with v0 proved more confusing
 than I'd anticipated. I hope to bring down the time to start variable as time
@@ -88,6 +101,8 @@ again tomorrow with a fresh start. I want to get more into the thought side of
 the project sooner than later. I like flexing my brain muscles every now and 
 then just to prove that I can!
 
+--------------------------------
+
 ### Day Two - 02-20-2025
 
 Today it's time for nextjs again. I've built a project with it once before but
@@ -101,13 +116,10 @@ is less foreign.
 
 let's get started.
 
-Start time: 4:41pm
---------------------------------
-break time: 5:00pm -- sick kid and dinner
---------------------------------
+Start: 4:41pm
+break: 5:00pm -- sick kid and dinner
 resume: 7:42pm
---------------------------------
-End time: 9:00pm
+End: 9:00pm
 
 Rough time to start a challenge. Daughter is sick and I'm just recovering from
 being sick myself. I got the site to meet my most basic requirements. I have 
@@ -124,6 +136,7 @@ Looking forward to trying another nextjs project tomorrow. I liked the business
 idea I went with for this one. I'm interested in carrying that one forward for
 some time.
 
+--------------------------------
 
 ### Day One - 02-19-2025
 
@@ -143,12 +156,8 @@ be a journey.
 
 Let's get started.
 
---------------------------------
-
 note: this is round 2. I installed too much before. no inertia or breeze this
 time. just a vanilla laravel install.
-
---------------------------------
 
 End time: 10:30pm
 

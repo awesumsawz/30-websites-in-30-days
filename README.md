@@ -25,8 +25,22 @@ keep going after that.
 7. The project must be pushed to github every day
 8. While AI can be used, it is prohibited from being the primary focus of the
     project. The goal is to build websites with my brain, not a machine's.
+9. A website can be returned to during the project if it is built from scratch
+    again. This puts emphasis on the building process, learning, and a touch of
+    dopemining
 
 ## Log Start - Newest to Oldest
+
+
+### Day Four - 02-22-2025
+
+Today I'm back with NextJS. I liked working on the project from yesterday, so 
+I'm continuing on with that. I'll emphasize the build process today and try to
+get further into typescript to build out dynamic components.
+
+start time: 4:00pm
+
+--------------------------------
 
 
 ### Day Three - 02-21-2025

@@ -36,6 +36,25 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day Five - 02-23-2025
+
+Continuing the focus on NextJS. Going to work on more database interactions with
+Prisma and Typescript. More tailwindcss for styling.
+
+Start: 7:30pm
+break: 8:00pm
+resume: 9:00pm
+end: 10:00pm
+
+Working on tailwind today. Started with V0 but it didn't do a great job of
+building out the theme. However, I was able to get it fixed up with some
+adjustments. I'm starting to feel more comfortable with the tailwind syntax. I 
+learned a lot about flex and grid today and how it's applied in tailwind.
+I also did some work on taking notes in the root dir for how to get a project
+up and running more proficiently.
+
+--------------------------------
+
 ### Day Four - 02-22-2025
 
 Today I'm back with NextJS. I liked working on the project from yesterday, so 

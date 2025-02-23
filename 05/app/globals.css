@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 205, 214, 244;
+  --background-start-rgb: 30, 30, 46;
+  --background-end-rgb: 30, 30, 46;
+
+    --primary: 217 92% 76%;      /* For #89b4fa */
+    --secondary: 316 72% 86%;    /* For #f5c2e7 */
+    --accent: 343 81% 75%;       /* For #f38ba8 */
+    --border: 240 24% 64%;
+    --input: 240 24% 64%;
+    --ring: 240 24% 64%;
+    --background: 240 21% 15%;
+    --foreground: 227 70% 87%;
+    --card: 240 21% 15%;
+    --card-foreground: 227 70% 87%;
+    --popover: 240 21% 15%;
+    --popover-foreground: 227 70% 87%;
+    --primary-foreground: 240 21% 15%;
+    --secondary-foreground: 240 21% 15%;
+    --muted: 240 21% 15%;
+    --muted-foreground: 215 20% 65%;
+    --accent-foreground: 240 21% 15%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 98%;
+    --radius: 0.5rem;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded font-semibold transition-colors;
+  }
+  .btn-primary {
+    @apply bg-primary text-base hover:bg-primary/80;
+  }
+}
+

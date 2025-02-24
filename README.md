@@ -30,8 +30,10 @@ keep going after that.
     dopemining
 
 --------------------------------
+
 ## Log
 Sorted newest to oldest
+
 --------------------------------
 
 ### Day Six - 02-24-2025

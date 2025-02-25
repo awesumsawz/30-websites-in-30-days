@@ -36,6 +36,19 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day Seven - 02-25-2025
+
+Laravel dropped some new starter kits today. I'm going to give those a shot with
+a react front end. I'll be ommitting v0 today. I'll also be using laravel sail
+to do my building and connect with a postgresql database. I'm going to use pnpm
+today because theo made an excellent point that it simplifies pasting.
+
+start: 7:30pm
+
+
+
+--------------------------------
+
 ### Day Six - 02-24-2025
 
 Today succcccked. keyboard being weird. wiped out a bunch of work after several

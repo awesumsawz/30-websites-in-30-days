@@ -36,6 +36,31 @@ Sorted newest to oldest
 
 --------------------------------
 
+
+
+
+--------------------------------
+
+### Day Seven - 02-25-2025
+
+Laravel dropped some new starter kits today. I'm going to give those a shot with
+a react front end. I'll be ommitting v0 today. I'll also be using laravel sail
+to do my building and connect with a postgresql database. I'm going to use pnpm
+today because theo made an excellent point that it simplifies pasting.
+
+start: 7:30pm
+end: 10:30pm
+
+bleh. didn't get through much today. Tired, sick, and just not feeling it. I got
+three pages created in a bare laravel project. I was hoping to be able to get to
+building a todo list but didn't make it. I think if I want to get through this
+and actually practice some building, I'm going to have to build the base project
+and then pull in work from a previous day. Then I can focus on building out
+something more complex. I think I'll give that a shot tomorrow. 
+
+
+--------------------------------
+
 ### Day Six - 02-24-2025
 
 Today succcccked. keyboard being weird. wiped out a bunch of work after several

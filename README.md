@@ -36,6 +36,17 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day Six - 02-24-2025
+
+Today succcccked. keyboard being weird. wiped out a bunch of work after several
+hours. not a great day. Had to start over after several hours of work. I was
+working on my thinkbig.dev site but I'm not going to be able to finish it today.
+Still going to get a site built but it's not what I wanted.
+
+
+
+--------------------------------
+
 ### Day Five - 02-23-2025
 
 Continuing the focus on NextJS. Going to work on more database interactions with

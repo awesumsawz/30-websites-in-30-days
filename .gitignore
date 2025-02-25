@@ -12,3 +12,5 @@ day-three/package-lock.json
 *.db
 
 04/package-lock.json
+
+*.lock

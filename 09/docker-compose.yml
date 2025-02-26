@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  nextjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - CONTENTFUL_SPACE_ID=${CONTENTFUL_SPACE_ID}
+        - CONTENTFUL_ACCESS_KEY=${CONTENTFUL_ACCESS_KEY}
+        - NEXT_PUBLIC_GA_ID=${NEXT_PUBLIC_GA_ID}
+        - URLSCAN_API_KEY=${URLSCAN_API_KEY}
+    ports:
+      - "3000:3000"
+    environment:
+      - CONTENTFUL_SPACE_ID=${CONTENTFUL_SPACE_ID}
+      - CONTENTFUL_ACCESS_KEY=${CONTENTFUL_ACCESS_KEY}
+      - NEXT_PUBLIC_GA_ID=${NEXT_PUBLIC_GA_ID}
+      - URLSCAN_API_KEY=${URLSCAN_API_KEY}
+    volumes:
+      - ./.env.local:/app/.env.local
+    restart: unless-stopped
+    env_file:
+      - .env 

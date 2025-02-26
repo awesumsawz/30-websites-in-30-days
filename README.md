@@ -36,7 +36,19 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day Eight - 02-26-2025
+Started out building a thinkbiggdev site base on a v0 design. Realized that I 
+am going to need more time to build out the site, so I decided to pivot to a 
+clone of my personal site as a docker container (sail) with a postgresql 
+database. I used bun the first time I tried to get it running but hit the wall
+a few times. Started over by pulling down the git repo and going from there.
+I removed the lock files just to start fresh and for extra spice. Then I pnpm'd
+the project and then ran composer install. I then initialized sail with pgsql
+then. I spun up the sail and ran the migrations. Then I opened up the db in 
+TablePlus and imported the data from the sqlite db of the original project.
+Oh, I also had to install sass.
 
+Now I think I'm going to give the project management tool a shot again.
 
 
 --------------------------------

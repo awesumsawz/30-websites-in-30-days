@@ -36,6 +36,21 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day Nine - 02-27-2025
+Rough day today so had to run a short project. I started by pulling down my blog
+and installing it as the day 09 project. For today's goal I want to get it to
+build successfully after resetting my lock file and then setup a docker
+container so that I can eventually run this as an ECS container. 
+The build process wasn't too hard. Build out a Dockerfile (first time in
+a while) and then built the docker-compose. Had to consult some docs to remember
+how to get both built especially with the env variables. 
+
+I'm going to be spending the rest of the night on vanilla work stuff but if I
+have the time, I'd like to get some typescript practice in and add more
+functionality to the blog.
+
+--------------------------------
+
 ### Day Eight - 02-26-2025
 Started out building a thinkbiggdev site base on a v0 design. Realized that I 
 am going to need more time to build out the site, so I decided to pivot to a 

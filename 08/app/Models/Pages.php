@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Pages extends Model
 {
     protected $table = 'pages';
-    protected $fillable = ['page_id', 'slug', 'key', 'value'];
+    // protected $fillable = ['degree', 'field', 'date', 'university', 'location'];
 }

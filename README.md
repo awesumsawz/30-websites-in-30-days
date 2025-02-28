@@ -29,10 +29,31 @@ keep going after that.
     again. This puts emphasis on the building process, learning, and a touch of
     dopemining
 
+AMMENDMENTS:
+1. A website must be built every day. It must be a unique entitie from all
+      previous projects. This means that sites can be reused but must be built
+      as though it is a new installation of the existing project. I cannot just
+      copy a folder to a new name. 
+2. A site that is considered complete is one that serves a page to a port that
+      can be accessed by a browser.
+3. If a site is copied as a project, a unique task must be completed to
+      consider the day's build complete.
+
 --------------------------------
 
 ## Log
 Sorted newest to oldest
+
+--------------------------------
+
+### Day Ten - 02-28-2025
+Built a laravel install. Used the new laravel starter kits to look at a react
+installation with inertia. Fumbled around a bit with the header in inertia but
+ended up building an api that fires back parks and rec quotes in response to a
+true or false post request to /api/quote.
+
+Still honing in on final rules because the three page rule isn't feasible with
+my responsibilities and time constraints.
 
 --------------------------------
 

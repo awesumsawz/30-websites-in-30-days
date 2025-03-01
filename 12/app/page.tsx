@@ -1,3 +1,5 @@
+import GradientLogo from './components/GradientLogo';
+
 export default function Home() {
   return (
     <div>
@@ -18,10 +20,7 @@ export default function Home() {
               d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0M3 6v13m9-13v13m9-13v13"
             />
           </svg>
-          <a 
-            className="text-xl font-bold hover:bg-gradient-to-r hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 hover:text-transparent hover:bg-clip-text transition-all duration-300"
-            href="#"
-          >LitRepo</a>
+          <GradientLogo />
         </div>
         <nav className="flex items-center space-x-4">
           <a className="hover:hover:bg-gray-800 px-4 py-2 rounded-md transition-all duration-300" href="#">

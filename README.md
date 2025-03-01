@@ -46,7 +46,18 @@ Sorted newest to oldest
 
 --------------------------------
 
-### Day Ten - 02-28-2025
+### Day Eleven - 02-28-2025
+Plan: NextJS, Tailwind, Typescript, Prisma, Postgresql. Building a website to sell
+materials for kindergarten through second grade literacy. Using v0 for the ui 
+and the basic start.
+
+Started building from scratch because v0 wasted a tremendous amount of time. 
+Ended up surrendering to the 'learn something' loophole. Built a cool hover 
+button that cycles the spectrum when hovered.
+
+--------------------------------
+
+### Day Ten - 02-27-2025
 Built a laravel install. Used the new laravel starter kits to look at a react
 installation with inertia. Fumbled around a bit with the header in inertia but
 ended up building an api that fires back parks and rec quotes in response to a
@@ -57,7 +68,7 @@ my responsibilities and time constraints.
 
 --------------------------------
 
-### Day Nine - 02-27-2025
+### Day Nine - 02-26-2025
 Rough day today so had to run a short project. I started by pulling down my blog
 and installing it as the day 09 project. For today's goal I want to get it to
 build successfully after resetting my lock file and then setup a docker
@@ -72,7 +83,7 @@ functionality to the blog.
 
 --------------------------------
 
-### Day Eight - 02-26-2025
+### Day Eight - 02-25-2025
 Started out building a thinkbiggdev site base on a v0 design. Realized that I 
 am going to need more time to build out the site, so I decided to pivot to a 
 clone of my personal site as a docker container (sail) with a postgresql 
@@ -89,7 +100,7 @@ Now I think I'm going to give the project management tool a shot again.
 
 --------------------------------
 
-### Day Seven - 02-25-2025
+### Day Seven - 02-24-2025
 
 Laravel dropped some new starter kits today. I'm going to give those a shot with
 a react front end. I'll be ommitting v0 today. I'll also be using laravel sail
@@ -109,7 +120,7 @@ something more complex. I think I'll give that a shot tomorrow.
 
 --------------------------------
 
-### Day Six - 02-24-2025
+### Day Six - 02-23-2025
 
 Today succcccked. keyboard being weird. wiped out a bunch of work after several
 hours. not a great day. Had to start over after several hours of work. I was
@@ -120,7 +131,7 @@ Still going to get a site built but it's not what I wanted.
 
 --------------------------------
 
-### Day Five - 02-23-2025
+### Day Five - 02-22-2025
 
 Continuing the focus on NextJS. Going to work on more database interactions with
 Prisma and Typescript. More tailwindcss for styling.
@@ -139,7 +150,7 @@ up and running more proficiently.
 
 --------------------------------
 
-### Day Four - 02-22-2025
+### Day Four - 02-21-2025
 
 Today I'm back with NextJS. I liked working on the project from yesterday, so 
 I'm continuing on with that. I'll emphasize the build process today and try to
@@ -159,7 +170,7 @@ is structured.
 
 --------------------------------
 
-### Day Three - 02-21-2025
+### Day Three - 02-20-2025
 
 Today I'm going to focus back on nextjs. 
 
@@ -206,7 +217,7 @@ then just to prove that I can!
 
 --------------------------------
 
-### Day Two - 02-20-2025
+### Day Two - 02-19-2025
 
 Today it's time for nextjs again. I've built a project with it once before but
 I could certainly use more experience. I'm also including tailwind again, it was
@@ -241,7 +252,7 @@ some time.
 
 --------------------------------
 
-### Day One - 02-19-2025
+### Day One - 02-18-2025
 
 I walked downstairs at about 7:30pm to start this thing. It's now 7:55pm and 
 I've only just begun. I think the goal for today is a three page website (home, 

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import GradientLogo from './components/GradientLogo';
 
 export default function Home() {
@@ -23,24 +24,24 @@ export default function Home() {
           <GradientLogo />
         </div>
         <nav className="flex items-center space-x-4">
-          <a className="hover:hover:bg-gray-800 px-4 py-2 rounded-md transition-all duration-300" href="#">
+          <a className="hover:bg-zinc-800 px-4 py-2 border border-zinc-800 rounded-md transition-all duration-300" href="#">
             Dashboard
           </a>
-          <a className="hover:hover:bg-gray-800 px-4 py-2 rounded-md transition-all duration-300" href="#">
+          <a className="hover:bg-zinc-800 px-4 py-2 border border-zinc-800 rounded-md transition-all duration-300" href="#">
             Downloads
           </a>
           <div className="relative group">
             <div
-              className="absolute z-0 -inset-2 rounded-lg opacity-0 blur transition-all duration-300 group-hover:opacity-75"
+              className="absolute z-0 -inset-3 rounded-lg opacity-0 blur transition-all duration-300 group-hover:opacity-75"
               style={{
                 backgroundImage:
                   "linear-gradient(to right, #8b5cf6, #d946ef, #ec4899)",
                 backgroundSize: "200% 200%",
-                animation: "gradient-rotate 3s linear infinite",
+                animation: "gradient-rotate 2s linear infinite",
               }}
             ></div>
             <a
-              className="relative z-10 bg-black px-4 py-2 border rounded-md border-gray-200"
+              className="relative height-full width-full font-bold z-10 bg-black px-4 py-2 border rounded-md border-gray-200"
               href="#"
             >
               Profile
@@ -99,7 +100,19 @@ export default function Home() {
             </p>
           </div>
           <div className="container">
-            <div className="card"></div>
+            <div className="card">
+              <div className="top">
+                <div className="tags"></div>
+                <div className="image">
+                  <Image 
+                    src="/placeholder.svg"
+                    width={500}
+                    height={500}
+                    alt="placeholder"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>

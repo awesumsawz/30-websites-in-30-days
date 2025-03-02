@@ -17,7 +17,7 @@ export default function GradientLogo() {
         style={{
           backgroundImage: 'linear-gradient(to right, #6366f1, #a855f7, #ec4899)',
           backgroundSize: '200% 200%',
-          animation: 'gradient-rotate 2s linear infinite',
+          animation: 'gradient-rotate 1s linear infinite',
           WebkitBackgroundClip: 'text',
           backgroundClip: 'text',
           color: 'transparent',

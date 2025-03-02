@@ -46,6 +46,29 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day Twelve - 03-01-2025
+Plan: basically a continuation of yesterday but again, from scratch.
+
+Ignored v0 as a builder today and just focused on using it as design 
+inspiration. Built out a pretty cool header. Started framing out the html for
+the body and footer of the homepage.
+Notable achievements: built a pretty cool hover logo that cycles through a 
+gradient on hover. I also built the 'profile' button out to have a gradient
+cycle on hover as a box shadow. 
+I'm starting to feel more and more comfortable with tailwind. I'm understanding
+the syntax more and more. I'm also starting to see the value in the utility as
+a way to build from the frontend without having to worry about organizing my
+sass just so. 
+NextJS and react are making more sense as far as the structure is concerned. I 
+think I should have adjusted and considered my goals for this project a bit more
+before jumping in. It would serve me to spend a full month on a single project
+or platform. It's clear that going with a speed approach embraces the start of
+a project which I need but more than that, I need to be able to understand these
+platforms and languages. There's value in getting comfortable with starting the
+projects, but I think I missed the mark on the value of the project itself.
+
+--------------------------------
+
 ### Day Eleven - 02-28-2025
 Plan: NextJS, Tailwind, Typescript, Prisma, Postgresql. Building a website to sell
 materials for kindergarten through second grade literacy. Using v0 for the ui 

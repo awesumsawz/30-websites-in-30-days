@@ -7,6 +7,7 @@ export default function Home() {
       <header className="flex items-center justify-between p-4 border-b border-gray-200">
         <div className="brand flex items-center space-x-4">
           <svg
+            className="text-purple-500"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -24,13 +25,13 @@ export default function Home() {
           <GradientLogo />
         </div>
         <nav className="flex items-center space-x-4">
-          <a className="hover:bg-zinc-800 px-4 py-2 border border-zinc-800 rounded-md transition-all duration-300" href="#">
+          <a className="hover:bg-zinc-900 px-4 py-2 border border-zinc-800 rounded-md transition-all duration-300 min-w-[120px] text-center" href="#">
             Dashboard
           </a>
-          <a className="hover:bg-zinc-800 px-4 py-2 border border-zinc-800 rounded-md transition-all duration-300" href="#">
+          <a className="hover:bg-zinc-900 px-4 py-2 border border-zinc-800 rounded-md transition-all duration-300 min-w-[120px] text-center" href="#">
             Downloads
           </a>
-          <div className="relative group">
+          <div className="relative group min-w-[120px]">
             <div
               className="absolute z-0 -inset-3 rounded-lg opacity-0 blur transition-all duration-300 group-hover:opacity-75"
               style={{
@@ -41,7 +42,7 @@ export default function Home() {
               }}
             ></div>
             <a
-              className="relative height-full width-full font-bold z-10 bg-black px-4 py-2 border rounded-md border-gray-200"
+              className="relative flex justify-center items-center w-full font-bold z-10 bg-black px-4 py-2 border rounded-md border-gray-200"
               href="#"
             >
               Profile

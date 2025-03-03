@@ -57,6 +57,12 @@ Once I have that setup, I'll start building out the new template that's been
 in my head for a while. I might even play with getting a gutenberg block built
 rather than using ACF. we'll see.
 
+Result: played with the docker compose build for a while and ended up getting
+it narrowed down to just the theme and the plugins. I also got the volumes
+setup for the uploads and the wp-* files. I started building out the theme but
+didn't get very far. I'm going to have to spend some time on this one to get it
+done.
+
 --------------------------------
 
 ### Day Twelve - 03-01-2025

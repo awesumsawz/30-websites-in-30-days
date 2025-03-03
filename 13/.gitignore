@@ -1,6 +1,11 @@
+# Start with least trust
 mysql/*
 uploads/*
 themes/*
 plugins/*
 .env*
+
+# Then add exceptions
+!plugins/tb-*
+!themes/model-horse-university*
 

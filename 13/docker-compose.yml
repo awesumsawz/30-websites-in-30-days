@@ -1,0 +1,36 @@
+services: 
+  wordpress:
+    container_name: mhu_wp
+    image: wordpress:php8.0-apache
+    env_file:
+      - .env
+    ports:
+      - "9082:80"
+      - "9443:443"
+    environment:
+      WORDPRESS_DEBUG: ${WORDPRESS_DEBUG}
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+    volumes:
+      - ./:/var/tmp:delegated
+      - ./themes/:/var/www/html/wp-content/themes:delegated
+      - ./plugins/:/var/www/html/wp-content/plugins:delegated
+      - ./uploads/:/var/www/html/wp-content/uploads:delegated
+  
+  db:
+    container_name: mhu_db
+    image: mysql:8.0
+    env_file:
+      - .env
+    ports:
+      - "34306:3306"
+    environment: 
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf:delegated
+      - ./mysql/lib:/var/lib/mysql:delegated

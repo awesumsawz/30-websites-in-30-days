@@ -1,0 +1,6 @@
+mysql/*
+uploads/*
+themes/*
+plugins/*
+.env*
+

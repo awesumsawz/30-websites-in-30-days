@@ -1,9 +1,9 @@
 # Ignore all plugins except those starting with "tb-"
-plugins/*
+plugins/
 !plugins/tb-*
 
 # Ignore all themes except model-horse-university-child
-themes/*
+themes/
 !themes/model-horse-university-child/
 
 # Ignore mysql directory entirely

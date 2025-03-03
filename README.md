@@ -46,6 +46,19 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day Thirteen - 03-02-2025
+Plan: I have some work I need to get done for a client today, so I'm going to 
+build up a wordpress website in a slimmed down container. I mostly build my
+docker containers with the entire html directory in the container. but today I
+want to try to build a container with just the theme and the plugins. I might
+also include a volume for the uploads directory and one for the wp-* files that
+occasionally need manipulation. 
+Once I have that setup, I'll start building out the new template that's been
+in my head for a while. I might even play with getting a gutenberg block built
+rather than using ACF. we'll see.
+
+--------------------------------
+
 ### Day Twelve - 03-01-2025
 Plan: basically a continuation of yesterday but again, from scratch.
 

@@ -46,6 +46,17 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day fourteen - 03-03-2025
+I built out a wordpress site again today. made significan progress on the 
+client template. 
+I think today is the last day of site building. I'd like to spend the next few
+days doing some site launching on AWS. I am determined to learn more about AWS
+deployments and I think launching some of these prjojects will be a good way to
+do just that.
+
+
+--------------------------------
+
 ### Day Thirteen - 03-02-2025
 Plan: I have some work I need to get done for a client today, so I'm going to 
 build up a wordpress website in a slimmed down container. I mostly build my

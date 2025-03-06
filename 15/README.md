@@ -1,0 +1,78 @@
+# Day 15 - Launch jason-biggs-laravel into an ec2 instance running within docker
+
+I may want to replace my nix process with ansible to avoid bloat
+
+## STEPS
+Setting up a new ec2 instance for a website
+- Log into aws
+- head to EC2 from the dashboard
+  [https://us-east-2.console.aws.amazon.com/ec2](https://us-east-2.console.aws.amazon.com/ec2)
+- Launch instance
+- Set the instance name
+- select the os
+  - I’m most comfortable with Ubuntu
+  - Current LTS is 24.04
+- Set the architechture
+  - x86/arm (I choose x86 for deeper compatability)
+- Set instance type
+  - For my small applications, I go with t2.micro since it is free tier eligible
+  - Could also choose t2.nano for even fewer resources
+- Select your key pair
+  - I am on my usual, so I have this setup but you can create a new key pair.
+  - I’d set this up with a new key for each machine you use to access the servers
+- Configure your network settings
+  - I’ve setup security groups to allow SSH and allow Public Access
+  - Additional rules can be created or selected
+- configure your storage
+  - I’d go with default unless you have specific requirements
+- Advanced Settings
+  - Domain Join Directory
+  - IAM instance profile
+  - Hostname type
+  - DNS Hostname
+  - Instance auto recovery
+  - Shutdown behavior
+  - Stop - hibernate behaviro
+  - Termination protection
+  - Stop protection
+  - Cloudwatch monitoring
+  - Credit Specification
+  - Placement Group
+  - EBS Optimized instance
+  - Instance Bandwidth Configuration
+  - Purchasing Option
+  - Capacity reservation
+  - Tenancy
+  - RAM Disk ID
+  - Kernel ID
+  - Nitro Enclave
+  - License configurations
+  - CPU options
+  - AMD SEV-SNP
+  - Metadata IPv6 kendpoint
+  - Metadata version
+  - Metadata response hop limit
+  - Allow tags in metadata
+  - Userdata
+- Launch instance
+- I currently have alarm status failed to fetch on both instances
+- Wait for the server to initialize
+- Which IP do I use to access the server?
+  - connect using the public IPv4 address supplied in the server details
+  - starts with “ec2”’
+- What is the username?
+  - On ubuntu servers, the username is ‘ubuntu’
+- SSH into the server
+- Update and upgrade
+- install git via apt
+  - sudo apt install git zsh
+- change shell
+  - sudo vim /etc/passwd
+- Pull down nix-minimal
+- install nix via README curl
+- run nix init from REAME
+- run home manager init from README
+- Run home manager
+- Pull down dotfiles-minimal
+- stow the dotfiles minimal
+- open nvim

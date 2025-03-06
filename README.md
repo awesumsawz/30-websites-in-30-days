@@ -46,6 +46,22 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day fifteen - 03-15-2025
+Time to start doing some website deployments. Not quite sure on how to document 
+the process but going to give it a shot. Today will be an EC2 instance. I know
+I've done these before but I figure starting out with something I know will be
+helpful for this phase of the project.
+
+Took advantage of the time to create a set of -minimal nix and dotfiles. Ran
+into some roadbumpbs but did good. 
+I also created the process I followed to get the server setup.
+
+Fail. Bummer. I got the server setup but I didn't get the site deployed. I got
+distracted trying to build out a configuration for fresh servers that would
+add some creature comforts. Trying again tomorrow.
+
+--------------------------------
+
 ### Day fourteen - 03-03-2025
 I built out a wordpress site again today. made significan progress on the 
 client template. 
@@ -53,7 +69,6 @@ I think today is the last day of site building. I'd like to spend the next few
 days doing some site launching on AWS. I am determined to learn more about AWS
 deployments and I think launching some of these prjojects will be a good way to
 do just that.
-
 
 --------------------------------
 

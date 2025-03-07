@@ -46,6 +46,13 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day seventeen - 03-06-2025
+Got it running! I then synced my server and got everything relatively production
+ready!
+Good day!
+
+--------------------------------
+
 ### Day sixteen - 03-05-2025
 brutal day. I got the instance created quickly but then when trying to get the
 sail application going (based on my jason-biggs-laravel project). Ran into issue

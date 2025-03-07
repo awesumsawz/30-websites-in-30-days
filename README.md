@@ -46,7 +46,17 @@ Sorted newest to oldest
 
 --------------------------------
 
-### Day fifteen - 03-15-2025
+### Day sixteen - 03-05-2025
+brutal day. I got the instance created quickly but then when trying to get the
+sail application going (based on my jason-biggs-laravel project). Ran into issue
+after issue and got the site to post an error when accessing the server from a
+browser. So technically a success. however, I'm really annoyed I didn't get the
+actual site to post. bummer. going to try the same thing again tomorrow.
+
+
+--------------------------------
+
+### Day fifteen - 03-04-2025
 Time to start doing some website deployments. Not quite sure on how to document 
 the process but going to give it a shot. Today will be an EC2 instance. I know
 I've done these before but I figure starting out with something I know will be

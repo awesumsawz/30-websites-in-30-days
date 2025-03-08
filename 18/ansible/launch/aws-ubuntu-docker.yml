@@ -1,0 +1,222 @@
+---
+# Ansible Playbook for AWS Ubuntu Server Setup with Docker
+# This playbook sets up a fresh Ubuntu server on AWS with Docker installed
+
+- name: AWS Ubuntu Server with Docker Setup
+  hosts: aws_ubuntu_servers
+  become: true
+  vars:
+    timezone: "UTC"
+    create_user: "admin"
+    user_password: "{{ vault_user_password }}" # Use ansible-vault for secure password storage
+    ssh_port: 22
+    firewall_allowed_tcp_ports:
+      - "{{ ssh_port }}"
+      - 80
+      - 443
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist
+        
+    - name: Install essential packages
+      apt:
+        name:
+          - vim
+          - curl
+          - git
+          - htop
+          - ufw
+          - fail2ban
+        state: present
+
+    - name: Set timezone
+      community.general.timezone:
+        name: "{{ timezone }}"
+
+    - name: Configure UFW
+      ufw:
+        state: enabled
+        policy: deny
+
+    - name: Allow specific ports through UFW
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: tcp
+      loop: "{{ firewall_allowed_tcp_ports }}"
+
+    - name: Configure fail2ban
+      copy:
+        dest: /etc/fail2ban/jail.local
+        content: |
+          [sshd]
+          enabled = true
+          bantime = 3600
+          findtime = 600
+          maxretry = 5
+      notify: Restart fail2ban
+
+    - name: Set up automatic security updates
+      apt:
+        name: unattended-upgrades
+        state: present
+
+    - name: Configure automatic security updates
+      copy:
+        dest: /etc/apt/apt.conf.d/20auto-upgrades
+        content: |
+          APT::Periodic::Update-Package-Lists "1";
+          APT::Periodic::Unattended-Upgrade "1";
+          APT::Periodic::AutocleanInterval "7";
+    
+    # Docker Installation - Ensuring all required steps are run once
+    - name: Check if Docker is already installed
+      stat:
+        path: /usr/bin/docker
+      register: docker_binary
+
+    - name: Install docker.io
+      apt:
+        name: docker.io
+        state: present
+      register: docker_io_installed
+      when: not docker_binary.stat.exists
+    
+    - name: Uninstall old versions of Docker
+      apt:
+        name:
+          - docker
+          - docker-engine
+          - containerd
+          - runc
+        state: absent
+      ignore_errors: yes
+      when: docker_io_installed is changed
+    
+    - name: Install packages to allow apt to use a repository over HTTPS
+      apt:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+        state: present
+    
+    - name: Create directory for Docker's official GPG key
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: '0755'
+    
+    - name: Check if Docker GPG key exists
+      stat:
+        path: /etc/apt/keyrings/docker.gpg
+      register: docker_gpg_key
+
+    - name: Add Docker's official GPG key
+      shell: |
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+        chmod a+r /etc/apt/keyrings/docker.gpg
+      when: not docker_gpg_key.stat.exists
+    
+    - name: Check if Docker repository is configured
+      stat:
+        path: /etc/apt/sources.list.d/docker.list
+      register: docker_repo
+
+    - name: Set up the Docker repository
+      shell: |
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+      when: not docker_repo.stat.exists
+    
+    - name: Update apt package index after adding Docker repository
+      apt:
+        update_cache: yes
+    
+    - name: Check if Docker Compose is installed via apt
+      stat:
+        path: /usr/bin/docker-compose
+      register: docker_compose_binary
+
+    - name: Install Docker CE, Docker CE CLI, and containerd.io
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+      when: not docker_compose_binary.stat.exists
+    
+    - name: Check if Docker service is running
+      stat:
+        path: /var/run/docker.sock
+      register: docker_sock
+
+    - name: Start Docker service
+      systemd:
+        name: docker
+        state: started
+      when: not docker_sock.stat.exists
+    
+    - name: Enable Docker service
+      systemd:
+        name: docker
+        enabled: yes
+    
+    - name: Add user to docker group
+      user:
+        name: "{{ create_user }}"
+        groups: docker
+        append: yes
+    
+    - name: Check if Docker Compose is installed
+      stat:
+        path: /usr/local/bin/docker-compose
+      register: docker_compose
+
+    - name: Install Docker Compose from GitHub (newer version with ARM64 support)
+      get_url:
+        url: "https://github.com/docker/compose/releases/download/v2.24.6/docker-compose-{{ ansible_system | lower }}-{{ ansible_architecture }}"
+        dest: /usr/local/bin/docker-compose
+        mode: '0755'
+        force: no
+      when: not docker_compose.stat.exists
+      register: compose_download
+      ignore_errors: yes
+
+    - name: Create Docker Compose symlink if plugin is installed
+      file:
+        src: /usr/libexec/docker/cli-plugins/docker-compose
+        dest: /usr/local/bin/docker-compose
+        state: link
+      when: not docker_compose.stat.exists and compose_download is failed
+      ignore_errors: yes
+    
+    - name: Verify Docker installation
+      command: docker --version
+      register: docker_version
+      changed_when: false
+    
+    - name: Display Docker version
+      debug:
+        var: docker_version.stdout
+
+  handlers:
+    - name: Restart SSH
+      service:
+        name: sshd
+        state: restarted
+
+    - name: Restart fail2ban
+      service:
+        name: fail2ban
+        state: restarted

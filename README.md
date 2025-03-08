@@ -46,6 +46,12 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day Eighteen - 03-07-2025
+Today I'm adapting the plan I followed yesterday to get laravel and my site
+working into an ansible playbook. Let's get 'er duun!
+
+--------------------------------
+
 ### Day seventeen - 03-06-2025
 Got it running! I then synced my server and got everything relatively production
 ready!

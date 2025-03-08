@@ -49,6 +49,15 @@ Sorted newest to oldest
 ### Day Eighteen - 03-07-2025
 Today I'm adapting the plan I followed yesterday to get laravel and my site
 working into an ansible playbook. Let's get 'er duun!
+I wrote up an andible playbook to spin up a docker ready server. Then I wrote a  
+second playbook to pull in my jason-biggs-laravel git repo and get it running 
+with sail. All that was left for me to do was import my database into the psgl
+server and everything was up and running exactly as I expected! I ran in on a 
+local vm, then on a vm on my proxmox server, and then finally on a fresh ec2 
+instace. 
+I'm really happy with how today turned out. I think the next step is to get the
+database to populate itself with data without my intervention. I'd also like to 
+try to start working with terraform to get the server(s) supn up. 
 
 --------------------------------
 

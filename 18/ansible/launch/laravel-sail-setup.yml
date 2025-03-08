@@ -1,0 +1,443 @@
+---
+# Ansible Playbook for Laravel Sail Setup with PostgreSQL
+# This playbook clones a Laravel repository and sets up Laravel Sail with PostgreSQL
+
+- name: Laravel Sail Setup with PostgreSQL
+  hosts: aws_ubuntu_servers
+  become: true
+  vars:
+    timezone: "UTC"
+    create_user: "admin"
+    user_password: "{{ vault_user_password }}" # Use ansible-vault for secure password storage
+    ssh_port: 22
+    firewall_allowed_tcp_ports:
+      - "{{ ssh_port }}"
+      - 80
+      - 443
+      - 5432
+    # Laravel specific variables
+    repo_url: "https://github.com/awesumsawz/jason-biggs-com_laravel.git"
+    project_dir: "/home/{{ create_user }}/jason-biggs-com_laravel"
+    php_version: "8.3"
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+
+    # Install unzip for better Composer package extraction
+    - name: Install unzip
+      apt:
+        name: unzip
+        state: present
+
+    # Make sure the admin user exists before trying to become that user
+    - name: Ensure admin user exists
+      user:
+        name: "{{ create_user }}"
+        state: present
+        shell: /bin/bash
+        create_home: yes
+
+    # Set proper permissions on the home directory
+    - name: Set proper permissions on admin home directory
+      file:
+        path: "/home/{{ create_user }}"
+        state: directory
+        owner: "{{ create_user }}"
+        group: "{{ create_user }}"
+        mode: '0755'
+
+    # Create the project directory with proper permissions
+    - name: Create project directory
+      file:
+        path: "{{ project_dir }}"
+        state: directory
+        owner: "{{ create_user }}"
+        group: "{{ create_user }}"
+        mode: '0755'
+
+    # Configure Git to allow the directory as safe
+    - name: Configure Git safe.directory
+      shell: git config --global --add safe.directory {{ project_dir }}
+      
+    # Clone the repository as root and then fix permissions
+    - name: Clone Laravel repository
+      git:
+        repo: "{{ repo_url }}"
+        dest: "{{ project_dir }}"
+        force: yes
+      environment:
+        GIT_TERMINAL_PROMPT: 0
+      register: git_clone_result
+      ignore_errors: yes
+
+    # Alternative clone method if the first one fails
+    - name: Alternative Git clone method
+      shell: rm -rf {{ project_dir }}/* && git clone {{ repo_url }} {{ project_dir }}
+      when: git_clone_result is failed
+
+    # Fix permissions after cloning
+    - name: Fix permissions on project directory
+      file:
+        path: "{{ project_dir }}"
+        state: directory
+        owner: "{{ create_user }}"
+        group: "{{ create_user }}"
+        recurse: yes
+
+    - name: Install software-properties-common
+      apt:
+        name: software-properties-common
+        state: present
+
+    - name: Add PHP repository
+      apt_repository:
+        repo: ppa:ondrej/php
+        state: present
+
+    - name: Update apt cache after adding PHP repository
+      apt:
+        update_cache: yes
+
+    - name: Install PHP and extensions
+      apt:
+        name:
+          - "php{{ php_version }}"
+          - "php{{ php_version }}-cli"
+          - "php{{ php_version }}-fpm"
+          - "php{{ php_version }}-mysql"
+          - "php{{ php_version }}-pgsql"
+          - "php{{ php_version }}-xml"
+          - "php{{ php_version }}-mbstring"
+          - "php{{ php_version }}-curl"
+          - "php{{ php_version }}-zip"
+          - "php{{ php_version }}-intl"
+          - "php{{ php_version }}-gd"
+        state: present
+
+    - name: Set PHP alternative to PHP 8.3
+      alternatives:
+        name: php
+        path: "/usr/bin/php{{ php_version }}"
+
+    - name: Install Composer
+      shell: |
+        curl -sS https://getcomposer.org/installer | php
+        mv composer.phar /usr/local/bin/composer
+        chmod +x /usr/local/bin/composer
+      args:
+        creates: /usr/local/bin/composer
+
+    # Run commands as root but with the correct working directory and environment
+    - name: Install Composer dependencies
+      shell: cd {{ project_dir }} && sudo -u {{ create_user }} composer install
+      environment:
+        HOME: "/home/{{ create_user }}"
+
+    # Check if .env.example exists
+    - name: Check if .env.example exists
+      stat:
+        path: "{{ project_dir }}/.env.example"
+      register: env_example_file
+
+    # Create .env.example if it doesn't exist
+    - name: Create .env.example if it doesn't exist
+      copy:
+        dest: "{{ project_dir }}/.env.example"
+        content: |
+          APP_NAME=Laravel
+          APP_ENV=local
+          APP_KEY=
+          APP_DEBUG=true
+          APP_URL=http://localhost
+          
+          LOG_CHANNEL=stack
+          LOG_DEPRECATIONS_CHANNEL=null
+          LOG_LEVEL=debug
+          
+          DB_CONNECTION=pgsql
+          DB_HOST=pgsql
+          DB_PORT=5432
+          DB_DATABASE=laravel
+          DB_USERNAME=sail
+          DB_PASSWORD=password
+          
+          BROADCAST_DRIVER=log
+          CACHE_DRIVER=file
+          FILESYSTEM_DISK=local
+          QUEUE_CONNECTION=sync
+          SESSION_DRIVER=file
+          SESSION_LIFETIME=120
+          
+          MEMCACHED_HOST=127.0.0.1
+          
+          REDIS_HOST=redis
+          REDIS_PASSWORD=null
+          REDIS_PORT=6379
+          
+          MAIL_MAILER=smtp
+          MAIL_HOST=mailpit
+          MAIL_PORT=1025
+          MAIL_USERNAME=null
+          MAIL_PASSWORD=null
+          MAIL_ENCRYPTION=null
+          MAIL_FROM_ADDRESS="hello@example.com"
+          MAIL_FROM_NAME="${APP_NAME}"
+          
+          AWS_ACCESS_KEY_ID=
+          AWS_SECRET_ACCESS_KEY=
+          AWS_DEFAULT_REGION=us-east-1
+          AWS_BUCKET=
+          AWS_USE_PATH_STYLE_ENDPOINT=false
+          
+          PUSHER_APP_ID=
+          PUSHER_APP_KEY=
+          PUSHER_APP_SECRET=
+          PUSHER_HOST=
+          PUSHER_PORT=443
+          PUSHER_SCHEME=https
+          PUSHER_APP_CLUSTER=mt1
+          
+          VITE_APP_NAME="${APP_NAME}"
+          VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+          VITE_PUSHER_HOST="${PUSHER_HOST}"
+          VITE_PUSHER_PORT="${PUSHER_PORT}"
+          VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
+          VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+        owner: "{{ create_user }}"
+        group: "{{ create_user }}"
+        mode: '0644'
+      when: not env_example_file.stat.exists
+
+    # Create .env file from .env.example
+    - name: Create .env file from .env.example
+      shell: cd {{ project_dir }} && sudo -u {{ create_user }} cp .env.example .env
+      environment:
+        HOME: "/home/{{ create_user }}"
+
+    # Generate application key
+    - name: Generate Laravel application key
+      shell: cd {{ project_dir }} && sudo -u {{ create_user }} php artisan key:generate
+      environment:
+        HOME: "/home/{{ create_user }}"
+
+    # Install Node.js and npm for frontend asset compilation
+    - name: Install Node.js prerequisites
+      apt:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+        state: present
+
+    - name: Add NodeSource repository
+      shell: |
+        mkdir -p /etc/apt/keyrings
+        curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+        echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
+      args:
+        creates: /etc/apt/sources.list.d/nodesource.list
+
+    - name: Update apt cache after adding Node.js repository
+      apt:
+        update_cache: yes
+
+    - name: Install Node.js and npm
+      apt:
+        name: nodejs
+        state: present
+
+    # Install frontend dependencies and build assets
+    - name: Install frontend dependencies
+      shell: cd {{ project_dir }} && sudo -u {{ create_user }} npm install
+      environment:
+        HOME: "/home/{{ create_user }}"
+      ignore_errors: yes
+
+    - name: Build frontend assets
+      shell: cd {{ project_dir }} && sudo -u {{ create_user }} npm run build
+      environment:
+        HOME: "/home/{{ create_user }}"
+      ignore_errors: yes
+
+    - name: Install Laravel Sail
+      shell: cd {{ project_dir }} && sudo -u {{ create_user }} composer require laravel/sail --dev
+      environment:
+        HOME: "/home/{{ create_user }}"
+
+    - name: Install Laravel Sail with PostgreSQL
+      shell: cd {{ project_dir }} && sudo -u {{ create_user }} php artisan sail:install --with=pgsql
+      environment:
+        HOME: "/home/{{ create_user }}"
+
+    - name: Add Sail alias to .bashrc
+      lineinfile:
+        path: "/home/{{ create_user }}/.bashrc"
+        line: "alias sail='bash vendor/bin/sail'"
+        state: present
+        owner: "{{ create_user }}"
+        group: "{{ create_user }}"
+        create: yes
+        mode: '0644'
+
+    - name: Check if port 80 is in use
+      shell: lsof -i :80
+      register: port_80_check
+      ignore_errors: yes
+
+    - name: Stop Apache if running on port 80
+      systemd:
+        name: apache2
+        state: stopped
+        enabled: no
+      when: port_80_check.rc == 0
+      ignore_errors: yes
+
+    - name: Kill processes using port 80
+      shell: lsof -i :80 | grep -v PID | awk '{print $2}' | xargs -r kill -9
+      when: port_80_check.rc == 0
+      ignore_errors: yes
+
+    - name: Check if port 443 is in use
+      shell: lsof -i :443
+      register: port_443_check
+      ignore_errors: yes
+
+    - name: Kill processes using port 443
+      shell: lsof -i :443 | grep -v PID | awk '{print $2}' | xargs -r kill -9
+      when: port_443_check.rc == 0
+      ignore_errors: yes
+
+    - name: Check if port 5432 is in use
+      shell: lsof -i :5432
+      register: port_5432_check
+      ignore_errors: yes
+
+    - name: Kill processes using port 5432
+      shell: lsof -i :5432 | grep -v PID | awk '{print $2}' | xargs -r kill -9
+      when: port_5432_check.rc == 0
+      ignore_errors: yes
+
+    # Docker Installation and Configuration
+    - name: Check if Docker is installed
+      command: which docker
+      register: docker_installed
+      ignore_errors: yes
+      changed_when: false
+
+    - name: Install Docker if not installed
+      shell: |
+        curl -fsSL https://get.docker.com -o get-docker.sh
+        sh get-docker.sh
+      when: docker_installed.rc != 0
+
+    - name: Start Docker service
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add admin user to docker group
+      user:
+        name: "{{ create_user }}"
+        groups: docker
+        append: yes
+
+    - name: Install Docker Compose
+      get_url:
+        url: "https://github.com/docker/compose/releases/download/v2.24.6/docker-compose-{{ ansible_system | lower }}-{{ ansible_architecture }}"
+        dest: /usr/local/bin/docker-compose
+        mode: '0755'
+      when: docker_installed.rc != 0
+
+    - name: Create Docker Compose symlink
+      file:
+        src: /usr/local/bin/docker-compose
+        dest: /usr/bin/docker-compose
+        state: link
+      when: docker_installed.rc != 0
+
+    # Restart Docker to apply group changes
+    - name: Restart Docker service
+      systemd:
+        name: docker
+        state: restarted
+
+    # Configure Docker daemon for non-root users
+    - name: Create Docker daemon configuration directory
+      file:
+        path: /etc/docker
+        state: directory
+        mode: '0755'
+
+    - name: Configure Docker daemon
+      copy:
+        dest: /etc/docker/daemon.json
+        content: |
+          {
+            "live-restore": true,
+            "group": "docker"
+          }
+        mode: '0644'
+      register: docker_daemon_config
+
+    - name: Restart Docker after daemon configuration
+      systemd:
+        name: docker
+        state: restarted
+      when: docker_daemon_config.changed
+
+    # Wait for Docker to be fully operational
+    - name: Wait for Docker to be ready
+      shell: docker info
+      register: docker_info
+      until: docker_info.rc == 0
+      retries: 10
+      delay: 3
+      ignore_errors: yes
+
+    # Ensure Docker socket has correct permissions
+    - name: Ensure Docker socket has correct permissions
+      file:
+        path: /var/run/docker.sock
+        mode: '0666'
+
+    # Instead of becoming the user, use a simpler approach
+    - name: Start Laravel Sail
+      shell: |
+        cd {{ project_dir }}
+        chown -R {{ create_user }}:{{ create_user }} .
+        sudo -u {{ create_user }} bash vendor/bin/sail up -d
+      args:
+        executable: /bin/bash
+      environment:
+        HOME: "/home/{{ create_user }}"
+
+    # Wait for Laravel Sail containers to be ready
+    - name: Wait for Laravel Sail containers to be ready
+      shell: sleep 10
+      changed_when: false
+
+    - name: Run database migrations
+      shell: cd {{ project_dir }} && sudo -u {{ create_user }} docker exec $(docker ps -q --filter name=laravel.test) php artisan migrate --force
+      environment:
+        HOME: "/home/{{ create_user }}"
+      ignore_errors: yes
+
+    # Run npm build inside the Laravel Sail container
+    - name: Run npm build inside Laravel Sail container
+      shell: cd {{ project_dir }} && sudo -u {{ create_user }} docker exec $(docker ps -q --filter name=laravel.test) npm run build
+      environment:
+        HOME: "/home/{{ create_user }}"
+      ignore_errors: yes
+
+    - name: Display success message
+      debug:
+        msg: "Laravel Sail with PostgreSQL has been successfully set up at {{ project_dir }}" 

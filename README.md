@@ -46,6 +46,25 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day nineteen - 03-08-2025
+Today's plan was to continue working on ansible and more specifically, get the
+database to populate itself without user intervention. Again, I started by
+writing out the scripts and adding the sqldumps to the data/ directory. Once I 
+had those setup, I spun up my ubntu server snapshot with my sshkey saved and 
+ran the playbook. I then decided to slim the process down even further by 
+wrapping the multiple playbooks into a single playbook. I then reset the local
+server instance and ran the new playbook. After a couple of hiccups, I got it 
+working as expected. Once that was complete, I spun up a fresh ec2 instance and 
+ran the playbook on the new ec2. It ran without issue on the first try. 
+
+Ansible is awesome. 
+
+Tomorrow, I'd like to get things setup so that terraform can 
+create the test environments for me. I will start with proxmox and then do a 
+build for aws ec2.
+
+--------------------------------
+
 ### Day Eighteen - 03-07-2025
 Today I'm adapting the plan I followed yesterday to get laravel and my site
 working into an ansible playbook. Let's get 'er duun!

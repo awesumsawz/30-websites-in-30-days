@@ -1,0 +1,77 @@
+---
+- name: Configure Ubuntu Server
+  hosts: localhost
+  become: true  # Run tasks as sudo
+  tasks:
+
+    - name: Update and upgrade apt packages
+      apt:
+        update_cache: yes
+        upgrade: yes
+
+    - name: Install required packages
+      apt:
+        name:
+          - bat
+          - docker.io
+          - docker-compose
+          - exa
+          - fzf
+          - git
+          - lazygit
+          - neovim
+          - ripgrep
+          - starship
+          - stow
+          - tree
+          - tree-sitter-cli
+          - xz-utils
+          - yq
+          - zoxide
+          - zellij
+          - nodejs
+          - unzip
+          - fonts-roboto
+        state: present
+
+    - name: Ensure Docker service is running and enabled
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+
+    - name: Add user to the Docker group
+      user:
+        name: ubuntu
+        groups: docker
+        append: yes
+
+    - name: Download and install Nerd Font (Roboto Mono)
+      get_url:
+        url: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/RobotoMono.zip"
+        dest: "/tmp/RobotoMono.zip"
+
+    - name: Unzip Nerd Font and install it
+      unarchive:
+        src: "/tmp/RobotoMono.zip"
+        dest: "/usr/share/fonts"
+        remote_src: yes
+
+    - name: Refresh font cache
+      command: fc-cache -f -v
+      changed_when: false
+
+    - name: Set up Starship prompt
+      shell: "starship init zsh >> ~/.zshrc"
+      args:
+        creates: "~/.zshrc"
+
+    - name: Set up Zoxide in Zsh
+      shell: "echo 'eval \"$(zoxide init zsh)\"' >> ~/.zshrc"
+      args:
+        creates: "~/.zshrc"
+
+    - name: Ensure Zsh is the default shell for ubuntu
+      user:
+        name: ubuntu
+        shell: /usr/bin/zsh

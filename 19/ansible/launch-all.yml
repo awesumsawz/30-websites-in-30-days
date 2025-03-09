@@ -1,0 +1,14 @@
+---
+# Main Launch Playbook
+# This playbook runs all the individual launch playbooks in the correct order
+
+- name: Run AWS Ubuntu Docker Setup
+  import_playbook: launch/aws-ubuntu-docker.yml
+
+- name: Run Laravel Sail Setup
+  import_playbook: launch/laravel-sail-setup.yml
+
+- name: Import SQL Data
+  import_playbook: launch/import-sql-data.yml
+
+# Add any additional playbooks here as needed 

@@ -1,0 +1,85 @@
+---
+# Ansible Playbook for Importing SQL Dumps into PostgreSQL Database
+# This playbook imports the SQL dumps from the data directory into the PostgreSQL database
+
+- name: Import SQL Dumps into PostgreSQL Database
+  hosts: aws_ubuntu_servers
+  become: true
+  vars:
+    project_dir: "/home/ubuntu/jason-biggs-com_laravel"
+    db_name: "laravel"
+    db_user: "sail"
+    db_password: "password"
+    sql_files:
+      - "professional_experiences.sql"
+      - "pages.sql"
+    ansible_root_dir: "{{ playbook_dir | dirname }}"  # This will get the parent directory of launch/
+
+  tasks:
+    - name: Check if Laravel Sail is running
+      shell: cd {{ project_dir }} && docker ps | grep laravel.test
+      register: sail_running
+      ignore_errors: yes
+      changed_when: false
+
+    - name: Start Laravel Sail if not running
+      shell: cd {{ project_dir }} && sudo -u ubuntu bash vendor/bin/sail up -d
+      args:
+        executable: /bin/bash
+      environment:
+        HOME: "/home/ubuntu"
+      when: sail_running.rc != 0
+
+    - name: Wait for Laravel Sail containers to be ready
+      shell: sleep 10
+      changed_when: false
+      when: sail_running.rc != 0
+
+    - name: Create directory for SQL files in the project
+      file:
+        path: "{{ project_dir }}/storage/sql"
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+    - name: Copy SQL files to the project directory
+      copy:
+        src: "{{ ansible_root_dir }}/data/{{ item }}"
+        dest: "{{ project_dir }}/storage/sql/{{ item }}"
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+      loop: "{{ sql_files }}"
+
+    - name: Get PostgreSQL container name
+      shell: cd {{ project_dir }} && docker ps --format '{% raw %}{{.Names}}{% endraw %}' | grep pgsql
+      register: pgsql_container
+      changed_when: false
+      
+    - name: Copy SQL dumps to PostgreSQL container
+      shell: cd {{ project_dir }} && docker cp storage/sql/{{ item }} {{ pgsql_container.stdout }}:/tmp/{{ item }}
+      loop: "{{ sql_files }}"
+
+    - name: Import SQL dumps into PostgreSQL database
+      shell: cd {{ project_dir }} && docker exec {{ pgsql_container.stdout }} psql -U {{ db_user }} -d {{ db_name }} -f /tmp/{{ item }}
+      loop: "{{ sql_files }}"
+      register: import_result
+
+    - name: Display import results
+      debug:
+        var: import_result.results
+
+    - name: Verify tables were imported
+      shell: cd {{ project_dir }} && docker exec {{ pgsql_container.stdout }} psql -U {{ db_user }} -d {{ db_name }} -c "SELECT COUNT(*) FROM {{ item | regex_replace('.sql$', '') }};"
+      loop: "{{ sql_files }}"
+      register: verify_result
+      changed_when: false
+
+    - name: Display verification results
+      debug:
+        var: verify_result.results
+
+    - name: Display success message
+      debug:
+        msg: "SQL dumps have been successfully imported into the PostgreSQL database" 

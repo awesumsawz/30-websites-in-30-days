@@ -64,7 +64,11 @@ const FloatingPixels: React.FC = () => {
     }
 
     requestRef.current = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(requestRef.current!)
+    return () => {
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current)
+      }
+    }
   }, [])
 
   return (

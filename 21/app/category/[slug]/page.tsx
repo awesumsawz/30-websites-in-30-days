@@ -4,7 +4,7 @@ import { notFound } from "next/navigation"
 
 export default function CategoryPage({ params }: { params: { slug: string } }) {
   const category = params.slug.charAt(0).toUpperCase() + params.slug.slice(1)
-  const categoryPosts = posts.filter((post) => post.category.toLowerCase() === params.slug)
+  const categoryPosts = posts.filter((post) => post.category.toLowerCase() === params.slug.toLowerCase())
 
   if (categoryPosts.length === 0) {
     notFound()
@@ -18,7 +18,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
           <Link
             key={post.id}
             href={`/post/${post.id}`}
-            className="block p-6 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
+            className="block p-6 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors pixelated-border"
           >
             <h3 className="text-xl font-pixel mb-2">{post.title}</h3>
             <p className="font-mono text-sm mb-2">{post.content.slice(0, 100)}...</p>

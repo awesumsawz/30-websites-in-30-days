@@ -6,6 +6,7 @@ import NavMenu from "./components/NavMenu"
 import PixelatedBackground from "./components/PixelatedBackground"
 import FloatingPixels from "./components/FloatingPixels"
 import AnimatedContent from "./components/AnimatedContent"
+import SoundEffect from "./components/SoundEffect"
 
 const robotoMono = Roboto_Mono({
   subsets: ["latin"],
@@ -21,6 +22,7 @@ const pressStart2P = Press_Start_2P({
 export const metadata = {
   title: "Think Bigg Development",
   description: "Web development and business consulting services",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -53,8 +55,12 @@ export default function RootLayout({
           </footer>
         </div>
         <FloatingPixels />
+        <SoundEffect />
       </body>
     </html>
   )
 }
 
+
+
+import './globals.css'

@@ -20,7 +20,7 @@ export default function AnimatedContent({ children, header }: { children: React.
       }, 300)
     } else {
       setIsAnimated(false)
-      setContent(null)
+      setContent(children)
     }
   }, [pathname, children])
 
@@ -30,7 +30,7 @@ export default function AnimatedContent({ children, header }: { children: React.
         const headerHeight = headerRef.current.offsetHeight
         const windowHeight = window.innerHeight
         const topSpace = (windowHeight - headerHeight) / 2
-        headerRef.current.style.marginTop = `${topSpace}px`
+        headerRef.current.style.marginTop = `${Math.max(0, topSpace)}px`
       } else if (headerRef.current) {
         headerRef.current.style.marginTop = "0px"
       }

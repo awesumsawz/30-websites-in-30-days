@@ -1,17 +1,8 @@
 import { notFound } from "next/navigation"
 import CommentSection from "../../components/CommentSection"
 import SocialShare from "../../components/SocialShare"
-
-const posts = [
-  {
-    id: 1,
-    title: "AI: Your New Artsy Bestie",
-    category: "Tech",
-    content:
-      "Who needs human creativity when you've got AI, right? Wrong! AI is here to amplify your artistic genius, not replace it. Imagine a world where your digital paintbrush is powered by machine learning, creating strokes you never thought possible. It's like having a hyper-caffeinated art assistant that never sleeps and doesn't steal your snacks. So, embrace the future, and let AI be the Robin to your Batman in the art world!",
-  },
-  // Add more posts here...
-]
+import { posts } from "../../data/posts"
+import Link from "next/link"
 
 export default function Post({ params }: { params: { id: string } }) {
   const post = posts.find((p) => p.id === Number.parseInt(params.id))
@@ -20,16 +11,40 @@ export default function Post({ params }: { params: { id: string } }) {
     notFound()
   }
 
+  // Find related posts with the same category
+  const relatedPosts = posts.filter((p) => p.category === post.category && p.id !== post.id).slice(0, 3)
+
   return (
-    <article className="prose prose-invert prose-green max-w-none">
-      <h1 className="font-pixel">{post.title}</h1>
-      <span className="inline-block px-2 py-1 bg-green-600 text-black text-sm font-mono rounded mb-4">
-        {post.category}
-      </span>
-      <div className="font-mono text-lg leading-relaxed">{post.content}</div>
-      <SocialShare url={`https://yourdomain.com/post/${post.id}`} title={post.title} />
+    <div className="max-w-3xl mx-auto">
+      <article className="prose prose-invert prose-green max-w-none mb-8">
+        <h1 className="font-pixel">{post.title}</h1>
+        <span className="inline-block px-2 py-1 bg-green-600 text-black text-sm font-mono rounded mb-4">
+          {post.category}
+        </span>
+        <div className="font-mono text-lg leading-relaxed">{post.content}</div>
+        <SocialShare url={`https://yourdomain.com/post/${post.id}`} title={post.title} />
+      </article>
+
+      {relatedPosts.length > 0 && (
+        <div className="mb-8">
+          <h3 className="text-xl font-pixel mb-4 text-dracula-cyan">Related Posts</h3>
+          <div className="grid gap-4">
+            {relatedPosts.map((relatedPost) => (
+              <Link
+                key={relatedPost.id}
+                href={`/post/${relatedPost.id}`}
+                className="block p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
+              >
+                <h4 className="text-lg font-pixel mb-1">{relatedPost.title}</h4>
+                <p className="font-mono text-sm">{relatedPost.content.slice(0, 80)}...</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
       <CommentSection />
-    </article>
+    </div>
   )
 }
 

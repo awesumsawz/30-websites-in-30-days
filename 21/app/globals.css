@@ -5,11 +5,38 @@
 :root {
   --background: 231 15% 18%;
   --foreground: 60 30% 96%;
+
+  --card: 231 15% 23%;
+  --card-foreground: 60 30% 96%;
+
+  --popover: 231 15% 18%;
+  --popover-foreground: 60 30% 96%;
+
+  --primary: 170 100% 75%;
+  --primary-foreground: 231 15% 18%;
+
+  --secondary: 231 15% 28%;
+  --secondary-foreground: 60 30% 96%;
+
+  --muted: 231 15% 28%;
+  --muted-foreground: 60 30% 56%;
+
+  --accent: 291 70% 69%;
+  --accent-foreground: 60 30% 96%;
+
+  --destructive: 0 100% 67%;
+  --destructive-foreground: 60 30% 96%;
+
+  --border: 231 15% 28%;
+  --input: 231 15% 28%;
+  --ring: 291 70% 69%;
+
+  --radius: 0.5rem;
 }
 
 body {
   color: rgb(var(--foreground));
-  background: rgb(var(--background));
+  background: #282a36; /* Dracula background color */
 }
 
 .pixelated-border {
@@ -17,11 +44,11 @@ body {
 }
 
 .font-pixel {
-  text-shadow: 2px 2px 0 #282a36;
+  text-shadow: 2px 2px 0 #191a21;
   letter-spacing: -1px;
 }
 
 .drop-shadow-icon {
-  filter: drop-shadow(2px 2px 0 #282a36);
+  filter: drop-shadow(2px 2px 0 #191a21);
 }
 

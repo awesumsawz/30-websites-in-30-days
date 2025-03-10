@@ -10,7 +10,7 @@ const ColorfulPixelLogo: React.FC = () => {
           key={i}
           className={`w-full h-full ${
             [0, 7, 8, 15, 16, 23, 24, 31, 32, 39, 40, 47, 48, 55, 56, 63].includes(i)
-              ? colors[Math.floor(Math.random() * colors.length)]
+              ? colors[Math.floor(i / 10) % colors.length]
               : "bg-transparent"
           }`}
         />

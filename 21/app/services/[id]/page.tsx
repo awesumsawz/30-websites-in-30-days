@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import ServiceContent from "@/app/components/ServiceContent"
 
 const services = {
   nextjs: {
@@ -32,19 +33,6 @@ export default function ServicePage({ params }: { params: { id: string } }) {
     notFound()
   }
 
-  return (
-    <div className="max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4 text-dracula-purple">{service.title}</h1>
-      <p className="text-lg mb-6 text-dracula-foreground">{service.description}</p>
-      <h2 className="text-2xl font-bold mb-4 text-dracula-cyan">Key Features</h2>
-      <ul className="list-disc list-inside space-y-2">
-        {service.features.map((feature, index) => (
-          <li key={index} className="text-dracula-foreground">
-            {feature}
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
+  return <ServiceContent {...service} />
 }
 

@@ -43,4 +43,13 @@ resource "proxmox_vm_qemu" "vm" {
   
   # Basic OS settings
   os_type = "l26"  # Linux 2.6+ kernel
+
+  # Adding ipconfig0 to capture the IP address
+  ipconfig0 = "ip=dhcp"
+}
+
+# Output the VM IP address (note: may only be available after VM is properly booted)
+output "vm_ip" {
+  value = proxmox_vm_qemu.vm.default_ipv4_address
+  description = "The IP address of the VM"
 } 

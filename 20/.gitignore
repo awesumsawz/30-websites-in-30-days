@@ -1,0 +1,32 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.tfvars
+*.tfvars.json
+!terraform/terraform.tfvars.example
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+.terraformrc
+terraform.rc
+
+# Ansible
+*.retry
+ansible/*.log
+ansible/secret*
+ansible/.vault_pass.txt
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Editor specific
+.vscode/
+.idea/
+*.swp
+*.swo 

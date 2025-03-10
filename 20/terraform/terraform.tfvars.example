@@ -1,0 +1,11 @@
+# Proxmox connection details
+# These will be overridden by environment variables in run-terraform.sh
+proxmox_api_url          = "https://your-proxmox-server:8006/api2/json"
+proxmox_api_token_id     = "your-user@pam!your-token-id"
+proxmox_api_token_secret = "your-token-secret"
+proxmox_node             = "your-node-name"
+
+# VM details
+# vm_name is set via TF_VAR in the run-terraform.sh script
+template_name = "your-template-id-or-name"  # VM ID or name of the template to clone
+storage_pool = "local-zfs"  # Storage pool for the VM disk 

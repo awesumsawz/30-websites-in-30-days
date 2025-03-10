@@ -46,6 +46,15 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day twenty - 03-09-2025
+Today's goal is to get terraform to spin up a proxmox vm without intervention 
+from me outside of starting the script. I relied heavily on cursor to get this 
+one done. I also encountered errors caused by the proxmox provider. I had to 
+settle for a bug announcement as the summary of the action to get the vm 
+created. 
+
+--------------------------------
+
 ### Day nineteen - 03-08-2025
 Today's plan was to continue working on ansible and more specifically, get the
 database to populate itself without user intervention. Again, I started by

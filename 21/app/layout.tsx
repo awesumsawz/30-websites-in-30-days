@@ -41,10 +41,10 @@ export default function RootLayout({
           <AnimatedContent
             header={
               <div className="text-center px-4 md:pt-0 pt-[73px] bg-transparent">
-                <Link href="/" className="inline-block">
-                  <h1 className="text-4xl font-bold font-pixel text-dracula-purple mb-2">Think Bigg Development</h1>
+                <Link href="/" className="inline-block max-w-full">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold font-pixel text-dracula-purple mb-2 break-words hyphens-auto max-w-full overflow-hidden text-ellipsis">Think Bigg Development</h1>
                 </Link>
-                <p className="text-xl pb-2 text-dracula-cyan">Web Development • Cloud Engineering • Business Consulting<BlinkingCursor /></p>
+                <p className="text-sm sm:text-base md:text-xl pb-2 text-dracula-cyan">Web Development • Cloud Engineering • Business Consulting<BlinkingCursor /></p>
                 <NavMenu />
               </div>
             }

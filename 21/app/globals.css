@@ -87,3 +87,24 @@ body.is-home {
   }
 }
 
+/* Responsive title adjustments */
+@media (max-width: 640px) {
+  h1.font-pixel {
+    word-break: break-word;
+    max-width: 100%;
+    padding: 0 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Ensure mobile nav title doesn't overflow */
+@media (max-width: 480px) {
+  .mobile-nav-title {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+

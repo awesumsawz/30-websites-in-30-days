@@ -15,7 +15,7 @@ const MobileNav = () => {
   return (
     <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-dracula-background">
       <div className="flex justify-between items-center px-4 py-3 border-b border-dracula-currentLine">
-        <Link href="/" className="text-dracula-purple font-pixel text-sm">
+        <Link href="/" className="text-dracula-purple font-pixel text-sm truncate mobile-nav-title">
           Think Bigg
         </Link>
         <button

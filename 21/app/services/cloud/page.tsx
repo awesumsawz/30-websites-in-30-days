@@ -3,15 +3,17 @@ import ServiceContent from "@/app/components/ServiceContent"
 export default function CloudServices() {
   return (
     <ServiceContent
-      title="Cloud Services"
-      description="I provide comprehensive cloud solutions leveraging AWS, GitHub, and other leading platforms to help businesses build, deploy, and manage scalable applications and infrastructure."
+      title="Cloud Solutions That Scale as You Grow"
+      description="Whether you need to migrate to the cloud, streamline your deployments, or optimize your infrastructure costs, I help businesses harness the power of AWS, GitHub, and modern cloud technologies to keep things running smoothly—without the headaches."
       features={[
-        "AWS architecture design and implementation (EC2, S3, Lambda, RDS)",
-        "GitHub workflow optimization and CI/CD pipeline setup",
-        "Cloud infrastructure management and cost optimization",
-        "Serverless application development and deployment",
-        "Docker containerization and Kubernetes orchestration",
-        "Cloud security best practices and implementation"
+        "AWS architecture & deployment - From EC2 and S3 to Lambda and RDS, I design and implement scalable, cost-effective cloud solutions.",
+        "CI/CD & DevOps workflows - Automate deployments, speed up development, and keep things running smoothly with GitHub Actions, Docker, and Kubernetes.",
+        "Cloud cost optimization - Avoid unnecessary expenses with smart infrastructure management and scaling strategies.",
+        "Security-first approach - Best practices for cloud security, including IAM, encryption, and compliance.",
+        "Serverless & containerized apps - Build and deploy highly efficient applications with serverless functions and container orchestration.",
+      ]}
+      postFeatures={[
+        "No overcomplicated setups. No mystery pricing. Just practical cloud solutions that help your business grow."
       ]}
     />
   )

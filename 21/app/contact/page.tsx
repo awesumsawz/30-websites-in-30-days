@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import emailjs from '@emailjs/browser';
 
 export default function ContactPage() {
 const [formState, setFormState] = useState({
@@ -20,25 +19,29 @@ e.preventDefault();
 setIsSubmitting(true);
 
 try {
-	const result = await emailjs.send(
-		'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-		'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
-		{
-			from_name: formState.name,
-			from_email: formState.email,
-			message: formState.message,
+	const response = await fetch('/api/contact', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
 		},
-		'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
-	);
+		body: JSON.stringify({
+			name: formState.name,
+			email: formState.email,
+			message: formState.message,
+		}),
+	});
 
-	if (result.status === 200) {
+	const data = await response.json();
+
+	if (response.ok) {
 		setSubmitStatus("success");
 		setFormState({ name: "", email: "", message: "" });
 	} else {
+		console.error('Form submission error:', data.error);
 		setSubmitStatus("error");
 	}
 } catch (error) {
-	console.error('Failed to send email:', error);
+	console.error('Failed to submit form:', error);
 	setSubmitStatus("error");
 } finally {
 	setIsSubmitting(false);
@@ -125,27 +128,39 @@ return (
 			: "bg-dracula-pink hover:bg-dracula-purple text-dracula-white"
 		}`}
 	>
-		{isSubmitting ? "Sending..." : "Send Message"}
+		{isSubmitting ? (
+			<span className="flex items-center justify-center">
+				<svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+					<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+					<path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+				</svg>
+				Sending...
+			</span>
+		) : "Send Message"}
 	</button>
 
 	{submitStatus === "success" && (
-		<motion.p
+		<motion.div
 		initial={{ opacity: 0 }}
 		animate={{ opacity: 1 }}
-		className="text-center text-dracula-green font-pixel"
+		className="p-4 bg-dracula-green/20 border border-dracula-green rounded-md"
 		>
-		Message sent successfully!
-		</motion.p>
+		<p className="text-center text-dracula-green font-pixel">
+			Message sent successfully! We'll get back to you soon.
+		</p>
+		</motion.div>
 	)}
 
 	{submitStatus === "error" && (
-		<motion.p
+		<motion.div
 		initial={{ opacity: 0 }}
 		animate={{ opacity: 1 }}
-		className="text-center text-dracula-red font-pixel"
+		className="p-4 bg-dracula-red/20 border border-dracula-red rounded-md"
 		>
-		Error sending message. Please try again.
-		</motion.p>
+		<p className="text-center text-dracula-red font-pixel">
+			Error sending message. Please try again or contact us directly.
+		</p>
+		</motion.div>
 	)}
 	</form>
 </motion.div>

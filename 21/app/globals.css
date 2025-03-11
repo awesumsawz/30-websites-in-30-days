@@ -90,7 +90,6 @@ body.is-home {
 /* Responsive title adjustments */
 @media (max-width: 640px) {
   h1.font-pixel {
-    word-break: break-word;
     max-width: 100%;
     padding: 0 10px;
     margin-left: auto;

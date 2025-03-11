@@ -1,10 +1,8 @@
 import Link from "next/link"
-import PixelLogo from "./components/PixelLogo"
 
 export default function NotFound() {
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh]">
-      <PixelLogo />
       <h1 className="text-4xl font-pixel mb-4">404 - Game Over</h1>
       <p className="font-mono mb-4">The page you're looking for is in another castle!</p>
       <Link

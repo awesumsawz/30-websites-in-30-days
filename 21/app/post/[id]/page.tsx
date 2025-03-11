@@ -1,10 +1,13 @@
-import { notFound } from "next/navigation"
+import { redirect, notFound } from 'next/navigation'
 import CommentSection from "../../components/CommentSection"
 import SocialShare from "../../components/SocialShare"
 import { posts } from "../../data/posts"
 import Link from "next/link"
 
 export default function Post({ params }: { params: { id: string } }) {
+  redirect('/')
+  
+  // Original content preserved below
   const post = posts.find((p) => p.id === Number.parseInt(params.id))
 
   if (!post) {

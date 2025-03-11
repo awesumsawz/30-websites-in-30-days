@@ -1,10 +1,12 @@
-"use client"
-
+import { redirect } from 'next/navigation'
 import Link from "next/link"
 import { posts } from "../data/posts"
 import { motion } from "framer-motion"
 
 export default function BlogPage() {
+  redirect('/')
+  
+  // Original content preserved below
   return (
     <motion.div 
       className="w-full max-w-3xl mx-auto mt-8"

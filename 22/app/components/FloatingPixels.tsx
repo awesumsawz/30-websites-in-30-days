@@ -23,9 +23,9 @@ export default function FloatingPixels() {
   useEffect(() => {
     const createPixels = () => {
       const newPixels: Pixel[] = []
-      for (let i = 0; i < 50; i++) {
-        const size = Math.random() * 6 + 1;
-        const speedFactor = Math.random() * 0.8 + 0.2;
+      for (let i = 0; i < 25; i++) {
+        const size = Math.random() * 5 + 1;
+        const speedFactor = Math.random() * 0.5 + 0.1;
         
         newPixels.push({
           id: i,

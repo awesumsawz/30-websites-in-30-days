@@ -7,6 +7,7 @@ import PixelatedBackground from "./components/PixelatedBackground"
 import FloatingPixels from "./components/FloatingPixels"
 import AnimatedContent from "./components/AnimatedContent"
 import SoundEffect from "./components/SoundEffect"
+import BlinkingCursor from "./components/BlinkingCursor"
 
 const robotoMono = Roboto_Mono({
   subsets: ["latin"],
@@ -33,26 +34,26 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${robotoMono.variable} ${pressStart2P.variable} font-sans bg-dracula-background text-dracula-foreground h-full overflow-hidden`}
+        className={`${robotoMono.variable} ${pressStart2P.variable} font-sans bg-dracula-background text-dracula-foreground h-full`}
       >
         <PixelatedBackground />
-        <div className="relative z-10 h-full flex flex-col md:pt-0 pt-14">
+        <div className="relative z-10 h-full flex flex-col">
           <AnimatedContent
             header={
-              <div className="text-center px-4">
+              <div className="text-center px-4 md:pt-0 pt-[73px] bg-transparent">
                 <Link href="/" className="inline-block">
                   <h1 className="text-4xl font-bold font-pixel text-dracula-purple mb-2">Think Bigg Development</h1>
                 </Link>
-                <p className="text-xl pb-2 text-dracula-cyan">Web Development • Cloud Engineering • Business Consulting</p>
+                <p className="text-xl pb-2 text-dracula-cyan">Web Development • Cloud Engineering • Business Consulting<BlinkingCursor /></p>
                 <NavMenu />
               </div>
             }
           >
-            <div className="max-w-4xl mx-auto px-4 pb-8">{children}</div>
+            <div className="max-w-4xl mx-auto px-4 py-8">{children}</div>
+            <footer className="py-4 text-center text-dracula-comment non-home-footer">
+              © {new Date().getFullYear()} Think Bigg Development. All rights reserved.
+            </footer>
           </AnimatedContent>
-          <footer className="py-4 text-center text-dracula-comment">
-            © {new Date().getFullYear()} Think Bigg Development. All rights reserved.
-          </footer>
         </div>
         <FloatingPixels />
         <SoundEffect />

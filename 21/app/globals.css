@@ -52,3 +52,38 @@ body {
   filter: drop-shadow(2px 2px 0 #191a21);
 }
 
+/* Footer visibility control */
+body.is-home .non-home-footer {
+  display: none;
+}
+
+/* Homepage specific styles */
+body.is-home {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.home-footer {
+  margin-top: auto;
+}
+
+/* Mobile header adjustments */
+@media (max-width: 768px) {
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: theme('colors.dracula.background');
+  }
+  
+  /* Mobile menu height variable */
+  :root {
+    --mobile-menu-height: 73px; /* Exact height as requested */
+  }
+  
+  /* Padding for content to account for fixed mobile header */
+  .mobile-header-offset {
+    padding-top: var(--mobile-menu-height);
+  }
+}
+

@@ -36,7 +36,7 @@ export default function RootLayout({
         className={`${robotoMono.variable} ${pressStart2P.variable} font-sans bg-dracula-background text-dracula-foreground h-full overflow-hidden`}
       >
         <PixelatedBackground />
-        <div className="relative z-10 h-full flex flex-col">
+        <div className="relative z-10 h-full flex flex-col md:pt-0 pt-14">
           <AnimatedContent
             header={
               <div className="text-center px-4">

@@ -1,14 +1,30 @@
 "use client"
 
-import type React from "react"
-import { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { usePathname } from "next/navigation"
 
 export default function AnimatedContent({ children, header }: { children: React.ReactNode; header: React.ReactNode }) {
   const [isAnimated, setIsAnimated] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const headerRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const isHome = pathname === "/"
+
+  useEffect(() => {
+    // Check if viewport is mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    
+    // Initial check
+    checkMobile()
+    
+    // Add resize listener
+    window.addEventListener('resize', checkMobile)
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     setIsAnimated(!isHome)
@@ -53,7 +69,7 @@ export default function AnimatedContent({ children, header }: { children: React.
           isAnimated 
             ? "py-4 border-dracula-currentLine border-opacity-100 sticky top-0 z-50" 
             : "py-8 border-dracula-currentLine border-opacity-0"
-        }`}
+        } ${!isHome && isMobile ? 'mobile-non-home-header' : ''}`}
       >
         {header}
       </header>

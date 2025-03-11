@@ -18,7 +18,7 @@ export default function ServiceContent({ title, description, features, postFeatu
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h1 className="text-3xl font-pixel mb-4 text-dracula-purple">{title}</h1>
+      <h1 className="text-3xl font-pixel mb-4 text-dracula-pink">{title}</h1>
       <p className="text-lg mb-6 text-dracula-foreground">{description}</p>
 
       <h2 className="text-2xl font-pixel mb-4 text-dracula-cyan">Key Features</h2>

@@ -53,9 +53,9 @@ return (
 	initial={{ opacity: 0, y: 20 }}
 	animate={{ opacity: 1, y: 0 }}
 	transition={{ duration: 0.5 }}
-	className="space-y-6"
+	className="space-y-6 max-w-2xl mx-auto"
 >
-	<div className="text-center">
+	<div className="text-left">
 	<h1 className="text-3xl font-pixel text-dracula-pink mb-4">
 		Contact Me
 	</h1>
@@ -64,7 +64,7 @@ return (
 	</p>
 	</div>
 
-	<form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
+	<form onSubmit={handleSubmit} className="space-y-6">
 	<div className="space-y-2">
 		<label htmlFor="name" className="block font-pixel text-dracula-foreground">
 		Name
@@ -145,7 +145,7 @@ return (
 		animate={{ opacity: 1 }}
 		className="p-4 bg-dracula-green/20 border border-dracula-green rounded-md"
 		>
-		<p className="text-center text-dracula-green font-pixel">
+		<p className="text-left text-dracula-green font-pixel">
 			Message sent successfully! We'll get back to you soon.
 		</p>
 		</motion.div>
@@ -157,7 +157,7 @@ return (
 		animate={{ opacity: 1 }}
 		className="p-4 bg-dracula-red/20 border border-dracula-red rounded-md"
 		>
-		<p className="text-center text-dracula-red font-pixel">
+		<p className="text-left text-dracula-red font-pixel">
 			Error sending message. Please try again or contact us directly.
 		</p>
 		</motion.div>

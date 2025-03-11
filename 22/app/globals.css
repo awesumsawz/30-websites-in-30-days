@@ -85,6 +85,45 @@ body.is-home {
   .mobile-header-offset {
     padding-top: var(--mobile-menu-height);
   }
+  
+  /* Hide specific header elements on non-homepage mobile views */
+  .mobile-non-home-header > div > a > h1 {
+    font-size: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  
+  .mobile-non-home-header > div > p {
+    display: none;
+  }
+  
+  .mobile-non-home-header > div > div.space-y-4 > nav {
+    display: none;
+  }
+  
+  /* Remove padding and border from header in mobile non-homepage views */
+  .mobile-non-home-header {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    border-bottom: none !important;
+  }
+  
+  /* Reduce padding-top for header content div in mobile non-homepage views */
+  .mobile-non-home-header > div {
+    padding-top: 30px !important;
+  }
+  
+  /* Ensure the mobile nav title "Think Bigg" remains visible */
+  .md\:hidden.fixed.top-0 .mobile-nav-title {
+    display: block !important;
+  }
 }
 
 /* Responsive title adjustments */

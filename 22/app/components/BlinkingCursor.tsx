@@ -18,4 +18,3 @@ const BlinkingCursor: React.FC = () => {
 }
 
 export default BlinkingCursor
-

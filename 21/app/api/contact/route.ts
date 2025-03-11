@@ -26,11 +26,11 @@ export async function POST(request: Request) {
 
     // Configure nodemailer transporter
     const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST || 'smtp.example.com',
+      host: process.env.EMAIL_HOST || 'smtp.gmail.com',
       port: parseInt(process.env.EMAIL_PORT || '587'),
       secure: process.env.EMAIL_SECURE === 'true',
       auth: {
-        user: process.env.EMAIL_USER || 'user@example.com',
+        user: process.env.EMAIL_USER || 'admin@thinkbigg.dev',
         pass: process.env.EMAIL_PASSWORD || 'password',
       },
     });
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     // Email content
     const mailOptions = {
       from: process.env.EMAIL_FROM || 'contact@thinkbigg.dev',
-      to: process.env.EMAIL_TO || 'recipient@example.com',
+      to: process.env.EMAIL_TO || 'admin@thinkbigg.dev',
       subject: `New Contact Form Submission from ${name}`,
       text: `
         Name: ${name}

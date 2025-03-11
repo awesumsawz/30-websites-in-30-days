@@ -43,7 +43,7 @@ export default function RootLayout({
                 <Link href="/" className="inline-block">
                   <h1 className="text-4xl font-bold font-pixel text-dracula-purple mb-2">Think Bigg Development</h1>
                 </Link>
-                <p className="text-xl text-dracula-cyan">Web Development • Business Consulting</p>
+                <p className="text-xl pb-2 text-dracula-cyan">Web Development • Business Consulting</p>
                 <NavMenu />
               </div>
             }

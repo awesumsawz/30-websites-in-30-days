@@ -1,9 +1,17 @@
+"use client"
+
 import Link from "next/link"
 import { posts } from "../data/posts"
+import { motion } from "framer-motion"
 
 export default function BlogPage() {
   return (
-    <div className="w-full max-w-3xl mx-auto mt-8">
+    <motion.div 
+      className="w-full max-w-3xl mx-auto mt-8"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <h1 className="text-3xl font-pixel mb-4 text-dracula-purple">Blog</h1>
       <div className="grid gap-6">
         {posts.map((post) => (
@@ -41,6 +49,6 @@ export default function BlogPage() {
           Finance Posts
         </Link>
       </div>
-    </div>
+    </motion.div>
   )
 } 

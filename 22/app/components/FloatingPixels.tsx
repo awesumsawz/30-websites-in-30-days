@@ -1,7 +1,6 @@
 "use client"
 
-import type React from "react"
-import { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState, useRef } from "react"
 
 interface Pixel {
   id: number
@@ -11,32 +10,48 @@ interface Pixel {
   speedX: number
   speedY: number
   color: string
+  opacity: number
 }
 
-const FloatingPixels: React.FC = () => {
+export default function FloatingPixels() {
   const [pixels, setPixels] = useState<Pixel[]>([])
-  const requestRef = useRef<number>()
-  const previousTimeRef = useRef<number>()
+  const requestRef = useRef<number | undefined>(undefined)
+  const previousTimeRef = useRef<number | undefined>(undefined)
 
-  const colors = ["#8be9fd", "#50fa7b", "#ffb86c", "#ff79c6", "#bd93f9", "#ff5555", "#f1fa8c"]
+  const colors = ["#00ffff", "#00ff7b", "#ffb000", "#ff00bf", "#bd00ff", "#ff0000", "#ffff00"]
 
   useEffect(() => {
     const createPixels = () => {
       const newPixels: Pixel[] = []
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 50; i++) {
+        const size = Math.random() * 6 + 1;
+        const speedFactor = Math.random() * 0.8 + 0.2;
+        
         newPixels.push({
           id: i,
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
-          size: Math.random() * 4 + 2,
-          speedX: (Math.random() - 0.5) * 0.5,
-          speedY: (Math.random() - 0.5) * 0.5,
+          size: size,
+          speedX: (Math.random() - 0.5) * speedFactor,
+          speedY: (Math.random() - 0.5) * speedFactor,
           color: colors[Math.floor(Math.random() * colors.length)],
+          opacity: Math.random() * 0.5 + 0.2,
         })
       }
       setPixels(newPixels)
     }
 
+    const handleResize = () => {
+      setPixels(prevPixels => 
+        prevPixels.map(pixel => ({
+          ...pixel,
+          x: Math.min(pixel.x, window.innerWidth),
+          y: Math.min(pixel.y, window.innerHeight)
+        }))
+      );
+    };
+
+    window.addEventListener('resize', handleResize);
     createPixels()
 
     const animate = (time: number) => {
@@ -68,6 +83,7 @@ const FloatingPixels: React.FC = () => {
       if (requestRef.current) {
         cancelAnimationFrame(requestRef.current)
       }
+      window.removeEventListener('resize', handleResize);
     }
   }, [])
 
@@ -76,19 +92,18 @@ const FloatingPixels: React.FC = () => {
       {pixels.map((pixel) => (
         <div
           key={pixel.id}
-          className="absolute opacity-50"
+          className="absolute"
           style={{
             left: `${pixel.x}px`,
             top: `${pixel.y}px`,
             width: `${pixel.size}px`,
             height: `${pixel.size}px`,
             backgroundColor: pixel.color,
+            opacity: pixel.opacity,
           }}
         />
       ))}
     </div>
   )
 }
-
-export default FloatingPixels
 

@@ -39,7 +39,7 @@ export default function ServiceContent({ title, description, features, postFeatu
         </div>
       )}
 
-      <div className="mt-8 p-6 bg-dracula-currentLine rounded-lg pixelated-border">
+      <div className="mt-8 p-6 bg-dracula-currentLine rounded-lg pixelated-border bg-transparent">
         <h3 className="text-xl font-pixel mb-3 text-dracula-pink">Let's build something awesome!</h3>
         <p className="mb-4 font-mono">
           I like building cool stuff. If you have a project in mind, let's talk!

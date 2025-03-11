@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Code, Briefcase, WorkflowIcon as Wordpress, Server } from "lucide-react"
+import { Code, Briefcase, WorkflowIcon as Wordpress, Server, Cloud } from "lucide-react"
 
 const NavMenu = () => {
   return (
@@ -23,25 +23,18 @@ const NavMenu = () => {
       {/* Primary Navigation - Services */}
       <nav className="flex justify-center gap-4 my-4 max-w-[800px] mx-auto">
         <Link
-          href="/services/nextjs"
+          href="/services/web"
           className="flex flex-col items-center p-2 bg-dracula-currentLine rounded hover:bg-dracula-comment transition-colors pixelated-border flex-grow"
         >
           <Code className="w-8 h-8 mb-1 text-dracula-green drop-shadow-icon" />
-          <span className="text-xs font-pixel whitespace-nowrap">Next.js</span>
+          <span className="text-xs font-pixel whitespace-nowrap">Web</span>
         </Link>
         <Link
-          href="/services/laravel"
+          href="/services/cloud"
           className="flex flex-col items-center p-2 bg-dracula-currentLine rounded hover:bg-dracula-comment transition-colors pixelated-border flex-grow"
         >
-          <Server className="w-8 h-8 mb-1 text-dracula-red drop-shadow-icon" />
-          <span className="text-xs font-pixel whitespace-nowrap">Laravel</span>
-        </Link>
-        <Link
-          href="/services/wordpress"
-          className="flex flex-col items-center p-2 bg-dracula-currentLine rounded hover:bg-dracula-comment transition-colors pixelated-border flex-grow"
-        >
-          <Wordpress className="w-8 h-8 mb-1 text-dracula-cyan drop-shadow-icon" />
-          <span className="text-xs font-pixel whitespace-nowrap">WordPress</span>
+          <Cloud className="w-8 h-8 mb-1 text-dracula-cyan drop-shadow-icon" />
+          <span className="text-xs font-pixel whitespace-nowrap">Cloud</span>
         </Link>
         <Link
           href="/services/consulting"

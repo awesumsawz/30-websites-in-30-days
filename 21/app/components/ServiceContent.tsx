@@ -7,9 +7,10 @@ interface ServiceContentProps {
   title: string
   description: string
   features: string[]
+  postFeatures?: string[]
 }
 
-export default function ServiceContent({ title, description, features }: ServiceContentProps) {
+export default function ServiceContent({ title, description, features, postFeatures }: ServiceContentProps) {
   return (
     <motion.div 
       className="max-w-2xl mx-auto"
@@ -30,14 +31,22 @@ export default function ServiceContent({ title, description, features }: Service
         ))}
       </ul>
 
+      {postFeatures && postFeatures.length > 0 && (
+        <div className="mt-6 mb-6">
+          {postFeatures.map((feature, index) => (
+            <p key={index} className="text-dracula-yellow font-mono italic">{feature}</p>
+          ))}
+        </div>
+      )}
+
       <div className="mt-8 p-6 bg-dracula-currentLine rounded-lg pixelated-border">
-        <h3 className="text-xl font-pixel mb-3 text-dracula-pink">Ready to get started?</h3>
+        <h3 className="text-xl font-pixel mb-3 text-dracula-pink">Let's build something awesome!</h3>
         <p className="mb-4 font-mono">
-          Contact us today to discuss your project requirements and how we can help you achieve your goals.
+          I like building cool stuff. If you have a project in mind, let's talk!
         </p>
         <Link href="/contact">
           <button className="bg-dracula-purple text-white px-4 py-2 rounded font-pixel hover:bg-dracula-pink transition-colors">
-            Contact Us
+            Get in touch
           </button>
         </Link>
       </div>

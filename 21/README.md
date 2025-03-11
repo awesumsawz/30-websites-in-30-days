@@ -13,3 +13,4 @@ To enable the contact form functionality:
 todo:
 implement a blog
 - this is currently blocked by redirects away from the blog componentsw
+

@@ -46,6 +46,12 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day twenty one - 03-10-2025
+build out my think bigg brand website.
+Did it.
+
+--------------------------------
+
 ### Day twenty - 03-09-2025
 Today's goal is to get terraform to spin up a proxmox vm without intervention 
 from me outside of starting the script. I relied heavily on cursor to get this 

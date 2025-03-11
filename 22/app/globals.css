@@ -130,7 +130,7 @@ body.is-home {
 @media (max-width: 640px) {
   h1.font-pixel {
     max-width: 100%;
-    padding: 0 10px;
+    padding: 0;
     margin-left: auto;
     margin-right: auto;
   }

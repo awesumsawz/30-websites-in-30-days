@@ -14,7 +14,7 @@ const BlinkingCursor: React.FC = () => {
     return () => clearInterval(interval)
   }, [])
 
-  return <span className={`inline-block w-3 h-5 bg-green-400 ${visible ? "opacity-100" : "opacity-0"}`} />
+  return <span className={`inline-block w-0.5 h-3 sm:h-4 md:h-5 bg-green-400 ${visible ? "opacity-100" : "opacity-0"}`} />
 }
 
 export default BlinkingCursor

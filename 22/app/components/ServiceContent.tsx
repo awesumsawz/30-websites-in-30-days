@@ -13,12 +13,12 @@ interface ServiceContentProps {
 export default function ServiceContent({ title, description, features, postFeatures }: ServiceContentProps) {
   return (
     <motion.div 
-      className="max-w-2xl mx-auto"
+      className="max-w-2xl mx-auto px-4"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h1 className="text-3xl font-pixel mb-4 text-dracula-pink">{title}</h1>
+      <h1 className="text-3xl font-pixel mb-4 text-dracula-pink px-0">{title}</h1>
       <p className="text-lg mb-6 text-dracula-foreground">{description}</p>
 
       <h2 className="text-2xl font-pixel mb-4 text-dracula-cyan">Key Features</h2>
@@ -45,7 +45,7 @@ export default function ServiceContent({ title, description, features, postFeatu
           I like building cool stuff. If you have a project in mind, let's talk!
         </p>
         <Link href="/contact">
-          <button className="bg-dracula-purple text-white px-4 py-2 rounded font-pixel hover:bg-dracula-pink transition-colors">
+          <button className="bg-dracula-purple text-white px-4 py-2 rounded font-pixel hover:bg-dracula-pink transition-colors w-full">
             Get in touch
           </button>
         </Link>

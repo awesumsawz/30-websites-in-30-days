@@ -6,23 +6,13 @@ import { usePathname } from "next/navigation"
 
 export default function AnimatedContent({ children, header }: { children: React.ReactNode; header: React.ReactNode }) {
   const [isAnimated, setIsAnimated] = useState(false)
-  const [content, setContent] = useState<React.ReactNode>(null)
   const headerRef = useRef<HTMLDivElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
+  const isHome = pathname === "/"
 
   useEffect(() => {
-    if (pathname !== "/") {
-      setIsAnimated(true)
-      setContent(null)
-      setTimeout(() => {
-        setContent(children)
-      }, 300)
-    } else {
-      setIsAnimated(false)
-      setContent(children)
-    }
-  }, [pathname, children])
+    setIsAnimated(!isHome)
+  }, [isHome])
 
   useEffect(() => {
     const adjustHeaderPosition = () => {
@@ -43,20 +33,11 @@ export default function AnimatedContent({ children, header }: { children: React.
 
   return (
     <div className={`flex flex-col ${isAnimated ? "min-h-screen" : "h-screen"}`}>
-      <header ref={headerRef} className={`transition-all duration-500 ease-linear ${isAnimated ? "py-4" : "py-8"}`}>
+      <header ref={headerRef} className={`transition-all duration-500 ease-in-out ${isAnimated ? "py-4" : "py-8"}`}>
         {header}
       </header>
-      <main
-        className={`transition-all duration-500 ease-linear flex-grow ${
-          isAnimated ? "opacity-100 overflow-y-auto" : "opacity-0"
-        }`}
-      >
-        <div
-          ref={contentRef}
-          className={`transition-opacity duration-300 ease-linear ${content ? "opacity-100" : "opacity-0"}`}
-        >
-          {content}
-        </div>
+      <main className={`flex-grow ${isAnimated ? "overflow-y-auto" : ""}`}>
+        {children}
       </main>
     </div>
   )

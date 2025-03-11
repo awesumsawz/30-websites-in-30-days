@@ -1,3 +1,8 @@
+"use client"
+
+import { motion } from "framer-motion"
+import Link from "next/link"
+
 interface ServiceContentProps {
   title: string
   description: string
@@ -6,7 +11,12 @@ interface ServiceContentProps {
 
 export default function ServiceContent({ title, description, features }: ServiceContentProps) {
   return (
-    <div className="max-w-2xl mx-auto">
+    <motion.div 
+      className="max-w-2xl mx-auto"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <h1 className="text-3xl font-pixel mb-4 text-dracula-purple">{title}</h1>
       <p className="text-lg mb-6 text-dracula-foreground">{description}</p>
 
@@ -25,11 +35,13 @@ export default function ServiceContent({ title, description, features }: Service
         <p className="mb-4 font-mono">
           Contact us today to discuss your project requirements and how we can help you achieve your goals.
         </p>
-        <button className="bg-dracula-purple text-white px-4 py-2 rounded font-pixel hover:bg-dracula-pink transition-colors">
-          Contact Us
-        </button>
+        <Link href="/contact">
+          <button className="bg-dracula-purple text-white px-4 py-2 rounded font-pixel hover:bg-dracula-pink transition-colors">
+            Contact Us
+          </button>
+        </Link>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

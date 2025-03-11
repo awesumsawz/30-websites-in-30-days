@@ -22,7 +22,29 @@ const pressStart2P = Press_Start_2P({
 export const metadata = {
   title: "Think Bigg Development",
   description: "Web, Cloud, and Business Consulting Services",
-    generator: 'v0.dev'
+  generator: 'v0.dev',
+  metadataBase: new URL('https://thinkbigg.dev'),
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://thinkbigg.dev',
+    title: 'Think Bigg Development',
+    description: 'Web, Cloud, and Business Consulting Services',
+  },
+  headers: {
+    'Content-Security-Policy': 
+      "default-src 'self'; " +
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
+      "style-src 'self' 'unsafe-inline'; " +
+      "img-src 'self' data: https:; " +
+      "font-src 'self' https://fonts.gstatic.com; " +
+      "connect-src 'self'; " +
+      "frame-ancestors 'none';",
+    'X-Frame-Options': 'DENY',
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+  }
 }
 
 export default function RootLayout({

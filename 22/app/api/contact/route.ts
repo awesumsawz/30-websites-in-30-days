@@ -1,62 +1,78 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { z } from 'zod';
+import DOMPurify from 'isomorphic-dompurify';
+
+// Input validation schema
+const contactSchema = z.object({
+  name: z.string().min(1).max(100).trim(),
+  email: z.string().email().max(100).trim().toLowerCase(),
+  message: z.string().min(10).max(1000).trim(),
+});
 
 export async function POST(request: Request) {
   try {
-    const { name, email, message } = await request.json();
-
-    // Validate form data
-    if (!name || !email || !message) {
-      console.log('Missing required fields:', { name, email, message });
+    // Validate request method
+    if (request.method !== 'POST') {
       return NextResponse.json(
-        { error: 'Name, email, and message are required' },
+        { error: 'Method not allowed' },
+        { status: 405 }
+      );
+    }
+
+    // Parse and validate input
+    const body = await request.json();
+    const result = contactSchema.safeParse(body);
+    
+    if (!result.success) {
+      return NextResponse.json(
+        { error: 'Invalid input', details: result.error.flatten() },
         { status: 400 }
       );
     }
 
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      console.log('Invalid email format:', email);
-      return NextResponse.json(
-        { error: 'Please provide a valid email address' },
-        { status: 400 }
-      );
-    }
+    const { name, email, message } = result.data;
 
-    // Configure nodemailer transporter
+    // Sanitize inputs
+    const sanitizedName = DOMPurify.sanitize(name);
+    const sanitizedMessage = DOMPurify.sanitize(message);
+
+    // Configure nodemailer transporter with strict security
     const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+      host: process.env.EMAIL_HOST,
       port: parseInt(process.env.EMAIL_PORT || '587'),
       secure: process.env.EMAIL_SECURE === 'true',
       auth: {
-        user: process.env.EMAIL_USER || 'admin@thinkbigg.dev',
-        pass: process.env.EMAIL_PASSWORD || 'password',
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
       },
+      tls: {
+        ciphers: 'TLS_AES_128_GCM_SHA256',
+        minVersion: 'TLSv1.2',
+        rejectUnauthorized: true
+      }
     });
 
-    // Email content
+    // Email content with sanitized inputs
     const mailOptions = {
-      from: process.env.EMAIL_FROM || 'contact@thinkbigg.dev',
-      to: process.env.EMAIL_TO || 'admin@thinkbigg.dev',
-      subject: `New Contact Form Submission from ${name}`,
+      from: process.env.EMAIL_FROM,
+      to: process.env.EMAIL_TO,
+      subject: `New Contact Form Submission from ${sanitizedName}`,
       text: `
-        Name: ${name}
+        Name: ${sanitizedName}
         Email: ${email}
         
         Message:
-        ${message}
+        ${sanitizedMessage}
       `,
       html: `
         <h3>New Contact Form Submission</h3>
-        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Name:</strong> ${sanitizedName}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <p>${sanitizedMessage.replace(/\n/g, '<br>')}</p>
       `,
     };
-
-    console.log('Processing contact form submission from:', email);
 
     // For demo purposes, we'll just return success without actually sending
     // In production, uncomment the following code to send the email
@@ -83,7 +99,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Error processing contact form:', error);
     return NextResponse.json(
-      { error: 'Failed to process contact form submission' },
+      { error: 'Internal server error' }, // Don't expose detailed error messages
       { status: 500 }
     );
   }

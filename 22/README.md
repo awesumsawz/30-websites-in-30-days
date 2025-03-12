@@ -99,14 +99,17 @@ docker push your-account-id.dkr.ecr.your-region.amazonaws.com/your-app-name:late
 To enable the contact form functionality:
 
 1. Ensure you've copied `.env.local.example` to `.env.local`
-2. Update the email configuration in `.env.local` with your SMTP server details:
+2. Update the email configuration in `.env.local` with your email server details:
    ```env
-   SMTP_HOST=your-smtp-host
-   SMTP_PORT=587
-   SMTP_USER=your-smtp-username
-   SMTP_PASSWORD=your-smtp-password
+   EMAIL_HOST=smtp.gmail.com  # or your SMTP server
+   EMAIL_PORT=465            # 465 for secure, 587 for TLS
+   EMAIL_SECURE=true        # true for 465, false for 587
+   EMAIL_USER=your-email@example.com
+   EMAIL_PASS=your-app-specific-password
+   DEFAULT_FROM="Your App Name <noreply@yourapp.com>"
    ```
-3. The contact form will be automatically enabled once the environment variables are set
+3. If using Gmail, follow the Gmail Setup instructions in the Email Configuration section below
+4. The contact form will be automatically enabled once the environment variables are set
 
 ## Development Notes
 
@@ -145,4 +148,77 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Implement blog functionality (currently blocked by redirect issues)
 - Add more interactive components
 - Enhance testing coverage
+
+## Email Configuration
+
+The application uses Nodemailer for sending emails, with a secure test endpoint for verification.
+
+### Environment Variables
+
+Required variables in `.env.local`:
+```env
+# Email Server Configuration
+EMAIL_HOST=smtp.gmail.com  # or your SMTP server
+EMAIL_PORT=465            # 465 for secure, 587 for TLS
+EMAIL_SECURE=true        # true for 465, false for 587
+EMAIL_USER=your-email@example.com
+EMAIL_PASS=your-app-specific-password
+DEFAULT_FROM="Your App Name <noreply@yourapp.com>"
+
+# Test Endpoint Security
+TEST_EMAIL_API_KEY=your-secure-api-key  # Required for test endpoint
+```
+
+### Gmail Setup
+If using Gmail (recommended for development):
+1. Enable 2-Step Verification in your Google Account
+2. Generate an App Password:
+   - Go to Google Account Settings → Security
+   - Under "2-Step Verification", click on "App passwords"
+   - Select "Mail" and your device
+   - Use the generated 16-character password as `EMAIL_PASS`
+
+### Test Endpoint
+
+A secure endpoint is available for verifying email functionality:
+
+- **URL**: `/api/test-email`
+- **Method**: GET
+- **Headers Required**: 
+  ```
+  x-api-key: your-test-email-api-key
+  ```
+- **Security Features**:
+  - Development environment only
+  - API key authentication
+  - Rate limited (1 request/minute)
+  - Sends only to configured `EMAIL_USER`
+  - No sensitive data in test emails
+
+Example test request:
+```bash
+curl http://localhost:3000/api/test-email \
+  -H "x-api-key: your-test-email-api-key"
+```
+
+### Implementation Details
+
+- Email service: `lib/email.ts`
+  - Handles SMTP communication via Nodemailer
+  - Includes error handling and response formatting
+- Test endpoint: `app/api/test-email/route.ts`
+  - Verifies email configuration
+  - Provides detailed error messages
+  - Includes rate limiting
+
+### Security Best Practices
+
+1. Never commit `.env.local` to version control
+2. Generate a secure random API key:
+   ```bash
+   openssl rand -hex 32
+   ```
+3. Test endpoint automatically disabled in production
+4. Use environment-specific email configurations
+5. Store sensitive credentials in environment variables only
 

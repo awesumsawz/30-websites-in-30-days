@@ -1,13 +1,18 @@
-# Use Bun as the base image
-FROM oven/bun:1-alpine AS builder
+# Set the platform ARG at the top
+ARG TARGETPLATFORM=linux/amd64
+
+# Build stage
+FROM --platform=$TARGETPLATFORM node:18-alpine AS builder
 WORKDIR /app
 COPY package*.json bun.lock ./
+# Install bun for package management
+RUN npm install -g bun
 RUN bun install --frozen-lockfile
 COPY . .
-RUN bun run build
+RUN npm run build
 
-# Production image, copy all the files and run next
-FROM oven/bun:1-alpine AS runner
+# Production stage
+FROM --platform=$TARGETPLATFORM node:18-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -31,4 +36,4 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["bun", "server.js"] 
+CMD ["node", "server.js"]

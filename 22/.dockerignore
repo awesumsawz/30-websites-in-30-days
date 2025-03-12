@@ -11,3 +11,4 @@ Dockerfile
 *.md
 .github
 .vscode 
+task-definition.json

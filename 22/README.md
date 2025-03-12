@@ -87,9 +87,9 @@ docker run -p 3000:3000 your-app-name
 
 1. Push the image to Amazon ECR:
 ```bash
-aws ecr get-login-password --region your-region | docker login --username AWS --password-stdin your-account-id.dkr.ecr.your-region.amazonaws.com
-docker tag your-app-name:latest your-account-id.dkr.ecr.your-region.amazonaws.com/your-app-name:latest
-docker push your-account-id.dkr.ecr.your-region.amazonaws.com/your-app-name:latest
+aws ecr get-login-password --region your-region | docker login --username AWS --password-stdin <your-account-id>.dkr.ecr.us-east-2.amazonaws.com
+docker tag thinkbigg-nextjs:latest <your-account-id>.dkr.ecr.us-east-2.amazonaws.com/thinkbigg-nextjs:latest
+docker push <your-account-id>.dkr.ecr.us-east-2.amazonaws.com/thinkbigg-nextjs:latest
 ```
 
 2. Create an ECS task definition and service using the AWS Console or CLI.

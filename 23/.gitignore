@@ -29,3 +29,6 @@ next-env.d.ts
 .cursor
 .prettierrc
 task-definition.json
+dns-change.json
+validation1.json
+validation2.json

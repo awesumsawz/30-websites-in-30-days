@@ -46,6 +46,26 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day twenty three - 03-12-2025
+I finished getting the site deployed. I realized that although I'd set the port
+to serve at port 80, it was actually still pointing to 3000. After some
+wrestling, I found that the issue had to do with permissions and configuration,
+so I configured a load balancer and the route 53 to point to the load balancer.
+I then configured my DNS host to point to the route 53.
+After about ten minutes of waiting, everything had deployed successfully.
+
+
+--------------------------------
+
+### Day twenty two - 03-11-2025
+Finished polishing the thinkbigg-dev website. Started a deploy to an ECS
+instance. I did not complete this successfully though. Being that it was my
+first time, I encountered a load of hiccups and eventually although I got the
+container to deploy to ecs and I had a task running, I wasn't able to connect to
+it successfully. 
+
+--------------------------------
+
 ### Day twenty one - 03-10-2025
 build out my think bigg brand website.
 Did it.

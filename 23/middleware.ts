@@ -9,9 +9,37 @@ const RATE_LIMIT_WINDOW = 60 * 1000 // 1 minute
 const MAX_REQUESTS = 5 // Maximum requests per window
 
 export function middleware(request: NextRequest) {
+  // Check if the request is for an admin route
+  if (request.nextUrl.pathname.startsWith('/admin')) {
+    // Check if the user is authenticated
+    const authToken = request.cookies.get('admin_auth_token')?.value
+    
+    // If no auth token or invalid token, redirect to login
+    if (!authToken) {
+      const url = new URL('/admin/login', request.url)
+      url.searchParams.set('from', request.nextUrl.pathname)
+      return NextResponse.redirect(url)
+    }
+    
+    // In a real app, you would verify the token here
+    // For now, we'll just check if it exists
+    try {
+      // Simple check - in production you would verify JWT or session
+      if (authToken !== process.env.ADMIN_API_KEY) {
+        throw new Error('Invalid token')
+      }
+    } catch (error) {
+      // If token verification fails, redirect to login
+      const url = new URL('/admin/login', request.url)
+      url.searchParams.set('from', request.nextUrl.pathname)
+      return NextResponse.redirect(url)
+    }
+  }
+  
   // Only apply rate limiting to the contact API
   if (request.nextUrl.pathname === '/api/contact') {
-    const ip = request.ip ?? 'anonymous'
+    // Get client IP from headers or use 'anonymous' if not available
+    const ip = request.headers.get('x-forwarded-for') || 'anonymous'
     const now = Date.now()
     const windowStart = now - RATE_LIMIT_WINDOW
 
@@ -47,4 +75,9 @@ export function middleware(request: NextRequest) {
   }
 
   return NextResponse.next()
+}
+
+// Configure the middleware to run on specific paths
+export const config = {
+  matcher: ['/admin/:path*', '/api/contact']
 } 

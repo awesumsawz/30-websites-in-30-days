@@ -1,0 +1,93 @@
+{
+  "family": "thinkbigg-nextjs",
+  "taskRoleArn": "arn:aws:iam::195275673733:role/ecsTaskRole",
+  "executionRoleArn": "arn:aws:iam::195275673733:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+    {
+      "name": "thinkbigg-nextjs",
+      "image": "195275673733.dkr.ecr.us-east-2.amazonaws.com/thinkbigg-nextjs:latest",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "PORT",
+          "value": "3000"
+        },
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "AWS_REGION",
+          "value": "us-east-2"
+        }
+      ],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "secrets": [
+        {
+          "name": "EMAIL_USER",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:195275673733:secret:thinkbigg/env-vars-Jtt440:EMAIL_USER::"
+        },
+        {
+          "name": "EMAIL_PASS",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:195275673733:secret:thinkbigg/env-vars-Jtt440:EMAIL_PASS::"
+        },
+        {
+          "name": "EMAIL_HOST",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:195275673733:secret:thinkbigg/env-vars-Jtt440:EMAIL_HOST::"
+        },
+        {
+          "name": "EMAIL_PORT",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:195275673733:secret:thinkbigg/env-vars-Jtt440:EMAIL_PORT::"
+        },
+        {
+          "name": "EMAIL_SECURE",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:195275673733:secret:thinkbigg/env-vars-Jtt440:EMAIL_SECURE::"
+        },
+        {
+          "name": "DEFAULT_FROM",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:195275673733:secret:thinkbigg/env-vars-Jtt440:DEFAULT_FROM::"
+        },
+        {
+          "name": "TEST_EMAIL_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:195275673733:secret:thinkbigg/env-vars-Jtt440:TEST_EMAIL_API_KEY::"
+        },
+        {
+          "name": "ADMIN_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:195275673733:secret:thinkbigg/env-vars-Jtt440:ADMIN_API_KEY::"
+        },
+        {
+          "name": "NEXT_PUBLIC_ADMIN_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:195275673733:secret:thinkbigg/env-vars-Jtt440:NEXT_PUBLIC_ADMIN_API_KEY::"
+        },
+        {
+          "name": "ADMIN_PASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:195275673733:secret:thinkbigg/env-vars-Jtt440:ADMIN_PASSWORD::"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/thinkbigg-nextjs",
+          "awslogs-region": "us-east-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "systemControls": []
+    }
+  ],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512"
+}

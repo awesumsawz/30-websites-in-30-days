@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
 import { z } from 'zod';
 import DOMPurify from 'isomorphic-dompurify';
+// Import the correct functions from our dynamodb module
+const { saveContactSubmission, updateContactSubmissionStatus } = require('../../../lib/dynamodb');
+const { sendEmail } = require('../../../lib/email');
 
 // Input validation schema
 const contactSchema = z.object({
@@ -9,6 +11,13 @@ const contactSchema = z.object({
   email: z.string().email().max(100).trim().toLowerCase(),
   message: z.string().min(10).max(1000).trim(),
 });
+
+// Define the type for contact form data
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 export async function POST(request: Request) {
   try {
@@ -34,70 +43,38 @@ export async function POST(request: Request) {
     const { name, email, message } = result.data;
 
     // Sanitize inputs
-    const sanitizedName = DOMPurify.sanitize(name);
-    const sanitizedMessage = DOMPurify.sanitize(message);
-
-    // Configure nodemailer transporter with strict security
-    const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
-      port: parseInt(process.env.EMAIL_PORT || '587'),
-      secure: process.env.EMAIL_SECURE === 'true',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
-      },
-      tls: {
-        ciphers: 'TLS_AES_128_GCM_SHA256',
-        minVersion: 'TLSv1.2',
-        rejectUnauthorized: true
-      }
-    });
-
-    // Email content with sanitized inputs
-    const mailOptions = {
-      from: process.env.EMAIL_FROM,
-      to: process.env.EMAIL_TO,
-      subject: `New Contact Form Submission from ${sanitizedName}`,
-      text: `
-        Name: ${sanitizedName}
-        Email: ${email}
-        
-        Message:
-        ${sanitizedMessage}
-      `,
-      html: `
-        <h3>New Contact Form Submission</h3>
-        <p><strong>Name:</strong> ${sanitizedName}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${sanitizedMessage.replace(/\n/g, '<br>')}</p>
-      `,
+    const sanitizedData: ContactFormData = {
+      name: DOMPurify.sanitize(name),
+      email: DOMPurify.sanitize(email),
+      message: DOMPurify.sanitize(message),
     };
 
-    // For demo purposes, we'll just return success without actually sending
-    // In production, uncomment the following code to send the email
-    /*
+    // Always save the submission to DynamoDB first
+    const submission = await saveContactSubmission(sanitizedData);
+    
+    // Then try to send the email
     try {
-      const info = await transporter.sendMail(mailOptions);
-      console.log('Email sent successfully:', info.messageId);
+      await sendEmail(sanitizedData);
+      // If email sends successfully, update the record
+      await updateContactSubmissionStatus(submission.id, 'email_sent');
+      
+      return NextResponse.json({ 
+        success: true,
+        message: 'Your message has been sent successfully!',
+        submissionId: submission.id 
+      });
     } catch (emailError) {
       console.error('Failed to send email:', emailError);
-      return NextResponse.json(
-        { error: 'Failed to send email' },
-        { status: 500 }
-      );
+      
+      // Email failed, but we still saved the submission
+      return NextResponse.json({ 
+        success: true, 
+        message: 'Your message was received but there was an issue sending the confirmation email. We\'ll get back to you soon.',
+        submissionId: submission.id 
+      });
     }
-    */
-
-    // For demo purposes, simulate a slight delay
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    return NextResponse.json({ 
-      success: true,
-      message: 'Form submission received successfully'
-    });
   } catch (error) {
-    console.error('Error processing contact form:', error);
+    console.error('Error handling contact form:', error);
     return NextResponse.json(
       { error: 'Internal server error' }, // Don't expose detailed error messages
       { status: 500 }

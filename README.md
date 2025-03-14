@@ -46,6 +46,14 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day twenty four - 03-13-2025
+Played with a hono project today. didn't get too much done. Also worked on
+getting the thinkbigg.dev site permanently up on ecs. I also started getting
+together scripts for deploying updated containers to ecs. I also got a dev-
+environment setup for testing divergent branches. 
+
+--------------------------------
+
 ### Day twenty three - 03-12-2025
 I finished getting the site deployed. I realized that although I'd set the port
 to serve at port 80, it was actually still pointing to 3000. After some

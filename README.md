@@ -46,6 +46,17 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day twenty five - 03-14-2025
+Started the day working on polishing the thinkbigg.dev aws deployment scripts.
+Then I went and created a hono project under day 25. I ported over the content
+from the thinkbigg.dev site. I rounded out the day with getting a wordpress site
+built out headless. then I built a rough frontend for the site using react. I 
+connected all of it using a docker compose that built containers for the mysql,
+wordpress, and react containers. I only got so far as creating a home page with
+placeholder content.
+
+--------------------------------
+
 ### Day twenty four - 03-13-2025
 Played with a hono project today. didn't get too much done. Also worked on
 getting the thinkbigg.dev site permanently up on ecs. I also started getting

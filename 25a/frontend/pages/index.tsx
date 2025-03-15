@@ -1,52 +1,46 @@
 import { GetStaticProps } from 'next';
-import Link from 'next/link';
+import Head from 'next/head';
 import parse from 'html-react-parser';
-import { getAllPosts, Post } from '../lib/api';
+import { getPageBySlug, Page } from '../lib/api';
 
 interface HomeProps {
-  posts: Post[];
+  page: Page | null;
 }
 
-export default function Home({ posts }: HomeProps) {
+export default function Home({ page }: HomeProps) {
+  if (!page) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-8">Page Not Found</h1>
+        <p>The home page could not be loaded. Please ensure a page with the slug "home" exists in WordPress.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8">Latest Posts</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {posts.map(post => (
-          <div key={post.id} className="border rounded-lg overflow-hidden shadow-md">
-            {post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0] && (
-              <div className="aspect-video relative">
-                <img 
-                  src={post._embedded['wp:featuredmedia'][0].source_url} 
-                  alt={post.title.rendered}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            )}
-            <div className="p-4">
-              <h2 className="text-xl font-semibold mb-2">
-                {parse(post.title.rendered)}
-              </h2>
-              <div className="text-gray-600 mb-4">
-                {parse(post.excerpt.rendered)}
-              </div>
-              <Link href={`/posts/${post.slug}`} className="text-blue-600 hover:underline">
-                Read More
-              </Link>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Head>
+        <title>{parse(page.title.rendered)}</title>
+        <meta name="description" content="Headless WordPress with Next.js" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main>
+        <h1 className="text-4xl font-bold mb-8">{parse(page.title.rendered)}</h1>
+        <div className="prose max-w-none">
+          {parse(page.content.rendered)}
+        </div>
+      </main>
     </div>
   );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getAllPosts();
+  const page = await getPageBySlug('home');
   
   return {
     props: {
-      posts,
+      page,
     },
     revalidate: 60, // Revalidate every 60 seconds
   };

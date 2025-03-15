@@ -1,0 +1,35 @@
+# Environment variables
+.env
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Next.js
+.next/
+out/
+build/
+.vercel
+
+# WordPress
+wordpress/wp-content/uploads/
+wordpress/wp-content/upgrade/
+wordpress/wp-content/backup-db/
+wordpress/wp-content/ai1wm-backups/
+wordpress/wp-content/cache/
+wordpress/wp-content/debug.log
+
+# Database
+data/
+
+# Misc
+.DS_Store
+*.pem
+.vscode/
+.idea/
+*.log
+logs/
+tmp/ 

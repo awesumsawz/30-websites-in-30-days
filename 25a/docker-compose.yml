@@ -1,0 +1,66 @@
+services:
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      - wordpress_network
+
+  # WordPress Headless CMS
+  wordpress:
+    depends_on:
+      - db
+    build:
+      context: ./wordpress
+      dockerfile: Dockerfile
+    volumes:
+      - wordpress_data:/var/www/html
+      - ./wordpress/wp-content:/var/www/html/wp-content
+      - ./wordpress/custom-wp-config.php:/var/www/html/wp-content/mu-plugins/headless-config.php
+      - ./wordpress/docker-entrypoint-init.d:/docker-entrypoint-init.d
+    ports:
+      - "8080:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_CONFIG_EXTRA: |
+        /* REST API settings */
+        define('JWT_AUTH_SECRET_KEY', 'your-secret-key');
+        define('JWT_AUTH_CORS_ENABLE', true);
+    networks:
+      - wordpress_network
+
+  # Next.js Frontend
+  nextjs:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    restart: always
+    environment:
+      - WORDPRESS_API_URL=http://wordpress/wp-json
+    depends_on:
+      - wordpress
+    networks:
+      - wordpress_network
+
+networks:
+  wordpress_network:
+
+volumes:
+  db_data:
+  wordpress_data: 

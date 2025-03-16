@@ -46,6 +46,18 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day Twenty Six - 03-15-2025
+Setup a nextjs project with payload as the cms. Used a postgresql database. 
+Once I got the project setup with postgresql, I tried 26a with the thinkbigg.dev
+nextjs site. I got the site setup with my pages and filled them with content.
+
+I also had to do some aws ecs troubleshooting as one of my attempts to get the
+site setup with the aws deploy scripts caused an errored container that
+continuously failed after deployment. I resolved this by identifying the error,
+reparing docker image and then running it through the production deploy scritps.
+
+--------------------------------
+
 ### Day twenty five - 03-14-2025
 Started the day working on polishing the thinkbigg.dev aws deployment scripts.
 Then I went and created a hono project under day 25. I ported over the content

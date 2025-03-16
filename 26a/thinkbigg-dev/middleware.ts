@@ -10,8 +10,9 @@ const MAX_REQUESTS = 5 // Maximum requests per window
 
 export function middleware(request: NextRequest) {
   // Only apply rate limiting to the contact API
-  if (request.nextUrl.pathname === '/api/contact') {
-    const ip = request.ip ?? 'anonymous'
+  if (request.nextUrl.pathname === '/api/contact' || request.nextUrl.pathname === '/app/(app)/api/contact') {
+    // Use IP or a fallback for identity
+    const requestIp = request.headers.get('x-forwarded-for') || 'anonymous'
     const now = Date.now()
     const windowStart = now - RATE_LIMIT_WINDOW
 
@@ -24,7 +25,7 @@ export function middleware(request: NextRequest) {
 
     // Count requests in current window
     const requestCount = [...rateLimit.entries()]
-      .filter(([key, timestamp]) => key.startsWith(ip) && timestamp > windowStart)
+      .filter(([key, timestamp]) => key.startsWith(requestIp) && timestamp > windowStart)
       .length
 
     if (requestCount >= MAX_REQUESTS) {
@@ -43,7 +44,7 @@ export function middleware(request: NextRequest) {
     }
 
     // Store this request
-    rateLimit.set(`${ip}-${now}`, now)
+    rateLimit.set(`${requestIp}-${now}`, now)
   }
 
   return NextResponse.next()

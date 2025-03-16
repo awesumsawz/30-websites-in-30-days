@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import ServiceContent from "@/app/(app)/components/ServiceContent"
+import ServiceContent from "../../components/ServiceContent"
 
 const services = {
   nextjs: {

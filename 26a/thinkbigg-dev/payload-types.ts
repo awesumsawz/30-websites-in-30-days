@@ -13,6 +13,8 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    services: Service;
+    contact: ContactPage;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -121,6 +123,50 @@ export interface Auth {
   [k: string]: unknown;
 }
 
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface ContactPage {
+  id: string;
+  shortName: string;
+  slug: string;
+  title: string;
+  intro: string;
+  formEnabled: boolean;
+  messages: {
+    success: string;
+    error: string;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: string;
+  shortName: string;
+  slug: string;
+  title: string;
+  intro: string;
+  listTitle: string;
+  listItems: {
+    item: string;
+    id?: string;
+  }[];
+  tldr: string;
+  ctaBox: {
+    ctaTitle: string;
+    ctaText: string;
+    ctaButtonText: string;
+    ctaButtonLink: string;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}

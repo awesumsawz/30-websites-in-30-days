@@ -1,7 +1,7 @@
 import type { CollectionConfig } from "payload";
 
-export const Contact: CollectionConfig = {
-  slug: "contact",
+export const ContactPage: CollectionConfig = {
+  slug: "contactPage",
   fields: [
     {
       name: "shortName",

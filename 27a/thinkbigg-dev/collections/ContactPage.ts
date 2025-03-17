@@ -35,13 +35,15 @@ export const ContactPage: CollectionConfig = {
       fields: [
         {
           name: "success",
-          type: "textarea",
+          type: "text",
           required: true,
+          defaultValue: "Thank you for your message! I will get back to you soon.",
         },
         {
           name: "error",
-          type: "textarea",
+          type: "text",
           required: true,
+          defaultValue: "Something went wrong. Please try again.",
         },
       ],
     },

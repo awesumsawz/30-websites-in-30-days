@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Models\Pages;
 use App\Models\Resume\ProfessionalExperience;
+use App\Models\BlogPost;
 
 Route::get('/', function () {
     $slideContent = Pages::where([
@@ -83,9 +84,28 @@ Route::get('/resume', function () {
 
     return view('resume', compact('intro', 'education', 'skillsLanguages', 'skillsSystems', 'skillsSoftware', 'personalHobbies', 'personalProjects', 'personalSpeaking', 'professionalExperience'));
 });
-// Route::get('/blog', function () {
-//     return view('blog');
-// });
+
+Route::get('/blog', function () {
+    $posts = BlogPost::published()->paginate(6);
+    return view('blog.index', compact('posts'));
+});
+
+Route::get('/blog/{slug}', function ($slug) {
+    $post = BlogPost::where('slug', $slug)->published()->firstOrFail();
+    
+    $previousPost = BlogPost::published()
+        ->where('published_at', '<', $post->published_at)
+        ->orderBy('published_at', 'desc')
+        ->first();
+        
+    $nextPost = BlogPost::published()
+        ->where('published_at', '>', $post->published_at)
+        ->orderBy('published_at', 'asc')
+        ->first();
+    
+    return view('blog.show', compact('post', 'previousPost', 'nextPost'));
+});
+
 // Route::get('/contact', function () {
 //     return view('contact');
 // });

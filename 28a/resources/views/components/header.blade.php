@@ -5,6 +5,13 @@
       <iconify-icon icon="material-symbols-light:dark-mode-outline" width="24" height="24"></iconify-icon>
     </label>
   </div>
+
+  <section class="menu secondary desktop-view">
+    <div class="menu-wrapper">
+      @include('components.nav.secondary')
+    </div>
+  </section>
+
   <section class="title">
     <a href="/">
       <div class="desktop-view">
@@ -18,11 +25,7 @@
       </div>
     </a>
   </section>
-  {{-- <section class="menu secondary desktop-view">
-    <div class="menu-wrapper">
-      @include('components.nav.secondary')
-    </div>
-  </section> --}}
+
   <section class="menu">
     <div class="desktop-view">
       @include('components.nav.primary')

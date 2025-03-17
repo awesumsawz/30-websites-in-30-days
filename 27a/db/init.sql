@@ -1,22 +1,32 @@
--- Create the nextjs database if it doesn't exist already
--- This is redundant because POSTGRES_DB environment variable already creates it
--- but keeping it here for completeness
-CREATE DATABASE nextjs
-    WITH 
-    OWNER = postgres
-    ENCODING = 'UTF8'
-    LC_COLLATE = 'en_US.utf8'
-    LC_CTYPE = 'en_US.utf8'
-    TABLESPACE = pg_default
-    CONNECTION LIMIT = -1;
-
--- Connect to the nextjs database
-\c nextjs
-
--- Create extensions if needed
+-- Create extensions in template1 so they are available in all new databases
+\c template1
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS "citext";
 CREATE EXTENSION IF NOT EXISTS "pg_trgm";
 
--- Set up permissions
-GRANT ALL PRIVILEGES ON DATABASE nextjs TO postgres; 
+-- Create the database and set up permissions
+GRANT ALL ON SCHEMA public TO current_user;
+
+-- Create the application user with environment variables
+DO $$
+BEGIN
+  CREATE USER :"POSTGRES_USER" WITH PASSWORD :'POSTGRES_PASSWORD';
+EXCEPTION WHEN duplicate_object THEN
+  RAISE NOTICE 'User already exists, skipping creation';
+END
+$$;
+
+-- Create the database with the user as owner
+DO $$
+BEGIN
+  CREATE DATABASE :"POSTGRES_DB" WITH OWNER = :"POSTGRES_USER";
+EXCEPTION WHEN duplicate_database THEN
+  RAISE NOTICE 'Database already exists, skipping creation';
+END
+$$;
+
+-- Connect to the database and set up permissions
+\c :POSTGRES_DB
+
+-- Grant privileges
+GRANT ALL ON SCHEMA public TO :"POSTGRES_USER"; 

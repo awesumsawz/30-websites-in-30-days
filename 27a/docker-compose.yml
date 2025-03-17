@@ -8,9 +8,9 @@ services:
     container_name: thinkbigg-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-awesumsawz}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dukesilver}
-      POSTGRES_DB: ${POSTGRES_DB:-thinkbigg_db}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
@@ -19,7 +19,7 @@ services:
     networks:
       - thinkbigg-network
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER:-awesumsawz}"]
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -33,8 +33,8 @@ services:
     restart: unless-stopped
     environment:
       NODE_ENV: production
-      DATABASE_URI: postgres://${POSTGRES_USER:-awesumsawz}:${POSTGRES_PASSWORD:-dukesilver}@postgres:5432/${POSTGRES_DB:-thinkbigg_db}
-      PAYLOAD_SECRET: ${PAYLOAD_SECRET:-33704e727ab5b11123f60296}
+      DATABASE_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET}
     ports:
       - "3000:3000"
     depends_on:

@@ -46,6 +46,16 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day Twenty Seven - 03-16-2025
+Today I built out a couple of attempts to get payload to communicate with nextjs
+frontends. I started trying to use their prebuilt website theme. I then moved to
+trying to get the site into a hono project. When that didn't work, I tried to 
+get it just working with the nextjs version of the site but that didn't work
+either. I wasn't successful in getting the site up and working as I expeted with
+payload but I did get three sites to launch.
+
+--------------------------------
+
 ### Day Twenty Six - 03-15-2025
 Setup a nextjs project with payload as the cms. Used a postgresql database. 
 Once I got the project setup with postgresql, I tried 26a with the thinkbigg.dev

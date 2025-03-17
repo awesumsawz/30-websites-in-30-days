@@ -1,0 +1,46 @@
+services:
+  payload-postgres:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    container_name: payload-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - payload-network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  payload-starter:
+    build:
+      context: ./payload-starter
+      dockerfile: Dockerfile
+    container_name: payload-starter
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      DATABASE_URI: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@payload-postgres:5432/${POSTGRES_DB}
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET}
+    ports:
+      - "3000:3000"
+    depends_on:
+      payload-postgres:
+        condition: service_healthy
+    networks:
+      - payload-network
+
+networks:
+  payload-network:
+    driver: bridge

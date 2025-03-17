@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  postgres:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    container_name: thinkbigg-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-awesumsawz}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dukesilver}
+      POSTGRES_DB: ${POSTGRES_DB:-thinkbigg_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - thinkbigg-network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER:-awesumsawz}"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  nextjs:
+    build:
+      context: ./thinkbigg-dev
+      dockerfile: Dockerfile
+    container_name: thinkbigg-nextjs
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DATABASE_URI: postgres://${POSTGRES_USER:-awesumsawz}:${POSTGRES_PASSWORD:-dukesilver}@postgres:5432/${POSTGRES_DB:-thinkbigg_db}
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET:-33704e727ab5b11123f60296}
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - thinkbigg-network
+
+networks:
+  thinkbigg-network:
+    driver: bridge
+
+volumes:
+  postgres_data: 

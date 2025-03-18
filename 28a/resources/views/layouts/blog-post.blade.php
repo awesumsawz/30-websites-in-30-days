@@ -27,7 +27,7 @@
             </div>
             @endif
             
-            <div class="post-content">
+            <div class="post-content blog-content">
                 @yield('content')
             </div>
             

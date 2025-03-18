@@ -27,6 +27,6 @@ I invite you to join me on this journey. Feel free to comment, share your though
 
 And with this post, our journey begins!
 
-![Welcome Image](/images/placeholder.svg =200x400)
+![Welcome Image](/images/placeholder.svg =x200){cover position=50% 50%}
 
 See you in the next post! 

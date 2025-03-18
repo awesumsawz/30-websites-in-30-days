@@ -154,4 +154,4 @@ All images in blog posts receive these base styles:
 - Proper margins for spacing
 - Center alignment for cover images
 
-For more details on CSS styling options, see the `blog-images.css` file. 
+For more details on CSS styling options, see the `resources/assets/sass/components/blog-images.scss` file. 

@@ -46,6 +46,19 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day Twenty Eight - 03-17-2025
+Added 28a was an experiment trying to add a blog to my jason-biggs-dev laravel
+website. I got it up and running and implemented a markdown based blog that 
+imports markdown files from the content/ directory and displays them on the
+frontend as standard blog posts. 
+
+Project 28 was an experiment to see if I could get cursor to rebuild my laravel
+blade frontend out as a laravel react project. I had cursor run the build but
+I never got back to it as I was compelled more to work on 28a.
+
+--------------------------------
+
+
 ### Day Twenty Seven - 03-16-2025
 Today I built out a couple of attempts to get payload to communicate with nextjs
 frontends. I started trying to use their prebuilt website theme. I then moved to

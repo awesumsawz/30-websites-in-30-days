@@ -87,6 +87,9 @@ Route::get('/resume', function () {
 
 Route::get('/blog', [App\Http\Controllers\BlogPostController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [App\Http\Controllers\BlogPostController::class, 'show'])->name('blog.show');
+Route::get('/blog-debug/{slug}', [App\Http\Controllers\BlogPostController::class, 'debug'])->name('blog.debug');
+Route::get('/image-debug-log', [App\Http\Controllers\BlogPostController::class, 'viewDebugLog'])->name('blog.debuglog');
+Route::get('/image-styles/{slug}', [App\Http\Controllers\BlogPostController::class, 'debugImageStyles'])->name('blog.styles');
 
 // Route::get('/contact', function () {
 //     return view('contact');

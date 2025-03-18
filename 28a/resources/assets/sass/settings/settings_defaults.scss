@@ -6,14 +6,12 @@
  */
 html body {
     margin-top: calc(15.5rem + $spacing-standard);
-    /* header height + padding */
     margin-inline: $spacing-standard;
     margin-bottom: $spacing-standard;
     position: relative;
 
     @media #{$tablet-view} {
         margin-top: calc(9rem + $spacing-standard);
-        /* header height + padding */
     }
 }
 

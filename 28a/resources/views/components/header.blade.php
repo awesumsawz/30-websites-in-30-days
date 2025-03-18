@@ -1,14 +1,15 @@
 <header id="main-menu" class="topbar navbar">
-  <div class="form-check form-switch desktop">
-    <input class="form-check-input dark-mode-toggle" type="checkbox" id="dark-mode-toggle-desktop">
-    <label class="form-check-label" for="dark-mode-toggle-desktop">
-      <iconify-icon icon="material-symbols-light:dark-mode-outline" width="24" height="24"></iconify-icon>
-    </label>
-  </div>
+  
 
   <section class="menu secondary desktop-view">
     <div class="menu-wrapper">
       @include('components.nav.secondary')
+      <div class="form-check form-switch desktop">
+        <input class="form-check-input dark-mode-toggle" type="checkbox" id="dark-mode-toggle-desktop">
+        <label class="form-check-label" for="dark-mode-toggle-desktop">
+          <iconify-icon icon="material-symbols-light:dark-mode-outline" width="24" height="24"></iconify-icon>
+        </label>
+      </div>
     </div>
   </section>
 

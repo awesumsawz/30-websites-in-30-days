@@ -2,7 +2,7 @@
 title: Welcome to My Blog
 date: 2024-06-01
 excerpt: An introduction to this blog and what to expect in the coming months.
-featured_image: /images/welcome.jpg
+featured_image: /images/placeholder.svg
 tags: [introduction, welcome]
 ---
 
@@ -27,6 +27,6 @@ I invite you to join me on this journey. Feel free to comment, share your though
 
 And with this post, our journey begins!
 
-![Welcome Image](/images/welcome.jpg)
+![Welcome Image](/images/placeholder.svg =200x400)
 
 See you in the next post! 

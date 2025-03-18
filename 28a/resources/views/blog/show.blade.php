@@ -5,7 +5,7 @@
 @section('content')
 <article class="blog-post">
     <header class="post-header">
-        <h1 class="post-title">{{ $post['metadata']['title'] }}</h1>
+        {{-- <h1 class="post-title">{{ $post['metadata']['title'] }}</h1> --}}
         
         <div class="post-meta">
             <span class="post-date">

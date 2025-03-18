@@ -4,13 +4,7 @@
 <main class="blog-post-page">
     <div class="breadcrumbs">
         <div class="container">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/blog">Blog</a></li>
-                    <li class="breadcrumb-item active" aria-current="page" title="@yield('title')">@yield('title')</li>
-                </ol>
-            </nav>
+            @include('components.breadcrumbs', ['title' => $__env->yieldContent('title')])
         </div>
     </div>
     

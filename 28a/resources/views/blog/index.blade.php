@@ -4,19 +4,9 @@
 
 @section('content')
 <div class="blog-list">
-    <h1 class="page-title">Blog Posts</h1>
-    
     <div class="posts">
         @foreach($posts as $post)
             <article class="post-card">
-                @if(isset($post['metadata']['featured_image']))
-                    <div class="post-image">
-                        <a href="{{ route('blog.show', $post['slug']) }}">
-                            <img src="{{ $post['metadata']['featured_image'] }}" alt="{{ $post['metadata']['title'] }}">
-                        </a>
-                    </div>
-                @endif
-                
                 <div class="post-content">
                     <h2 class="post-title">
                         <a href="{{ route('blog.show', $post['slug']) }}">{{ $post['metadata']['title'] }}</a>

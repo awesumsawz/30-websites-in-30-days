@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Home - Theme 29{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2 class="mb-4">Welcome to Theme 29</h2>
+        <p class="lead">A modern Django starter theme with PostgreSQL integration.</p>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3 class="card-title">Features</h3>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Django 5.1 framework</li>
+                    <li class="list-group-item">PostgreSQL database</li>
+                    <li class="list-group-item">Responsive Bootstrap 5 design</li>
+                    <li class="list-group-item">Environment variable configuration</li>
+                    <li class="list-group-item">Clean, organized project structure</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h3 class="card-title">Quick Links</h3>
+                <div class="list-group">
+                    <a href="{% url 'about' %}" class="list-group-item list-group-item-action">About Us</a>
+                    <a href="{% url 'contact' %}" class="list-group-item list-group-item-action">Contact Us</a>
+                    <a href="https://docs.djangoproject.com/" target="_blank" class="list-group-item list-group-item-action">Django Documentation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

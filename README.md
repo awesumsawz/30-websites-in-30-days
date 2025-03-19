@@ -46,6 +46,21 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day Twenty Nine - 03-18-2025
+
+Today, I tried out django. I built out a simple project with a theme built by
+cursor. Then I had chat gipitee walk me through creating my own django app from
+scratch. 
+
+Simple day but I got a site built. I really liked learning with gipitee like 
+this. I gave it the prompt to help me walk througha  simple build using django
+with the condition that it not move on to the next step of the build until I 
+told it to do so. This allowed me to ask follow up questions about the step
+before moving on to the next. It was really effective at helping me get my feet
+underneath me with django.
+
+--------------------------------
+
 ### Day Twenty Eight - 03-17-2025
 Added 28a was an experiment trying to add a blog to my jason-biggs-dev laravel
 website. I got it up and running and implemented a markdown based blog that 

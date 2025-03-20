@@ -46,6 +46,14 @@ Sorted newest to oldest
 
 --------------------------------
 
+### Day Thirty - 03-19-2025
+
+Today was a client build. I reconfigured how the site loaded styles and scripts
+I also enhanced ease of use by creating some startup scripts. I also went and
+started building a plugin to house the course builder.
+
+--------------------------------
+
 ### Day Twenty Nine - 03-18-2025
 
 Today, I tried out django. I built out a simple project with a theme built by

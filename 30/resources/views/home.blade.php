@@ -1,0 +1,1 @@
+@extends('layouts.home', ['slideContent' => $slideContent, 'textContent' => $textContent])

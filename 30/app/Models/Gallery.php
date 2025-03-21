@@ -49,7 +49,7 @@ class Gallery
         $output .=				'<div class="image">';
         $output .=					'<img src="'. $image_url .'" alt="'. $image_alt .'">';
         $output .=				'</div>';
-        $output .=      	'<div class="content">';
+        $output .=      	'<div class="content border-l border-dark-gray">';
         $output .=      		'<div class="title">';
         $output .=        		$title;
         $output .=      		'</div>';

@@ -759,6 +759,8 @@ script#theme-check {
     @apply invisible fixed inset-0 z-nines grid grid-cols-1 justify-items-center items-center p-8 overflow-hidden;
     background-color: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(8px);
+    transition: visibility 0s 0.3s, opacity 0.3s ease;
+    opacity: 0;
 }
 
 @media (max-width: 50em) {
@@ -769,6 +771,8 @@ script#theme-check {
 
 .showcase-template .grid-card-modal-wrapper.active {
     @apply visible;
+    transition: visibility 0s, opacity 0.3s ease;
+    opacity: 1;
 }
 
 .showcase-template .grid-card-modal-wrapper .overlay {

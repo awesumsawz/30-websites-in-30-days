@@ -23,7 +23,10 @@ window.galleryGridCollapseModal = function(element) {
     const modalWrapper = element.closest('.grid-card-modal-wrapper');
     if (modalWrapper) {
         modalWrapper.classList.remove('active');
-        document.body.style.overflow = '';
+        // Restore scrolling after transition completes
+        setTimeout(() => {
+            document.body.style.overflow = '';
+        }, 300);
     }
 };
 

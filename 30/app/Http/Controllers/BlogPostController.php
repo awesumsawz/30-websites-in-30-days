@@ -32,11 +32,53 @@ class BlogPostController extends Controller
     /**
      * Display a listing of blog posts.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = $this->getAllPosts();
+        $allPosts = $this->getAllPosts();
         
-        return view('blog.index', compact('posts'));
+        // Get selected tag for filtering
+        $selectedTag = $request->input('tag');
+        
+        // Filter posts by tag if a tag is selected
+        if ($selectedTag) {
+            $allPosts = array_filter($allPosts, function($post) use ($selectedTag) {
+                return isset($post['metadata']['tags']) && 
+                      is_array($post['metadata']['tags']) && 
+                      in_array($selectedTag, $post['metadata']['tags']);
+            });
+        }
+        
+        // Get per_page value from request or use default of 9
+        $perPage = $request->input('per_page', 9);
+        
+        // Make sure per_page is one of our allowed values
+        $allowedPerPage = [9, 12, 24, 48];
+        if (!in_array($perPage, $allowedPerPage)) {
+            $perPage = 9; // Default if not in allowed values
+        }
+        
+        $currentPage = $request->query('page', 1);
+        
+        // Manually paginate the posts
+        $offset = ($currentPage - 1) * $perPage;
+        $paginatedItems = array_slice($allPosts, $offset, $perPage);
+        
+        // Create a custom paginator
+        $posts = new \Illuminate\Pagination\LengthAwarePaginator(
+            $paginatedItems,
+            count($allPosts),
+            $perPage,
+            $currentPage,
+            [
+                'path' => $request->url(),
+                'query' => $request->except('page')
+            ]
+        );
+        
+        // Get all unique tags for the filter dropdown
+        $allTags = $this->getAllTags($this->getAllPosts());
+        
+        return view('blog.index', compact('posts', 'perPage', 'allowedPerPage', 'allTags', 'selectedTag'));
     }
     
     /**
@@ -357,5 +399,29 @@ class BlogPostController extends Controller
         $output .= "</table>";
         
         return $output;
+    }
+    
+    /**
+     * Extract all unique tags from all blog posts.
+     */
+    protected function getAllTags($posts)
+    {
+        $tags = [];
+        
+        foreach ($posts as $post) {
+            if (isset($post['metadata']['tags']) && is_array($post['metadata']['tags'])) {
+                foreach ($post['metadata']['tags'] as $tag) {
+                    // Add tag if it's not already in the array
+                    if (!in_array($tag, $tags)) {
+                        $tags[] = $tag;
+                    }
+                }
+            }
+        }
+        
+        // Sort tags alphabetically
+        sort($tags);
+        
+        return $tags;
     }
 } 

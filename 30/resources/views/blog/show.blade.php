@@ -5,7 +5,7 @@
 @section('content')
 <article class="blog-post">
     <header class="post-header">
-        {{-- <h1 class="post-title">{{ $post['metadata']['title'] }}</h1> --}}
+        <h1 class="post-title">{{ $post['metadata']['title'] }}</h1>
         
         <div class="post-meta">
             <span class="post-date">
@@ -34,7 +34,13 @@
     
     <div class="post-footer">
         <div class="post-navigation">
-            {{-- Add previous/next post navigation here if needed --}}
+            @if(isset($previousPost))
+                <a href="{{ route('blog.show', $previousPost['slug']) }}" class="previous-post">&larr; {{ $previousPost['metadata']['title'] }}</a>
+            @endif
+            
+            @if(isset($nextPost))
+                <a href="{{ route('blog.show', $nextPost['slug']) }}" class="next-post">{{ $nextPost['metadata']['title'] }} &rarr;</a>
+            @endif
         </div>
         
         <div class="post-share">

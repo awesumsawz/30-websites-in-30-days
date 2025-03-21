@@ -3,16 +3,16 @@
 @section('title', 'Blog')
 
 @section('content')
-<div class="blog-list">
+<div class="blog-page">
     <div class="posts">
         @foreach($posts as $post)
-            <article class="post-card">
-                <div class="post-content">
-                    <h2 class="post-title">
+            <article class="blog-card">
+                <div class="card-content">
+                    <h2 class="card-title">
                         <a href="{{ route('blog.show', $post['slug']) }}">{{ $post['metadata']['title'] }}</a>
                     </h2>
                     
-                    <div class="post-meta">
+                    <div class="card-meta">
                         <span class="post-date">{{ date('F j, Y', strtotime($post['metadata']['date'])) }}</span>
                         
                         @if(isset($post['metadata']['tags']) && count($post['metadata']['tags']) > 0)
@@ -24,11 +24,11 @@
                         @endif
                     </div>
                     
-                    <div class="post-excerpt">
+                    <div class="card-excerpt">
                         {{ $post['excerpt'] }}
                     </div>
                     
-                    <div class="post-link">
+                    <div class="card-link">
                         <a href="{{ route('blog.show', $post['slug']) }}" class="read-more">Read More</a>
                     </div>
                 </div>

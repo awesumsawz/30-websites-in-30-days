@@ -5,6 +5,13 @@
         </h2>
         <div class="card-meta">
             <span class="post-date">{{ $post->published_at->format('F j, Y') }}</span>
+            @if(isset($post->tags) && count($post->tags) > 0)
+                <span class="post-tags">
+                    @foreach($post->tags as $tag)
+                        <span class="tag">{{ $tag }}</span>
+                    @endforeach
+                </span>
+            @endif
         </div>
         <div class="card-excerpt">
             <p>{{ $post->excerpt }}</p>

@@ -9,6 +9,24 @@ window.toggleMobileMenu = function(element) {
     }
 };
 
+// Gallery grid modal functions
+window.galleryGridShowModal = function(element) {
+    const cardWrapper = element.closest('.card-wrapper');
+    const modalWrapper = cardWrapper.querySelector('.grid-card-modal-wrapper');
+    if (modalWrapper) {
+        modalWrapper.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+};
+
+window.galleryGridCollapseModal = function(element) {
+    const modalWrapper = element.closest('.grid-card-modal-wrapper');
+    if (modalWrapper) {
+        modalWrapper.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+};
+
 // Initialize any components
 document.addEventListener('DOMContentLoaded', function() {
     // Additional initialization code can go here

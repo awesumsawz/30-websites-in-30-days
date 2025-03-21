@@ -756,7 +756,7 @@ script#theme-check {
 }
 
 .showcase-template .grid-card-modal-wrapper {
-    @apply invisible fixed inset-0 z-nines grid grid-cols-1 justify-center items-center p-12 overflow-scroll;
+    @apply invisible fixed inset-0 z-nines grid grid-cols-1 justify-items-center items-center p-12 overflow-scroll;
 }
 
 @media (max-width: 50em) {
@@ -777,7 +777,7 @@ script#theme-check {
 }
 
 .showcase-template .grid-card-modal {
-    @apply w-full max-w-[80rem] h-full max-h-[100rem] grid grid-rows-[auto_auto] relative z-highest;
+    @apply w-full max-w-[80rem] h-full max-h-[100rem] grid grid-rows-[auto_auto] relative z-highest mx-auto justify-self-center;
 }
 
 .showcase-template .grid-card-modal .image {

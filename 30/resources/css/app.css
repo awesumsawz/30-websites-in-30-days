@@ -100,11 +100,11 @@
     }
     
     h4 {
-        @apply font-mono text-6xl font-extrabold leading-tight m-0;
+        @apply font-mono text-[2rem] font-extrabold leading-tight m-0;
     }
     
     h5 {
-        @apply font-mono text-5xl font-light leading-tight m-0;
+        @apply font-mono text-[1.6rem] font-light leading-tight m-0;
     }
     
     h6 {
@@ -840,3 +840,34 @@ script#theme-check {
 .showcase-template .grid-card-modal .content .date {
     @apply italic text-gray dark:text-light-gray text-[1.4rem];
 } 
+
+
+
+
+.resume hr {
+    @apply border-light-gray dark:border-light-gray;
+}
+.resume h3 {
+    @apply text-[2.8rem] text-dark-gray dark:text-white;
+}
+.resume p {
+    @apply mb-0;
+}
+.resume .subtitle-note {
+    @apply text-gray dark:text-light-gray font-['DDC_Hardware_Condensed'] text-lg md:text-[1.6rem] mb-0 dark:text-mid-gray;
+}
+.resume .section-title {
+    @apply text-center mb-[2rem];
+}
+.resume .range {
+    @apply text-[1.6rem] font-display mb-0 text-dark-gray dark:text-white;
+}
+.resume .company {
+    @apply text-gray dark:text-light-gray;
+}
+.resume .location {
+    @apply text-gray dark:text-light-gray;
+}
+.resume .experience ul {
+    @apply list-disc pl-5 space-y-2 text-[1.6rem] max-w-[70rem];
+}

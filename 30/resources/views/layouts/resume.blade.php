@@ -14,11 +14,11 @@ $speaking = json_decode($personalSpeaking->value, true);
 @include('components.head')
 @include('components.header')
 
-<main class="mx-auto px-4 sm:px-6 lg:px-8">
-    <section class="mb-16">
+<main class="resume mx-auto">
+    <section>
         <div class="text-center">
-            <h1 class="text-[4rem] font-bold mb-0 text-gray-900 dark:text-white">Resume</h1>
-            <p class="text-[#666] dark:text-gray-300 font-['DDC_Hardware_Condensed'] text-lg md:text-[1.6rem] mb-0">Last Updated {{ date('F Y') }}</p>
+            <h1 class="text-[4rem] font-bold mb-0 text-gray-900 dark:text-primary">Resume</h1>
+            <p class="subtitle-note">Last Updated {{ date('F Y') }}</p>
         </div>
         <div class="flex flex-col">
             <div class="body-content mt-0">
@@ -26,11 +26,11 @@ $speaking = json_decode($personalSpeaking->value, true);
                     <div class="post-content">
                         <div class="entry">
                             <div class="text-center my-6">
-                                <a href="{{ asset('files/12-05-24_JasonBiggs_Resume__WebDeveloper.pdf') }}" class="wp-block-file__button bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-semibold py-3 px-6 rounded-full transition-colors duration-300 inline-block" download="">
+                                <a href="{{ asset('files/12-05-24_JasonBiggs_Resume__WebDeveloper.pdf') }}" class="bg-dark-gray !text-white text-[1.4rem] px-6 py-2 rounded-full hover:bg-primary-hover transition-colors duration-300 dark:bg-true-black dark:hover:bg-primary-hover" download="">
                                     Download a copy
                                 </a>
                             </div>
-                            <div class="prose prose-lg dark:prose-invert max-w-none text-gray-800 dark:text-gray-200">
+                            <div class="prose prose-lg dark:prose-invert max-w-none text-gray-800 dark:text-light-gray">
                                 {!! $intro->value !!}
                             </div>
                         </div>
@@ -39,10 +39,10 @@ $speaking = json_decode($personalSpeaking->value, true);
             </div>
         </div>
     </section>
-    <hr class="border-gray-200 dark:border-gray-700 my-8">
-    <section class="mb-16">
-        <div class="text-center mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white">Education</h2>
+    <hr>
+    <section>
+        <div class="section-title">
+            <h2 class="text-[3.6rem] font-bold mb-2">Education</h2>
         </div>
         <div class="flex flex-col md:flex-row justify-between gap-8">
             @if (is_array($degrees))
@@ -54,37 +54,37 @@ $speaking = json_decode($personalSpeaking->value, true);
             @endif
         </div>
     </section>
-    <hr class="border-gray-200 dark:border-gray-700 my-8">
-    <section class="mb-16">
-        <div class="text-center mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white">Skills</h2>
-            <p class="text-gray-600 dark:text-gray-300">Sections are Ordered Most Experienced to Least</p>
+    <hr>
+    <section>
+        <div class="section-title">
+            <h2 class="text-[3.6rem] font-bold mb-0">Skills</h2>
+            <p class="subtitle-note">Sections are Ordered Most Experienced to Least</p>
         </div>
         <div class="flex flex-col gap-8">
-            <div class="text-center mb-8">
-                <h3 class="text-2xl md:text-3xl font-display text-blue-600 dark:text-blue-400 mb-4">Languages & Frameworks</h3>
-                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none pl-0">
+            <div class="text-center">
+                <h3 class="font-display mb-[1rem]">Languages & Frameworks</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  list-none pl-0">
                     {!! Lists::listBuilder($languages) !!}
                 </ul>
             </div>
-            <div class="text-center mb-8">
-                <h3 class="text-2xl md:text-3xl font-display text-blue-600 dark:text-blue-400 mb-4">Software</h3>
-                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none pl-0">
+            <div class="text-center">
+                <h3 class="font-display mb-[1rem]">Software</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  list-none pl-0">
                     {!! Lists::listBuilder($software) !!}
                 </ul>
             </div>
-            <div class="text-center mb-8">
-                <h3 class="text-2xl md:text-3xl font-display text-blue-600 dark:text-blue-400 mb-4">Systems</h3>
-                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none pl-0">
+            <div class="text-center">
+                <h3 class="font-display mb-[1rem]">Systems</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  list-none pl-0">
                     {!! Lists::listBuilder($systems) !!}
                 </ul>
             </div>
         </div>
     </section>
-    <hr class="border-gray-200 dark:border-gray-700 my-8">
-    <section class="mb-16">
-        <div class="text-center mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white">Professional Experience</h2>
+    <hr>
+    <section>
+        <div class="section-title">
+            <h2 class="text-[3.6rem] font-bold mb-2">Professional Experience</h2>
         </div>
         <div class="flex flex-col gap-8">
             @foreach ($professionalExperience as $experience)
@@ -100,53 +100,53 @@ $speaking = json_decode($personalSpeaking->value, true);
             @endforeach
         </div>
     </section>
-    <hr class="border-gray-200 dark:border-gray-700 my-8">
-    <section class="mb-16">
-        <div class="text-center mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white">Personal Experience</h2>
+    <hr>
+    <section>
+        <div class="section-title">
+            <h2 class="text-[3.6rem] font-bold mb-2">Personal Experience</h2>
         </div>
         <div class="flex flex-col gap-8">
-            <div class="text-center mb-8">
-                <h3 class="text-2xl md:text-3xl font-display text-blue-600 dark:text-blue-400 mb-4">Hobbies & Interests</h3>
-                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none pl-0">
+            <div class="text-center">
+                <h3 class="font-display mb-2 pb-[1rem]">Hobbies & Interests</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  list-none pl-0">
                     {!! Lists::listBuilder($hobbies) !!}
                 </ul>
             </div>
-            <div class="mb-12">
-                <h3 class="text-2xl md:text-3xl font-display text-blue-600 dark:text-blue-400 text-center mb-8">Personal Projects</h3>
+            <div class="mb-4">
+                <h3 class="font-display mb-2 text-center pb-[1rem]">Personal Projects</h3>
                 <div class="flex flex-col gap-8">
-                    <div class="grid md:grid-cols-[30rem_auto] gap-8 pb-8 border-b border-gray-200 dark:border-gray-700">
-                        <h4 class="text-xl md:text-2xl font-display text-blue-600 dark:text-blue-400 text-right md:text-right">TechRegular</h4>
-                        <p class="text-base md:text-lg leading-relaxed text-gray-800 dark:text-gray-200">
+                    <div class="grid md:grid-cols-[30rem_auto] gap-8">
+                        <h4 class="text-[2rem] dark:text-white font-display text-right md:text-right">TechRegular</h4>
+                        <p class="leading-relaxed text-gray-800 dark:text-gray-200">
                             {!! $projects['techregular'] !!}
                         </p>
                     </div>
-                    <div class="grid md:grid-cols-[30rem_auto] gap-8 pb-8 border-b border-gray-200 dark:border-gray-700">
-                        <h4 class="text-xl md:text-2xl font-display text-blue-600 dark:text-blue-400 text-right md:text-right">Think Bigg Consulting</h4>
-                        <p class="text-base md:text-lg leading-relaxed text-gray-800 dark:text-gray-200">
+                    <div class="grid md:grid-cols-[30rem_auto] gap-8">
+                        <h4 class="text-[2rem] dark:text-white font-display text-right md:text-right">Think Bigg Consulting</h4>
+                        <p class="leading-relaxed text-gray-800 dark:text-gray-200">
                             {!! $projects['think_bigg_consulting'] !!}
                         </p>
                     </div> 
                 </div>
             </div>
             <div>
-                <h3 class="text-2xl md:text-3xl font-display text-blue-600 dark:text-blue-400 text-center mb-8">Speaking Engagements</h3>
+                <h3 class="font-display mb-2 text-center">Speaking Engagements</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                     <div>
-                        <h4 class="text-xl md:text-2xl font-display text-blue-600 dark:text-blue-400 mb-4">2014</h4>
-                        <div class="flex flex-col gap-4">
+                        <h4 class="font-display mb-4">2014</h4>
+                        <div class="flex flex-col ">
                             {!! Lists::h5ListBuilder($speaking['2014']) !!}
                         </div>
                     </div>
                     <div>
-                        <h4 class="text-xl md:text-2xl font-display text-blue-600 dark:text-blue-400 mb-4">2015</h4>
-                        <div class="flex flex-col gap-4">
+                        <h4 class="font-display mb-4">2015</h4>
+                        <div class="flex flex-col ">
                             {!! Lists::h5ListBuilder($speaking['2015']) !!}
                         </div>
                     </div>
                     <div>
-                        <h4 class="text-xl md:text-2xl font-display text-blue-600 dark:text-blue-400 mb-4">2016</h4>
-                        <div class="flex flex-col gap-4">
+                        <h4 class="font-display mb-4">2016</h4>
+                        <div class="flex flex-col ">
                             {!! Lists::h5ListBuilder($speaking['2016']) !!}
                         </div>
                     </div>

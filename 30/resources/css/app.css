@@ -635,7 +635,7 @@
     
     /* Body content styles for home page */
     .body-content {
-        @apply font-mono text-[1.6rem] leading-normal w-full max-w-6xl mx-auto;
+        @apply font-mono text-[1.6rem] leading-normal w-full mx-auto;
     }
     
     .body-content h1, 
@@ -722,7 +722,7 @@ script#theme-check {
 }
 
 .showcase-template section.examples .links a {
-    @apply text-dark-gray no-underline hover:text-primary-hover hover:underline;
+    @apply text-dark-gray no-underline hover:text-primary-hover hover:underline dark:text-light-gray dark:hover:text-primary-light;
 }
 
 .showcase-template section.gallery-grid {

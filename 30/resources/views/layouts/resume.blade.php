@@ -14,75 +14,79 @@ $speaking = json_decode($personalSpeaking->value, true);
 @include('components.head')
 @include('components.header')
 
-<main class="resume-template">
-    <section class="intro">
-        <div class="title">
-            <h1>Resume</h1>
-            {{-- TODO: MAKE THIS DYNAMIC --}}
-            <p class="subtitle">Last Updated December 2024</p>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="mb-16">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-0 text-gray-900 dark:text-white">Resume</h1>
+            <p class="text-gray-600 dark:text-gray-300 font-display text-lg md:text-xl">Last Updated {{ date('F Y') }}</p>
         </div>
-        <div class="content">
+        <div class="flex flex-col">
             <div class="body-content">
                 <div class="post page type-page status-publish hentry">
                     <div class="post-content">
                         <div class="entry">
-                            <div class="wp-block-file aligncenter">
-                                <a href="{{ asset('files/12-05-24_JasonBiggs_Resume__WebDeveloper.pdf') }}" class="wp-block-file__button wp-element-button" download="">
+                            <div class="text-center my-6">
+                                <a href="{{ asset('files/12-05-24_JasonBiggs_Resume__WebDeveloper.pdf') }}" class="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-semibold py-3 px-6 rounded-full transition-colors duration-300 inline-block" download="">
                                     Download a copy
                                 </a>
                             </div>
-                            {!! $intro->value !!}
+                            <div class="prose prose-lg dark:prose-invert max-w-none text-gray-800 dark:text-gray-200">
+                                {!! $intro->value !!}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <hr>
-    <section class="education">
-        <div class="title">
-            <h2>Education</h2>
+    <hr class="border-gray-200 dark:border-gray-700 my-8">
+    <section class="mb-16">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white">Education</h2>
         </div>
-        <div class="content">
+        <div class="flex flex-col md:flex-row justify-between gap-8">
             @if (is_array($degrees))
                 @foreach($degrees as $degree)
                     {!! Lists::educationBuilder($degree) !!}
                 @endforeach
             @else
-                <p>No education degrees found.</p>
+                <p class="text-gray-800 dark:text-gray-200">No education degrees found.</p>
             @endif
         </div>
     </section>
-    <section class="skills">
-        <div class="title">
-            <h2>Skills</h2>
+    <hr class="border-gray-200 dark:border-gray-700 my-8">
+    <section class="mb-16">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white">Skills</h2>
+            <p class="text-gray-600 dark:text-gray-300">Sections are Ordered Most Experienced to Least</p>
         </div>
-        <div class="content">
-            <div class="skill-list">
-                <h3>Languages & Frameworks</h3>
-                <ul>
+        <div class="flex flex-col gap-8">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl md:text-3xl font-display text-blue-600 dark:text-blue-400 mb-4">Languages & Frameworks</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none pl-0">
                     {!! Lists::listBuilder($languages) !!}
                 </ul>
             </div>
-            <div class="skill-list">
-                <h3>Software</h3>
-                <ul>
+            <div class="text-center mb-8">
+                <h3 class="text-2xl md:text-3xl font-display text-blue-600 dark:text-blue-400 mb-4">Software</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none pl-0">
                     {!! Lists::listBuilder($software) !!}
                 </ul>
             </div>
-            <div class="skill-list">
-                <h3>Systems</h3>
-                <ul>
+            <div class="text-center mb-8">
+                <h3 class="text-2xl md:text-3xl font-display text-blue-600 dark:text-blue-400 mb-4">Systems</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none pl-0">
                     {!! Lists::listBuilder($systems) !!}
                 </ul>
             </div>
         </div>
     </section>
-    <section class="professional-exp">
-        <div class="title">
-            <h2>Professional Experience</h2>
+    <hr class="border-gray-200 dark:border-gray-700 my-8">
+    <section class="mb-16">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white">Professional Experience</h2>
         </div>
-        <div class="content">
+        <div class="flex flex-col gap-8">
             @foreach ($professionalExperience as $experience)
                 @php
                 $array['position'] = $experience->position;
@@ -96,58 +100,53 @@ $speaking = json_decode($personalSpeaking->value, true);
             @endforeach
         </div>
     </section>
-    <section class="personal-exp">
-        <div class="title">
-            <h2>Personal Experience</h2>
+    <hr class="border-gray-200 dark:border-gray-700 my-8">
+    <section class="mb-16">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white">Personal Experience</h2>
         </div>
-        <div class="content">
-            <div class="skill-list">
-                <h3>Hobbies & Interests</h3>
-                <ul>
+        <div class="flex flex-col gap-8">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl md:text-3xl font-display text-blue-600 dark:text-blue-400 mb-4">Hobbies & Interests</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none pl-0">
                     {!! Lists::listBuilder($hobbies) !!}
                 </ul>
             </div>
-            <div class="projects">
-                <h3>Personal Projects</h3>
-                <div class="wrapper">
-                    <div class="project">
-                        <h4>Think Bigg Development</h4>
-                        <p class="description">
-                            {!! $projects['think_bigg_development'] !!}
-                        </p>
-                    </div>
-                    <div class="project">
-                        <h4>TechRegular</h4>
-                        <p class="description">
+            <div class="mb-12">
+                <h3 class="text-2xl md:text-3xl font-display text-blue-600 dark:text-blue-400 text-center mb-8">Personal Projects</h3>
+                <div class="flex flex-col gap-8">
+                    <div class="grid md:grid-cols-[30rem_auto] gap-8 pb-8 border-b border-gray-200 dark:border-gray-700">
+                        <h4 class="text-xl md:text-2xl font-display text-blue-600 dark:text-blue-400 text-right md:text-right">TechRegular</h4>
+                        <p class="text-base md:text-lg leading-relaxed text-gray-800 dark:text-gray-200">
                             {!! $projects['techregular'] !!}
                         </p>
                     </div>
-                    <div class="project inactive">
-                        <h4>Think Bigg Consulting</h4>
-                        <p class="description">
+                    <div class="grid md:grid-cols-[30rem_auto] gap-8 pb-8 border-b border-gray-200 dark:border-gray-700">
+                        <h4 class="text-xl md:text-2xl font-display text-blue-600 dark:text-blue-400 text-right md:text-right">Think Bigg Consulting</h4>
+                        <p class="text-base md:text-lg leading-relaxed text-gray-800 dark:text-gray-200">
                             {!! $projects['think_bigg_consulting'] !!}
                         </p>
                     </div> 
                 </div>
             </div>
-            <div class="speaking">
-                <h3>Speaking Engagements</h3>
-                <div class="wrapper">
-                    <div class="year">
-                        <h4>2014</h4>
-                        <div class="event-list">
+            <div>
+                <h3 class="text-2xl md:text-3xl font-display text-blue-600 dark:text-blue-400 text-center mb-8">Speaking Engagements</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div>
+                        <h4 class="text-xl md:text-2xl font-display text-blue-600 dark:text-blue-400 mb-4">2014</h4>
+                        <div class="flex flex-col gap-4">
                             {!! Lists::h5ListBuilder($speaking['2014']) !!}
                         </div>
                     </div>
-                    <div class="year">
-                        <h4>2015</h4>
-                        <div class="event-list">
+                    <div>
+                        <h4 class="text-xl md:text-2xl font-display text-blue-600 dark:text-blue-400 mb-4">2015</h4>
+                        <div class="flex flex-col gap-4">
                             {!! Lists::h5ListBuilder($speaking['2015']) !!}
                         </div>
                     </div>
-                    <div class="year">
-                        <h4>2016</h4>
-                        <div class="event-list">
+                    <div>
+                        <h4 class="text-xl md:text-2xl font-display text-blue-600 dark:text-blue-400 mb-4">2016</h4>
+                        <div class="flex flex-col gap-4">
                             {!! Lists::h5ListBuilder($speaking['2016']) !!}
                         </div>
                     </div>

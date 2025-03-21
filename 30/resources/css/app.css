@@ -751,11 +751,12 @@ script#theme-check {
 }
 
 .showcase-template .grid-card .overlay {
-    @apply absolute inset-0 bg-black/50 z-bottom invisible;
+    @apply absolute inset-0 z-bottom invisible;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .showcase-template .grid-card-modal-wrapper {
-    @apply invisible fixed inset-0 z-nines grid grid-cols-auto justify-center items-center p-12 overflow-scroll;
+    @apply invisible fixed inset-0 z-nines grid grid-cols-1 justify-center items-center p-12 overflow-scroll;
 }
 
 @media (max-width: 50em) {
@@ -769,7 +770,10 @@ script#theme-check {
 }
 
 .showcase-template .grid-card-modal-wrapper .overlay {
-    @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-standard cursor-pointer;
+    @apply fixed inset-0 z-standard cursor-pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
 }
 
 .showcase-template .grid-card-modal {
@@ -785,11 +789,14 @@ script#theme-check {
 }
 
 .showcase-template .grid-card-modal .image .close {
-    @apply absolute top-4 right-6 text-white text-[3rem] cursor-pointer drop-shadow-[0px_0px_2px_rgba(0,0,0,1)] hover:text-primary-hover;
+    @apply absolute top-4 right-6 text-white text-[3rem] cursor-pointer hover:text-primary-hover;
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 1));
 }
 
 .showcase-template .grid-card-modal .content {
-    @apply bg-black/70 text-white p-12 backdrop-blur-md flex flex-col justify-center cursor-auto;
+    @apply text-white p-12 flex flex-col justify-center cursor-auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
 }
 
 .showcase-template .grid-card-modal .content * {

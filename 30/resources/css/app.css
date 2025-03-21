@@ -756,12 +756,14 @@ script#theme-check {
 }
 
 .showcase-template .grid-card-modal-wrapper {
-    @apply invisible fixed inset-0 z-nines grid grid-cols-1 justify-items-center items-center p-12 overflow-scroll;
+    @apply invisible fixed inset-0 z-nines grid grid-cols-1 justify-items-center items-center p-8 overflow-hidden;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
 }
 
 @media (max-width: 50em) {
     .showcase-template .grid-card-modal-wrapper {
-        @apply grid-rows-[9rem_1fr];
+        @apply p-4;
     }
 }
 
@@ -771,32 +773,52 @@ script#theme-check {
 
 .showcase-template .grid-card-modal-wrapper .overlay {
     @apply fixed inset-0 z-standard cursor-pointer;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
+}
+
+.showcase-template .grid-card-modal .close {
+    @apply absolute top-4 right-4 z-50 text-white rounded-full h-10 w-10 flex items-center justify-center cursor-pointer hover:text-primary transition-colors;
+}
+
+.showcase-template .grid-card-modal .close iconify-icon {
+    @apply flex items-center justify-center h-6 w-6 text-[2rem];
+}
+
+@media (max-width: 50em) {
+    .showcase-template .grid-card-modal .close {
+        @apply top-4 right-4 h-10 w-10;
+    }
 }
 
 .showcase-template .grid-card-modal {
-    @apply w-full max-w-[80rem] h-full max-h-[100rem] grid grid-rows-[auto_auto] relative z-highest mx-auto justify-self-center;
+    @apply w-full max-w-[90rem] bg-white dark:bg-dark-gray rounded-lg shadow-2xl overflow-hidden flex flex-col md:flex-row relative z-highest transition-all duration-300;
+    max-height: 90vh;
+    transform: scale(0.95);
+    opacity: 0;
+    animation: modal-in 0.3s forwards;
+}
+
+@keyframes modal-in {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .showcase-template .grid-card-modal .image {
-    @apply h-full w-full relative cursor-auto;
+    @apply relative w-full md:w-2/3 cursor-auto overflow-y-auto;
+    background-color: #000;
+    max-height: 90vh;
 }
 
 .showcase-template .grid-card-modal .image img {
-    @apply object-cover h-full w-full;
-}
-
-.showcase-template .grid-card-modal .image .close {
-    @apply absolute top-4 right-6 text-white text-[3rem] cursor-pointer hover:text-primary-hover;
-    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 1));
+    @apply w-full object-contain object-center;
+    min-height: 100%;
+    height: auto;
+    max-height: none;
 }
 
 .showcase-template .grid-card-modal .content {
-    @apply text-white p-12 flex flex-col justify-center cursor-auto;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
+    @apply p-8 flex flex-col justify-start cursor-auto w-full md:w-1/3 md:max-h-[90vh] overflow-y-auto bg-white dark:bg-dark-gray text-dark-gray dark:text-white;
 }
 
 .showcase-template .grid-card-modal .content * {
@@ -804,9 +826,13 @@ script#theme-check {
 }
 
 .showcase-template .grid-card-modal .content .title {
-    @apply font-display text-[2.4rem];
+    @apply font-display text-[2.8rem] text-primary;
+}
+
+.showcase-template .grid-card-modal .content .description {
+    @apply text-[1.6rem] leading-relaxed;
 }
 
 .showcase-template .grid-card-modal .content .date {
-    @apply italic;
+    @apply italic text-gray dark:text-light-gray text-[1.4rem];
 } 

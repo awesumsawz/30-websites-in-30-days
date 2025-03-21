@@ -14,19 +14,19 @@ $speaking = json_decode($personalSpeaking->value, true);
 @include('components.head')
 @include('components.header')
 
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<main class="mx-auto px-4 sm:px-6 lg:px-8">
     <section class="mb-16">
-        <div class="text-center mb-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-0 text-gray-900 dark:text-white">Resume</h1>
-            <p class="text-gray-600 dark:text-gray-300 font-display text-lg md:text-xl">Last Updated {{ date('F Y') }}</p>
+        <div class="text-center">
+            <h1 class="text-[4rem] font-bold mb-0 text-gray-900 dark:text-white">Resume</h1>
+            <p class="text-[#666] dark:text-gray-300 font-['DDC_Hardware_Condensed'] text-lg md:text-[1.6rem] mb-0">Last Updated {{ date('F Y') }}</p>
         </div>
         <div class="flex flex-col">
-            <div class="body-content">
+            <div class="body-content mt-0">
                 <div class="post page type-page status-publish hentry">
                     <div class="post-content">
                         <div class="entry">
                             <div class="text-center my-6">
-                                <a href="{{ asset('files/12-05-24_JasonBiggs_Resume__WebDeveloper.pdf') }}" class="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-semibold py-3 px-6 rounded-full transition-colors duration-300 inline-block" download="">
+                                <a href="{{ asset('files/12-05-24_JasonBiggs_Resume__WebDeveloper.pdf') }}" class="wp-block-file__button bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-semibold py-3 px-6 rounded-full transition-colors duration-300 inline-block" download="">
                                     Download a copy
                                 </a>
                             </div>

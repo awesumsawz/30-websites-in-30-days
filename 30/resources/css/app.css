@@ -143,7 +143,7 @@
     }
     
     header.navbar .title .logo {
-        @apply max-h-[120px] py-4;
+        @apply max-h-[120px];
     }
     
     header.navbar .title .logo:hover {
@@ -171,7 +171,7 @@
     }
     
     header.navbar .menu ul li a {
-        @apply no-underline text-dark-gray hover:text-primary-hover text-2xl;
+        @apply no-underline text-dark-gray hover:text-primary-hover text-[1.6rem];
     }
     
     header.navbar .menu ul li.active a {
@@ -187,7 +187,7 @@
     }
     
     header.navbar .menu.secondary {
-        @apply font-mono absolute top-0 right-0 p-[1rem_2rem] w-full z-10;
+        @apply font-['DDC_Hardware_Condensed'] absolute top-0 right-0 p-[1rem_2rem] w-full z-10;
     }
     
     header.navbar .menu.secondary ul {
@@ -195,7 +195,7 @@
     }
     
     header.navbar .menu.secondary ul a {
-        @apply block capitalize hover:underline;
+        @apply block capitalize;
     }
     
     /* Dark Mode Toggle Styles - Matching dark-mode.scss */

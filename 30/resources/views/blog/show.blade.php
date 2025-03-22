@@ -6,7 +6,8 @@
 <article class="blog-post">
     <div class="back-link">
         <a href="{{ route('blog.index') }}" class="back-to-posts">
-            <span class="back-arrow">&larr;</span> Back to all posts
+            <span class="back-arrow">&larr;</span>
+            <span class="back-text">Back to all posts</span>
         </a>
     </div>
 

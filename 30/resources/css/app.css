@@ -186,6 +186,7 @@
         @apply text-primary-hover cursor-pointer;
     }
     
+    /* Secondary menu - commented out
     header.navbar .menu.secondary {
         @apply font-['DDC_Hardware_Condensed'] absolute top-0 right-0 p-[1rem_2rem] w-full z-10;
     }
@@ -196,6 +197,12 @@
     
     header.navbar .menu.secondary ul a {
         @apply block capitalize;
+    }
+    */
+    
+    /* Dark Mode Toggle Section */
+    header.navbar .dark-mode-toggle {
+        @apply absolute top-4 right-8 z-20;
     }
     
     /* Dark Mode Toggle Styles - Matching dark-mode.scss */
@@ -379,12 +386,29 @@
         @apply mx-auto mb-12;
     }
     
+    .blog-post .back-link {
+        @apply mb-8;
+    }
+    
     .blog-post .back-to-posts {
-        @apply font-mono text-gray text-[1.6rem] inline-flex items-center dark:text-light-gray hover:text-primary-hover hover:underline transition-colors;
+        @apply font-display inline-flex items-center gap-2 p-4 bg-white dark:bg-dark-gray text-dark-gray dark:text-white rounded-lg border border-light-gray dark:border-gray transition-all duration-200;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    
+    .blog-post .back-to-posts:hover {
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transform: translateY(-2px);
+        @apply text-primary dark:text-primary-light;
     }
     
     .blog-post .back-to-posts .back-arrow {
-        @apply mr-2 text-[1.8rem];
+        @apply text-2xl text-primary dark:text-primary-light flex items-center;
+        line-height: 1;
+        margin-top: -2px;
+    }
+    
+    .blog-post .back-to-posts .back-text {
+        @apply font-display;
     }
     
     .blog-post .post-header {
@@ -534,7 +558,9 @@
     }
     
     .blog-post .post-navigation .nav-arrow {
-        @apply text-2xl font-mono text-gray dark:text-light-gray;
+        @apply text-2xl font-mono text-primary dark:text-primary-light flex items-center;
+        line-height: 1;
+        margin-top: -2px;
     }
     
     .blog-post .post-navigation .nav-label {

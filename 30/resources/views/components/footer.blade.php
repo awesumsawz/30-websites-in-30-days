@@ -1,4 +1,4 @@
-<footer class="container mx-auto py-8">
+<footer class="container mx-auto my-0">
     <div class="attribution">
         © {{ date('Y') }} Jason Biggs
     </div>

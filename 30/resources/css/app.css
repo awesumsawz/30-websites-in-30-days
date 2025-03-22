@@ -293,7 +293,7 @@
     
     /* Blog-specific classes - Matching blog.scss exactly */
     .blog-page {
-        @apply py-8;
+        @apply pb-8;
     }
     
     .posts {
@@ -346,7 +346,7 @@
     
     /* Blog Card Styles - Updated for clickable cards */
     .blog-card {
-        @apply bg-white dark:bg-dark-gray rounded-lg overflow-hidden flex flex-col h-full transition-all duration-300 border border-light-gray dark:border-gray mb-8 relative cursor-pointer;
+        @apply bg-white dark:bg-dark-gray rounded-lg overflow-hidden flex flex-col h-full transition-all duration-300 border border-light-gray dark:border-gray mb-8 relative;
         box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
     
@@ -361,7 +361,7 @@
     }
     
     .blog-card .card-link-wrapper {
-        @apply block h-full w-full text-current no-underline;
+        @apply block text-current no-underline cursor-pointer;
         text-decoration: none;
     }
     
@@ -370,7 +370,7 @@
     }
     
     .blog-card .card-meta {
-        @apply text-[1.3rem] text-gray mb-3 flex flex-col gap-2 font-mono;
+        @apply text-[1.3rem] text-gray mb-2 flex flex-col gap-1 font-mono;
     }
     
     .blog-card .card-meta .post-date {
@@ -384,7 +384,7 @@
     }
     
     .blog-card .card-title {
-        @apply font-display text-[2.2rem] mb-3 leading-tight text-dark-gray dark:text-white;
+        @apply font-display text-[2.2rem] mt-4 mb-4 leading-tight text-dark-gray dark:text-white;
     }
     
     .blog-card:hover .card-title {
@@ -396,7 +396,7 @@
     }
     
     .blog-card .card-link {
-        @apply mt-2;
+        @apply mt-0;
     }
     
     .blog-card .read-more {
@@ -978,11 +978,11 @@ script#theme-check {
 
 /* Blog header section */
 .blog-header {
-    @apply py-10 text-center;
+    @apply pb-12 text-center;
 }
 
 .blog-header h1 {
-    @apply font-display text-7xl text-primary mb-2;
+    @apply font-display text-[4rem] text-primary mb-2;
     letter-spacing: 1px;
 }
 
@@ -1054,19 +1054,23 @@ script#theme-check {
 
 /* Blog Pagination Styles */
 .blog-pagination {
-    @apply flex justify-center items-center my-12;
+    @apply flex flex-col items-center mt-12 gap-4;
+}
+
+.blog-pagination .pagination-info {
+    @apply font-mono text-[1.4rem] text-dark-gray dark:text-light-gray text-center;
 }
 
 .blog-pagination nav {
     @apply flex justify-center items-center;
 }
 
-.blog-pagination .pagination {
-    @apply flex list-none gap-2;
+.blog-pagination nav .pagination {
+    @apply flex list-none gap-4 pl-0 my-0;
 }
 
 .blog-pagination .page-item {
-    @apply inline-block;
+    @apply inline-block pl-0;
 }
 
 .blog-pagination .page-link {
@@ -1075,7 +1079,9 @@ script#theme-check {
 }
 
 .blog-pagination .page-item.active .page-link {
-    @apply bg-primary border-primary text-white dark:text-white;
+    @apply bg-primary border-primary text-white font-bold shadow-md;
+    transform: scale(1.1);
+    box-shadow: 0 0 0 3px rgba(0, 184, 128, 0.3);
 }
 
 .blog-pagination .page-item.disabled .page-link {
@@ -1170,7 +1176,7 @@ script#theme-check {
 }
 
 .active-filter span strong {
-    @apply text-primary dark:text-primary-light;
+    @apply text-primary dark:text-primary-light font-bold;
 }
 
 .active-filter .clear-filter {
@@ -1184,27 +1190,41 @@ script#theme-check {
 
 /* Add tag badges to blog cards */
 .blog-card .post-tags {
-    @apply mb-3 flex gap-2 overflow-x-auto pb-2 max-w-full;
-    scrollbar-width: thin;
-    -ms-overflow-style: none;
+    @apply px-6 pb-4 pt-0 flex flex-col gap-2 max-w-full -mt-1;
 }
 
-.blog-card .post-tags::-webkit-scrollbar {
-    @apply h-1;
-}
-
-.blog-card .post-tags::-webkit-scrollbar-track {
-    @apply bg-transparent;
-}
-
-.blog-card .post-tags::-webkit-scrollbar-thumb {
-    @apply bg-light-gray dark:bg-gray rounded-full;
+.blog-card .tags-wrapper {
+    @apply flex flex-wrap gap-2 items-center;
 }
 
 .blog-card .tag-badge {
-    @apply inline-flex items-center px-2 py-1 text-[1.2rem] bg-light-gray dark:bg-gray text-dark-gray dark:text-light-gray rounded-full hover:bg-primary/10 dark:hover:bg-primary-light/10 transition-colors whitespace-nowrap flex-none;
+    @apply inline-flex items-center px-4 py-2 text-[1.2rem] bg-light-gray dark:bg-gray text-dark-gray dark:text-light-gray rounded-full hover:bg-primary/10 dark:hover:bg-primary-light/10 transition-colors whitespace-nowrap flex-none cursor-pointer z-20;
 }
 
 .blog-card .tag-badge:hover {
     @apply text-primary dark:text-primary-light;
+}
+
+.blog-card .tag-badge.hidden-tag {
+    display: none;
+}
+
+.blog-card .tags-toggle {
+    @apply inline-flex items-center px-2 py-1 text-[1.2rem] bg-primary/10 dark:bg-primary-light/10 text-primary dark:text-primary-light font-bold rounded-full hover:bg-primary/20 dark:hover:bg-primary-light/20 transition-colors cursor-pointer whitespace-nowrap;
+}
+
+.blog-card .tags-toggle .less-text {
+    @apply hidden;
+}
+
+.blog-card .tags-toggle[data-expanded="true"] .more-text {
+    @apply hidden;
+}
+
+.blog-card .tags-toggle[data-expanded="true"] .less-text {
+    @apply inline;
+}
+
+.blog-card.expanded {
+    @apply transition-all duration-300;
 }

@@ -5,8 +5,6 @@
     <section class="blog-header">
         <div class="container">
             <h1>BLOG</h1>
-            <p>Insights, tutorials, and thoughts on web development, WordPress, React.js, Laravel, and more.</p>
-            
             @if(isset($selectedTag) && !empty($selectedTag))
             <div class="active-filter">
                 <span>Showing posts tagged with: <strong>{{ $selectedTag }}</strong></span>
@@ -71,4 +69,5 @@
 </main>
 
 @include('components.footer')
-@include('components.foot') 
+@include('components.foot')
+@stack('scripts') 

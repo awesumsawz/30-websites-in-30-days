@@ -374,7 +374,7 @@
     }
     
     .blog-card .card-meta .post-date {
-        @apply flex items-center gap-2;
+        @apply flex items-center gap-2 dark:text-light-gray;
     }
     
     .blog-card .card-meta .post-date:before {

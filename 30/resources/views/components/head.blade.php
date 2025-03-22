@@ -63,5 +63,8 @@
 			'resources/js/dark-mode.js',
 			'resources/css/app.css'
 		])		
+        
+        <!-- Iconify for UI icons -->
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>		
 	</head>
 	<body class="min-h-screen">

@@ -62,6 +62,15 @@
         position: relative;
     }
     
+    /* Font weight utilities */
+    .font-medium {
+        font-weight: 500;
+    }
+    
+    .font-semibold {
+        font-weight: 600;
+    }
+    
     /* For tablet view - exact breakpoint from SASS */
     @media (max-width: 50em) {
         body {
@@ -70,7 +79,7 @@
     }
     
     main {
-        @apply max-w-[100rem] mx-auto;
+        @apply max-w-[100rem] mx-auto mb-12;
         margin-top: -1.4rem;
     }
     
@@ -178,12 +187,40 @@
         @apply text-primary;
     }
     
-    header.navbar .menu .tablet-view .mobile-view {
-        @apply text-9xl;
+    header.navbar .menu .tablet-view,
+    header.navbar .menu .mobile-view {
+        @apply flex justify-end items-center;
     }
     
-    header.navbar .menu .tablet-view .mobile-view .open:hover {
-        @apply text-primary-hover cursor-pointer;
+    header.navbar .menu .menu-trigger {
+        @apply hidden justify-end items-center;
+    }
+    
+    @media (max-width: 50em) {
+        header.navbar .menu .menu-trigger {
+            @apply flex;
+        }
+    }
+    
+    header.navbar .menu .menu-button {
+        @apply bg-transparent border-0 p-2 cursor-pointer text-dark-gray dark:text-white hover:text-primary dark:hover:text-primary-light transition-colors duration-200;
+        font-size: 2.4rem;
+    }
+    
+    header.navbar .menu .menu-button iconify-icon {
+        @apply block;
+    }
+    
+    @media (max-width: 768px) {
+        header.navbar .menu .menu-button {
+            font-size: 2.8rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        header.navbar .menu .menu-button {
+            font-size: 3rem;
+        }
     }
     
     /* Secondary menu - commented out
@@ -203,6 +240,12 @@
     /* Dark Mode Toggle Section */
     header.navbar .dark-mode-toggle {
         @apply absolute top-4 right-8 z-20;
+    }
+    
+    @media (max-width: 50em) {
+        header.navbar .dark-mode-toggle {
+            @apply hidden;
+        }
     }
     
     /* Dark Mode Toggle Styles - Matching dark-mode.scss */
@@ -247,55 +290,136 @@
         @apply text-4xl hover:text-primary-hover hover:cursor-pointer;
     }
     
+    /* Mobile menu close button */
+    .menu-button.close-button {
+        @apply text-white hover:text-primary-light;
+        font-size: 3rem;
+    }
+    
     /* Mobile menu */
     #mobile-menu {
-        @apply fixed inset-0 bg-white dark:bg-dark-gray z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: white;
+        z-index: 9999;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .dark #mobile-menu {
+        background-color: #333333;
     }
     
     #mobile-menu.is-active {
-        @apply translate-x-0;
+        transform: translateX(0);
     }
     
-    /* Mobile menu internal structure */
+    /* Mobile menu toggle */
     #mobile-menu .menu-toggle {
-        @apply absolute top-6 right-6;
+        display: flex;
+        justify-content: flex-end;
+        padding: 1rem;
     }
     
+    #mobile-menu .close-button {
+        background: transparent;
+        border: 0;
+        padding: 0.5rem;
+        cursor: pointer;
+        color: #333333;
+        font-size: 3rem;
+        transition: color 0.2s;
+    }
+    
+    .dark #mobile-menu .close-button {
+        color: white;
+    }
+    
+    #mobile-menu .close-button:hover {
+        color: #00b880;
+    }
+    
+    .dark #mobile-menu .close-button:hover {
+        color: #5fdbb5;
+    }
+    
+    /* Mobile menu content */
+    #mobile-menu .mobile-nav-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 1rem;
+        padding-bottom: 3rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        height: 100%;
+        overflow-y: auto;
+    }
+    
+    /* Mobile navigation */
+    #mobile-menu .mobile-nav-content nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 3rem;
+        width: 100%;
+    }
+    
+    .dark #mobile-menu .mobile-nav-content nav a:hover {
+        color: #5fdbb5;
+    }
+    
+    #mobile-menu .mobile-nav-content nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        list-style: none;
+        padding: 0;
+        width: 100%;
+    }
+    
+    #mobile-menu .mobile-nav-content nav ul li {
+        text-align: center;
+        width: 100%;
+    }
+    
+    #mobile-menu .mobile-nav-content nav a {
+        font-family: 'DDC Hardware', sans-serif;
+        font-size: 2.4rem;
+        color: #333333;
+        text-decoration: none;
+        transition: color 0.2s;
+        display: block;
+        width: 100%;
+    }
+    
+    .dark #mobile-menu .mobile-nav-content nav a {
+        color: white;
+    }
+    
+    #mobile-menu .mobile-nav-content nav a:hover {
+        color: #00b880;
+    }
+    
+    /* Dark mode toggle in mobile menu */
     #mobile-menu .form-check.mobile {
-        @apply mx-auto mt-12 flex justify-center;
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
     }
     
-    #mobile-menu .top {
-        @apply flex-1 flex flex-col justify-center items-center;
-    }
-    
-    #mobile-menu .top .primary-menu,
-    #mobile-menu .top .secondary-menu {
-        @apply my-4 w-full max-w-xs;
-    }
-    
-    #mobile-menu .top .menu-items ul {
-        @apply flex flex-col gap-6 items-center;
-    }
-    
-    #mobile-menu .top .menu-items ul li a {
-        @apply text-3xl;
-    }
-    
-    #mobile-menu .top .secondary-menu .menu-items ul li a {
-        @apply text-xl;
-    }
-    
-    #mobile-menu hr {
-        @apply w-3/4 mx-auto my-8 border-light-gray dark:border-gray;
-    }
-    
-    #mobile-menu .bottom {
-        @apply py-8 flex justify-center;
-    }
-    
-    #mobile-menu .bottom .logo img {
-        @apply max-h-32;
+    /* Make sure body doesn't scroll when menu is open */
+    body.menu-open {
+        overflow: hidden;
     }
     
     /* Blog-specific classes - Matching blog.scss exactly */
@@ -623,6 +747,14 @@
         @apply hidden;
     }
     
+    .tablet-view-only {
+        @apply hidden;
+    }
+    
+    .mobile-view-only {
+        @apply hidden;
+    }
+    
     @media (min-width: 50em) {
         .desktop-view {
             @apply block;
@@ -633,10 +765,18 @@
         .tablet-view {
             @apply block;
         }
+        
+        .tablet-view-only {
+            @apply block;
+        }
     }
     
     @media (max-width: 30em) {
         .mobile-view {
+            @apply block;
+        }
+        
+        .mobile-view-only {
             @apply block;
         }
     }
@@ -972,6 +1112,9 @@ script#theme-check {
     @apply italic text-gray dark:text-light-gray text-[1.4rem];
 } 
 
+.resume {
+    @apply mb-12;
+}
 .resume hr {
     @apply border-light-gray dark:border-light-gray;
 }
@@ -1284,4 +1427,19 @@ script#theme-check {
 
 .blog-post .post-navigation .nav-header {
     @apply flex items-center gap-2 mb-2;
+}
+
+/* Mobile logo */
+#mobile-menu .mobile-logo {
+    margin-bottom: 3rem;
+    margin-top: 1rem;
+}
+
+#mobile-menu .mobile-logo img {
+    max-height: 8rem;
+    transition: transform 0.2s;
+}
+
+#mobile-menu .mobile-logo img:hover {
+    transform: scale(1.05);
 }

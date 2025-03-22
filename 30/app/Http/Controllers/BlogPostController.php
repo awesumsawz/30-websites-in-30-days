@@ -48,6 +48,24 @@ class BlogPostController extends Controller
             });
         }
         
+        // Format dates properly for all posts
+        foreach ($allPosts as &$post) {
+            // Ensure the date is properly formatted for display regardless of its original format
+            if (isset($post['metadata']['date'])) {
+                $timestamp = strtotime($post['metadata']['date']);
+                if ($timestamp) {
+                    // Format date for display
+                    $post['metadata']['formatted_date'] = date('F j, Y', $timestamp);
+                    // Keep the original date for sorting
+                    $post['metadata']['date'] = date('Y-m-d', $timestamp);
+                } else {
+                    // If the date couldn't be parsed as a timestamp, use a default
+                    $post['metadata']['formatted_date'] = 'Unknown Date';
+                }
+            }
+        }
+        unset($post); // Unset reference to avoid issues
+        
         // Get per_page value from request or use default of 9
         $perPage = $request->input('per_page', 9);
         
@@ -103,6 +121,21 @@ class BlogPostController extends Controller
         
         $post = $this->parsePost($postPath);
         
+        // Format the date for display
+        if (isset($post['metadata']['date'])) {
+            $timestamp = strtotime($post['metadata']['date']);
+            if ($timestamp) {
+                $post['metadata']['formatted_date'] = date('F j, Y', $timestamp);
+            } else {
+                $post['metadata']['formatted_date'] = 'Unknown Date';
+            }
+        }
+        
+        // Calculate estimated reading time
+        $wordCount = str_word_count(strip_tags($post['content']));
+        $readingTime = max(1, ceil($wordCount / 200)); // Assuming 200 words per minute reading speed
+        $post['metadata']['reading_time'] = $readingTime;
+        
         return view('blog.show', compact('post'));
     }
     
@@ -134,8 +167,15 @@ class BlogPostController extends Controller
         $content = File::get($path);
         $filename = basename($path);
         
-        // Extract the slug from the filename (remove date and extension)
-        $slug = preg_replace('/^\d{4}-\d{2}-\d{2}-(.*)\.md$/', '$1', $filename);
+        // Extract the slug and date from the filename
+        $filenameDate = null;
+        if (preg_match('/^(\d{4}-\d{2}-\d{2})-(.*)\.md$/', $filename, $matches)) {
+            $filenameDate = $matches[1];
+            $slug = $matches[2];
+        } else {
+            // If filename doesn't match pattern, just extract slug without date
+            $slug = preg_replace('/\.md$/', '', $filename);
+        }
         
         // Parse front matter and content
         if (preg_match('/^---\s*(.*?)\s*---\s*(.*)/s', $content, $matches)) {
@@ -144,11 +184,45 @@ class BlogPostController extends Controller
             
             // Parse YAML front matter
             $metadata = Yaml::parse($frontMatter);
+            
+            // Handle date format - it could be a timestamp, string, or object
+            if (isset($metadata['date'])) {
+                // If it's an integer timestamp, convert to date string
+                if (is_numeric($metadata['date'])) {
+                    $metadata['date'] = date('Y-m-d', (int)$metadata['date']);
+                }
+                // If date is an object (like DateTime or Carbon), convert to string
+                else if (is_object($metadata['date'])) {
+                    $metadata['date'] = $metadata['date']->format('Y-m-d');
+                }
+                // If it's already a string, ensure it's formatted correctly
+                else if (is_string($metadata['date'])) {
+                    $timestamp = strtotime($metadata['date']);
+                    if ($timestamp) {
+                        $metadata['date'] = date('Y-m-d', $timestamp);
+                    }
+                }
+            }
+            
+            // Prioritize date from front matter, fallback to filename date, then file modification time
+            if (empty($metadata['date']) && $filenameDate) {
+                $metadata['date'] = $filenameDate;
+            } elseif (empty($metadata['date'])) {
+                $metadata['date'] = date('Y-m-d', filemtime($path));
+            }
+            
+            // For debugging - log the original and processed date
+            file_put_contents(
+                storage_path('logs/date_debug.log'),
+                "File: {$filename}, Processed date: {$metadata['date']}, Filename date: {$filenameDate}" . PHP_EOL,
+                FILE_APPEND
+            );
+            
         } else {
             // No front matter found
             $metadata = [
                 'title' => $this->generateTitleFromSlug($slug),
-                'date' => date('Y-m-d', filemtime($path)),
+                'date' => $filenameDate ?: date('Y-m-d', filemtime($path)),
             ];
             $markdownContent = $content;
         }

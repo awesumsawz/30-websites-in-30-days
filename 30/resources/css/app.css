@@ -414,41 +414,92 @@
     
     /* Blog Post Content Styles - Updated to match design */
     .blog-post {
-        @apply max-w-4xl mx-auto;
+        @apply max-w-4xl mx-auto pt-8 pb-20;
+    }
+    
+    .blog-post .back-link {
+        @apply mb-12;
+    }
+    
+    .blog-post .back-to-posts {
+        @apply font-mono text-primary text-[1.6rem] inline-flex items-center hover:text-primary-hover transition-colors;
+    }
+    
+    .blog-post .back-to-posts .back-arrow {
+        @apply mr-2 text-[1.8rem];
     }
     
     .blog-post .post-header {
-        @apply mb-8;
+        @apply mb-10;
     }
     
     .blog-post .post-title {
-        @apply font-display text-5xl mb-4 text-dark-gray dark:text-white;
+        @apply font-display text-6xl text-dark-gray dark:text-light-gray font-normal leading-tight mb-5;
+        font-size: 5rem;
     }
     
     .blog-post .post-meta {
-        @apply flex items-center gap-4 text-gray mb-8 font-mono text-[1.4rem];
+        @apply flex flex-wrap items-center font-mono text-gray text-[1.6rem] mb-10;
     }
     
     .blog-post .post-meta .post-date {
-        @apply flex items-center gap-2;
+        @apply font-mono text-gray;
     }
     
-    .blog-post .post-meta .post-date:before {
-        content: '';
-        @apply block w-5 h-5 bg-contain bg-no-repeat bg-center;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2300B880' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+    .blog-post .post-meta .reading-time {
+        @apply font-mono text-gray ml-1;
     }
     
+    .blog-post .post-content {
+        @apply font-mono text-[1.8rem] text-dark-gray dark:text-light-gray leading-relaxed;
+    }
+    
+    .blog-post .post-content p {
+        @apply mb-6 font-mono text-[1.8rem] leading-relaxed;
+    }
+    
+    .blog-post .post-content h2 {
+        @apply text-4xl font-display text-dark-gray dark:text-light-gray mt-12 mb-6;
+    }
+    
+    .blog-post .post-content h3 {
+        @apply text-3xl font-display text-dark-gray dark:text-light-gray mt-10 mb-4;
+    }
+    
+    .blog-post .post-content ul, 
+    .blog-post .post-content ol {
+        @apply my-6 pl-8;
+    }
+    
+    .blog-post .post-content li {
+        @apply mb-2;
+    }
+    
+    @media (max-width: 768px) {
+        .blog-post {
+            @apply pt-6;
+        }
+        
+        .blog-post .post-title {
+            @apply text-4xl;
+        }
+        
+        .blog-post .post-meta {
+            @apply text-[1.4rem];
+        }
+        
+        .blog-post .post-content {
+            @apply text-[1.6rem];
+        }
+    }
+    
+    /* Blog Post Content Styles - Updated to match design */
     .blog-post .post-featured-image {
         @apply mb-8 rounded-lg overflow-hidden border border-light-gray dark:border-gray;
     }
     
     .blog-post .post-featured-image img {
         @apply w-full h-auto object-cover max-h-[400px];
-    }
-    
-    .blog-post .post-content {
-        @apply font-mono text-[1.6rem] leading-relaxed text-dark-gray dark:text-light-gray mb-12;
     }
     
     .blog-post .post-content h1,
@@ -460,33 +511,8 @@
         @apply font-display text-dark-gray dark:text-white my-6;
     }
     
-    .blog-post .post-content h1 {
-        @apply text-4xl;
-    }
-    
-    .blog-post .post-content h2 {
-        @apply text-3xl;
-    }
-    
-    .blog-post .post-content h3 {
-        @apply text-2xl;
-    }
-    
-    .blog-post .post-content p {
-        @apply mb-6;
-    }
-    
     .blog-post .post-content a {
         @apply text-primary dark:text-primary-light hover:text-primary-hover dark:hover:text-white underline;
-    }
-    
-    .blog-post .post-content ul, 
-    .blog-post .post-content ol {
-        @apply mb-6 pl-8;
-    }
-    
-    .blog-post .post-content li {
-        @apply mb-2;
     }
     
     .blog-post .post-content blockquote {

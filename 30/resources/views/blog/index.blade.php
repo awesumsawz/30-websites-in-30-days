@@ -8,7 +8,15 @@
             <a href="{{ route('blog.show', $post['slug']) }}" class="card-link-wrapper">
                 <div class="card-content">
                     <div class="card-meta">
-                        <span class="post-date">{{ date('F j, Y', strtotime($post['metadata']['date'])) }}</span>
+                        <span class="post-date">{{ $post['metadata']['formatted_date'] ?? date('F j, Y', strtotime($post['metadata']['date'])) }}</span>
+                        @if(app()->environment('local'))
+                        <!-- Debug info -->
+                        <span class="debug-info" style="display: none;">
+                            Raw date: {{ $post['metadata']['date'] ?? 'none' }} |
+                            Filename: {{ basename($post['slug']) }} |
+                            Timestamp: {{ strtotime($post['metadata']['date']) }}
+                        </span>
+                        @endif
                     </div>
                     
                     <h2 class="card-title">

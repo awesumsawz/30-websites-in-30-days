@@ -495,46 +495,6 @@
         @apply font-mono text-[1.4rem] text-primary dark:text-primary-light;
     }
     
-    .blog-post .post-footer {
-        @apply mt-12 pt-8 border-t border-light-gray dark:border-gray;
-    }
-    
-    .blog-post .post-navigation {
-        @apply flex justify-between items-center;
-    }
-    
-    .blog-post .post-navigation a {
-        @apply font-mono text-primary dark:text-primary-light hover:text-primary-hover dark:hover:text-white;
-    }
-    
-    .blog-post .post-share {
-        @apply mt-8;
-    }
-    
-    .blog-post .post-share h3 {
-        @apply font-display text-2xl mb-4 text-dark-gray dark:text-white;
-    }
-    
-    .blog-post .share-buttons {
-        @apply flex gap-4;
-    }
-    
-    .blog-post .share-buttons a {
-        @apply px-4 py-2 text-white rounded-md transition-colors font-mono text-[1.4rem] inline-flex items-center;
-    }
-    
-    .blog-post .share-twitter {
-        @apply bg-primary hover:bg-primary-hover;
-    }
-    
-    .blog-post .share-facebook {
-        @apply bg-primary hover:bg-primary-hover;
-    }
-    
-    .blog-post .share-linkedin {
-        @apply bg-primary hover:bg-primary-hover;
-    }
-    
     /* Container styles */
     .container {
         @apply px-4 mx-auto;

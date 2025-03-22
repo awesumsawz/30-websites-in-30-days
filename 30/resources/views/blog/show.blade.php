@@ -40,26 +40,5 @@
     <div class="post-content">
         {!! $post['content'] !!}
     </div>
-    
-    <div class="post-footer">
-        <div class="post-navigation">
-            @if(isset($previousPost))
-                <a href="{{ route('blog.show', $previousPost['slug']) }}" class="previous-post">&larr; {{ $previousPost['metadata']['title'] }}</a>
-            @endif
-            
-            @if(isset($nextPost))
-                <a href="{{ route('blog.show', $nextPost['slug']) }}" class="next-post">{{ $nextPost['metadata']['title'] }} &rarr;</a>
-            @endif
-        </div>
-        
-        <div class="post-share">
-            <h3>Share this post</h3>
-            <div class="share-buttons">
-                <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}&text={{ urlencode($post['metadata']['title']) }}" target="_blank" class="share-twitter">Twitter</a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}" target="_blank" class="share-facebook">Facebook</a>
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(request()->url()) }}&title={{ urlencode($post['metadata']['title']) }}" target="_blank" class="share-linkedin">LinkedIn</a>
-            </div>
-        </div>
-    </div>
 </article>
 @endsection 

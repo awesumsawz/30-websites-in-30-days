@@ -4,21 +4,30 @@
 
 @section('content')
 <article class="blog-post">
+    <div class="back-link">
+        <a href="{{ route('blog.index') }}" class="back-to-posts">
+            <span class="back-arrow">&larr;</span> Back to all posts
+        </a>
+    </div>
+
     <header class="post-header">
         <h1 class="post-title">{{ $post['metadata']['title'] }}</h1>
         
-        <div class="post-meta">
-            <span class="post-date">
-                {{ date('F j, Y', strtotime($post['metadata']['date'])) }}
-            </span>
-            
-            @if(isset($post['metadata']['tags']) && count($post['metadata']['tags']) > 0)
-                <span class="post-tags">
+        @if(isset($post['metadata']['tags']) && is_array($post['metadata']['tags']) && count($post['metadata']['tags']) > 0)
+            <div class="post-tags">
+                <div class="tags-wrapper">
                     @foreach($post['metadata']['tags'] as $tag)
-                        <span class="tag">{{ $tag }}</span>
+                        <a href="{{ route('blog.index', ['tag' => $tag]) }}" class="tag-badge">
+                            {{ $tag }}
+                        </a>
                     @endforeach
-                </span>
-            @endif
+                </div>
+            </div>
+        @endif
+        
+        <div class="post-meta">
+            <span class="post-date">{{ $post['metadata']['formatted_date'] ?? date('F j, Y', strtotime($post['metadata']['date'])) }}</span> 
+            <span class="reading-time">• {{ $post['metadata']['reading_time'] }} min read</span>
         </div>
     </header>
     

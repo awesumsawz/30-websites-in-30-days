@@ -376,15 +376,11 @@
     
     /* Blog Post Content Styles - Updated to match design */
     .blog-post {
-        @apply max-w-4xl mx-auto pt-8 pb-20;
-    }
-    
-    .blog-post .back-link {
-        @apply mb-12;
+        @apply mx-auto mb-12;
     }
     
     .blog-post .back-to-posts {
-        @apply font-mono text-primary text-[1.6rem] inline-flex items-center hover:text-primary-hover transition-colors;
+        @apply font-mono text-gray text-[1.6rem] inline-flex items-center hover:text-primary-hover hover:underline transition-colors;
     }
     
     .blog-post .back-to-posts .back-arrow {
@@ -396,7 +392,7 @@
     }
     
     .blog-post .post-title {
-        @apply font-display text-6xl text-dark-gray dark:text-light-gray font-normal leading-tight mb-5;
+        @apply font-display text-6xl text-primary font-normal leading-tight mb-5;
         font-size: 5rem;
     }
     
@@ -1215,4 +1211,21 @@ script#theme-check {
 
 .blog-card.expanded {
     @apply transition-all duration-300;
+}
+
+/* Blog post page tag styles */
+.blog-post .post-tags {
+    @apply my-3;
+}
+
+.blog-post .tags-wrapper {
+    @apply flex flex-wrap gap-2 items-center;
+}
+
+.blog-post .tag-badge {
+    @apply inline-flex items-center px-4 py-2 text-[1.2rem] bg-light-gray dark:bg-gray text-dark-gray dark:text-light-gray rounded-full hover:bg-primary/10 dark:hover:bg-primary-light/10 transition-colors whitespace-nowrap flex-none cursor-pointer z-20;
+}
+
+.blog-post .tag-badge:hover {
+    @apply text-primary dark:text-primary-light;
 }

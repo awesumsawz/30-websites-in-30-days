@@ -50,7 +50,7 @@
                     
                     @if(count($post['metadata']['tags']) > 3)
                     <button class="tags-toggle" data-post="{{ $post['slug'] }}" data-expanded="false" onclick="togglePostTags('{{ $post['slug'] }}', this)">
-                        <span class="more-text">+{{ count($post['metadata']['tags']) - 3 }} more</span>
+                        <span class="more-text">+{{ count($post['metadata']['tags']) - 2 }} more</span>
                         <span class="less-text">Show less</span>
                     </button>
                     @endif

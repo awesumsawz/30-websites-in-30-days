@@ -136,7 +136,31 @@ class BlogPostController extends Controller
         $readingTime = max(1, ceil($wordCount / 200)); // Assuming 200 words per minute reading speed
         $post['metadata']['reading_time'] = $readingTime;
         
-        return view('blog.show', compact('post'));
+        // Get previous and next posts
+        $allPosts = $this->getAllPosts();
+        
+        // Find the current post's index
+        $currentIndex = -1;
+        foreach ($allPosts as $index => $currentPost) {
+            if ($currentPost['slug'] === $slug) {
+                $currentIndex = $index;
+                break;
+            }
+        }
+        
+        // Set previous and next posts
+        $previousPost = null;
+        $nextPost = null;
+        
+        if ($currentIndex > 0) {
+            $previousPost = $allPosts[$currentIndex - 1];
+        }
+        
+        if ($currentIndex < count($allPosts) - 1 && $currentIndex !== -1) {
+            $nextPost = $allPosts[$currentIndex + 1];
+        }
+        
+        return view('blog.show', compact('post', 'previousPost', 'nextPost'));
     }
     
     /**

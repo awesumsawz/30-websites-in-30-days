@@ -40,5 +40,34 @@
     <div class="post-content">
         {!! $post['content'] !!}
     </div>
+    
+    <div class="post-footer">
+        <hr class="my-8 border-light-gray dark:border-gray">
+        <div class="post-navigation">
+            @if(isset($previousPost))
+                <a href="{{ route('blog.show', $previousPost['slug']) }}" class="previous-post">
+                    <div class="nav-header">
+                        <span class="nav-arrow">&larr;</span>
+                        <span class="nav-label">Previous Post</span>
+                    </div>
+                    <span class="nav-title">{{ $previousPost['metadata']['title'] }}</span>
+                </a>
+            @else
+                <div class="nav-placeholder"></div>
+            @endif
+            
+            @if(isset($nextPost))
+                <a href="{{ route('blog.show', $nextPost['slug']) }}" class="next-post">
+                    <div class="nav-header">
+                        <span class="nav-label">Next Post</span>
+                        <span class="nav-arrow">&rarr;</span>
+                    </div>
+                    <span class="nav-title">{{ $nextPost['metadata']['title'] }}</span>
+                </a>
+            @else
+                <div class="nav-placeholder"></div>
+            @endif
+        </div>
+    </div>
 </article>
 @endsection 

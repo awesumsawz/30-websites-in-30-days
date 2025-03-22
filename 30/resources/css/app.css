@@ -380,7 +380,7 @@
     }
     
     .blog-post .back-to-posts {
-        @apply font-mono text-gray text-[1.6rem] inline-flex items-center hover:text-primary-hover hover:underline transition-colors;
+        @apply font-mono text-gray text-[1.6rem] inline-flex items-center dark:text-light-gray hover:text-primary-hover hover:underline transition-colors;
     }
     
     .blog-post .back-to-posts .back-arrow {
@@ -493,6 +493,60 @@
     
     .blog-post .post-content code {
         @apply font-mono text-[1.4rem] text-primary dark:text-primary-light;
+    }
+    
+    .blog-post .post-footer {
+        @apply mt-12;
+    }
+    
+    .blog-post .post-navigation {
+        @apply flex justify-between items-stretch gap-4;
+    }
+    
+    .blog-post .post-navigation a {
+        @apply flex-1 p-6 flex flex-col bg-white dark:bg-dark-gray transition-all duration-200 rounded-lg border border-light-gray dark:border-gray;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    
+    .blog-post .post-navigation a:hover {
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transform: translateY(-2px);
+    }
+    
+    .blog-post .post-navigation .previous-post {
+        @apply items-start text-left;
+    }
+    
+    .blog-post .post-navigation .next-post {
+        @apply items-end text-right;
+    }
+    
+    .blog-post .post-navigation .nav-header {
+        @apply flex items-center gap-2 mb-2;
+    }
+    
+    .blog-post .post-navigation .previous-post .nav-header {
+        @apply justify-start;
+    }
+    
+    .blog-post .post-navigation .next-post .nav-header {
+        @apply justify-end;
+    }
+    
+    .blog-post .post-navigation .nav-arrow {
+        @apply text-2xl font-mono text-gray dark:text-light-gray;
+    }
+    
+    .blog-post .post-navigation .nav-label {
+        @apply text-sm text-gray dark:text-light-gray font-display;
+    }
+    
+    .blog-post .post-navigation .nav-title {
+        @apply font-display text-dark-gray dark:text-white hover:text-primary dark:hover:text-primary-light;
+    }
+    
+    .blog-post .post-navigation .nav-placeholder {
+        @apply flex-1;
     }
     
     /* Container styles */
@@ -1188,4 +1242,20 @@ script#theme-check {
 
 .blog-post .tag-badge:hover {
     @apply text-primary dark:text-primary-light;
+}
+
+.blog-post .post-navigation a:hover .nav-title {
+    @apply text-primary dark:text-primary-light;
+}
+
+.blog-post .post-navigation .previous-post {
+    @apply items-start text-left;
+}
+
+.blog-post .post-navigation .next-post {
+    @apply items-end text-right;
+}
+
+.blog-post .post-navigation .nav-header {
+    @apply flex items-center gap-2 mb-2;
 }
